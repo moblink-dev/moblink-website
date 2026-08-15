@@ -12,16 +12,9 @@ export type PageKey =
   | "enhanced-bail-article";
 
 export const navItems = [
-  { href: "/", label: "Home", key: "index" },
-  { href: "/app/search/", label: "Find services", key: "services" },
   { href: "/#how-it-works", label: "How it works", key: "how" },
-];
-
-export const dropdownItems = [
-  { href: "/#for-providers", label: "For service providers", key: "providers" },
-  { href: "/admin/funding/", label: "Funding workspace", key: "funding" },
-  { href: "/app/map/", label: "Service map", key: "map" },
-  { href: "/app/messages/", label: "MobLink chat", key: "chat" },
+  { href: "/#ways-we-can-help", label: "Ways we can help", key: "support" },
+  { href: "/#community-stories", label: "Example journeys", key: "journeys" },
 ];
 
 export const programs = [
