@@ -160,11 +160,14 @@ test("returns fresh demo records when browser storage is empty", () => {
 
 test("normalizes malformed nested stored referral collections", () => {
   const referral = makeReferral();
-  storage.setItem("moblink_referrals", JSON.stringify([{ ...referral, aiCalls: {}, conversation: "invalid" }]));
+  storage.setItem("moblink_referrals", JSON.stringify([{ ...referral, aiCalls: {}, conversation: "invalid", rating: 9, seriousness: "extreme", outcome: "done" }]));
 
   const normalized = getReferrals().find((item) => item.id === referral.id);
 
   assert.deepEqual(normalized?.aiCalls, []);
   assert.deepEqual(normalized?.conversation, []);
+  assert.equal(normalized?.rating, undefined);
+  assert.equal(normalized?.seriousness, "elevated");
+  assert.equal(normalized?.outcome, "pending");
   assert.equal(scheduleAICall(referral.id, "check_in").status, "queued");
 });
