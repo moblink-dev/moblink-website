@@ -1,11 +1,9 @@
+"use client";
+
 import Link from "next/link";
 import { services } from "../data";
 import BottomNav from "../../components/app/BottomNav";
-
-export const metadata = {
-  title: "MobLink | Find support near you",
-  description: "Find Aboriginal and community services near you — health, legal, housing, crisis support and more.",
-};
+import { useProviderServices } from "../../lib/provider-services";
 
 // Nowra center point for distance calculations
 const NOWRA_LAT = -34.882;
@@ -91,28 +89,29 @@ function ServiceRail({ title, services: items, link }: { title: string; services
 }
 
 export default function MobLinkHome() {
+  const effectiveServices = useProviderServices(services);
   // Recommended for you — top local services, sorted by distance, non-crisis
   const recommended = sortByDistance(
-    services.filter((s) => !s.isNational && !s.isCrisis && s.suburb !== "National")
+    effectiveServices.filter((s) => !s.isNational && !s.isCrisis && s.suburb !== "National")
   ).slice(0, 15);
 
   // Newly added — services with createdAt >= 2026-08-05
-  const newlyAdded = services
+  const newlyAdded = effectiveServices
     .filter((s) => s.createdAt >= "2026-08-05" && !s.isNational)
     .sort((a, b) => b.createdAt.localeCompare(a.createdAt))
     .slice(0, 12);
 
   // National support
-  const national = services.filter((s) => s.isNational && !s.isCrisis).slice(0, 10);
+  const national = effectiveServices.filter((s) => s.isNational && !s.isCrisis).slice(0, 10);
 
   // Closest to me — sorted by distance from Nowra, non-national, non-crisis
   const closest = sortByDistance(
-    services.filter((s) => !s.isNational && !s.isCrisis)
+    effectiveServices.filter((s) => !s.isNational && !s.isCrisis)
   ).slice(0, 12);
 
   // Aboriginal specific — all Aboriginal-led services, sorted by distance
   const aboriginal = sortByDistance(
-    services.filter((s) => s.isAboriginalLed && !s.isNational)
+    effectiveServices.filter((s) => s.isAboriginalLed && !s.isNational)
   ).slice(0, 15);
 
   return (

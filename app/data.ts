@@ -1,5 +1,4 @@
 export type PageKey =
-  | "about"
   | "programs"
   | "insights"
   | "governance"
@@ -12,8 +11,8 @@ export type PageKey =
   | "enhanced-bail-article";
 
 export const navItems = [
-  { href: "/#how-it-works", label: "How it works", key: "how" },
-  { href: "/#ways-we-can-help", label: "Ways we can help", key: "support" },
+  { href: "/about/", label: "About us", key: "about" },
+  { href: "/services/", label: "Services", key: "services" },
   { href: "/#community-stories", label: "Example journeys", key: "journeys" },
 ];
 
@@ -65,34 +64,6 @@ export const publicPages: Record<
     sections: { title: string; body: string[]; cardTitle?: string; cardBody?: string }[];
   }
 > = {
-  about: {
-    title: "Our Story",
-    description: "Who IRAAC is and how it fits within the NSW Local Decision Making Framework.",
-    active: "about",
-    eyebrow: "About Us",
-    hero: "Our Story",
-    lead: "IRAAC is an Aboriginal Community Organisation and registered charity, working under the NSW Local Decision Making Framework.",
-    image: "https://picsum.photos/seed/iraac-community/1200/900",
-    sections: [
-      {
-        title: "Who We Are",
-        body: [
-          "IRAAC represents and serves its community through a set of programs and a growing focus on governance and organisational capability.",
-          "IRAAC is independent of government, while working alongside Aboriginal Affairs NSW, Alliances and Assemblies to progress the priorities community identifies for itself.",
-        ],
-        cardTitle: "Local Decision Making",
-        cardBody:
-          "IRAAC's programs and governance work sit within a framework designed to give Aboriginal communities a stronger say in decisions that affect them.",
-      },
-      {
-        title: "Our Board",
-        body: [
-          "IRAAC is led by a Board of community members, meeting regularly using a standard agenda, minutes, decisions and actions framework.",
-          "Board information should be expanded once names, photos and short bios are confirmed for public release.",
-        ],
-      },
-    ],
-  },
   programs: {
     title: "Our Programs",
     description: "MCC, YouthScape, The Crew and DARC - IRAAC's community programs.",
@@ -350,7 +321,72 @@ export const serviceCategories: ServiceCategory[] = [
   "Disability",
 ];
 
+const iraacServiceDefaults = {
+  address: "Illawarra and South Coast service area",
+  suburb: "Illawarra",
+  state: "NSW",
+  postcode: "2500",
+  lat: -34.4278,
+  lng: 150.8931,
+  distance: "Illawarra region",
+  phone: "Connect through MobLink",
+  hours: "Contact IRAAC to discuss support",
+  isAboriginalLed: true,
+  isCrisis: false,
+  isNational: false,
+  isFree: true,
+  createdAt: "2026-08-16",
+} satisfies Pick<Service, "address" | "suburb" | "state" | "postcode" | "lat" | "lng" | "distance" | "phone" | "hours" | "isAboriginalLed" | "isCrisis" | "isNational" | "isFree" | "createdAt">;
+
+export const iraacServices: Service[] = [
+  {
+    ...iraacServiceDefaults,
+    id: "iraac-mcc",
+    name: "IRAAC MCC - Mob and Country Connections",
+    category: "Culture",
+    subcategory: "Aboriginal organisation capability",
+    tags: ["Culture", "Governance", "Community organisations", "Aboriginal-led"],
+    website: "https://www.iraac-aco.com/programs/#mcc",
+    description: "Peer-to-peer support for Aboriginal Community Organisations building governance, administration and reporting capability.",
+    eligibility: "Aboriginal Community Organisations seeking practical capability support",
+  },
+  {
+    ...iraacServiceDefaults,
+    id: "iraac-youthscape",
+    name: "IRAAC YouthScape",
+    category: "Youth",
+    subcategory: "Young people, culture and practical support",
+    tags: ["Youth", "Culture", "Bail pathways", "Aboriginal-led"],
+    website: "https://www.iraac-aco.com/programs/#youthscape",
+    description: "YouthScape connects young people with culture, opportunity and support, including practical navigation around safe pathways and appropriate legal services when required.",
+    eligibility: "Aboriginal young people and families in IRAAC's service area",
+  },
+  {
+    ...iraacServiceDefaults,
+    id: "iraac-the-crew",
+    name: "IRAAC The Crew",
+    category: "Employment",
+    subcategory: "Practical skills and participation",
+    tags: ["Skills", "Community", "Participation", "Aboriginal-led"],
+    website: "https://www.iraac-aco.com/programs/#thecrew",
+    description: "A community-facing program building practical skills, connection and participation.",
+    eligibility: "Community members in IRAAC's service area",
+  },
+  {
+    ...iraacServiceDefaults,
+    id: "iraac-darc",
+    name: "IRAAC DARC",
+    category: "Family",
+    subcategory: "Community outcomes and stronger pathways",
+    tags: ["Community", "Family", "Pathways", "Aboriginal-led"],
+    website: "https://www.iraac-aco.com/programs/#darc",
+    description: "DARC sits alongside MCC, YouthScape and The Crew to support community outcomes and stronger pathways.",
+    eligibility: "Community members in IRAAC's service area",
+  },
+];
+
 export const services: Service[] = [
+  ...iraacServices,
   {
     id: "south-coast-medical",
     name: "South Coast Medical Service",

@@ -2,16 +2,31 @@
 
 import { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
-import { getReferrals, updateReferralStatus, referralSourceLabels, referralStatusLabels, referralStatusColors, type Referral, type ReferralStatus } from "../../../lib/referrals";
+import { getIraacReferrals, scheduleAICall, updateReferralStatus, referralSourceLabels, referralStatusLabels, referralStatusColors, type AICallPurpose, type Referral, type ReferralStatus } from "../../../lib/referrals";
+
+type DemoBatchCall = { id: string; maskedNumber: string; status: "queued"; createdAt: string };
+const BATCH_QUEUE_KEY = "moblink_iraac_demo_batch_calls";
 
 export default function AdminReferralsPage() {
   const [referrals, setReferrals] = useState<Referral[]>([]);
   const [filter, setFilter] = useState<ReferralStatus | "all">("all");
   const [expanded, setExpanded] = useState<string | null>(null);
   const [editNotes, setEditNotes] = useState("");
+  const [batchNumbers, setBatchNumbers] = useState("");
+  const [batchConsent, setBatchConsent] = useState(false);
+  const [batchQueued, setBatchQueued] = useState(0);
+  const [batchRejected, setBatchRejected] = useState(0);
+  const [batchQueue, setBatchQueue] = useState<DemoBatchCall[]>([]);
+  const [callMessage, setCallMessage] = useState("");
 
   useEffect(() => {
-    setReferrals(getReferrals());
+    setReferrals(getIraacReferrals());
+    try {
+      const parsed: unknown = JSON.parse(localStorage.getItem(BATCH_QUEUE_KEY) || "[]");
+      if (Array.isArray(parsed)) setBatchQueue(parsed.filter((item): item is DemoBatchCall => Boolean(item && typeof item === "object" && "maskedNumber" in item)));
+    } catch {
+      setBatchQueue([]);
+    }
   }, []);
 
   const { filtered, counts } = useMemo(() => {
@@ -43,17 +58,44 @@ export default function AdminReferralsPage() {
     setExpanded(null);
   };
 
+  const handleAICall = (id: string, purpose: AICallPurpose) => {
+    const result = scheduleAICall(id, purpose);
+    if (result.referral) replaceReferral(result.referral);
+    setCallMessage(result.status === "queued" ? "Demonstration AI call added to the lead." : result.reason || "The call could not be queued.");
+  };
+
+  const handleBatchQueue = () => {
+    const entries = batchNumbers.split(/[\n,]+/).map((number) => number.trim()).filter(Boolean);
+    const numbers = entries.filter((number) => /^(?:\+?61|0)4[\d\s-]{7,}$/.test(number));
+    const now = new Date().toISOString();
+    const additions = numbers.map((number, index) => ({ id: `batch_${Date.now()}_${index}`, maskedNumber: `04•• ••• ${number.replace(/\D/g, "").slice(-3)}`, status: "queued" as const, createdAt: now }));
+    const nextQueue = [...batchQueue, ...additions];
+    setBatchQueue(nextQueue);
+    localStorage.setItem(BATCH_QUEUE_KEY, JSON.stringify(nextQueue));
+    setBatchQueued(additions.length);
+    setBatchRejected(entries.length - numbers.length);
+    setBatchNumbers("");
+    setBatchConsent(false);
+  };
+
   return (
     <div className="admin-page-content">
       <div className="admin-top">
         <div>
-          <p className="admin-kicker">MobLink network demo</p>
-          <h1>Leads</h1>
+          <p className="admin-kicker">IRAAC provider demo</p>
+          <h1>Leads &amp; AI calls</h1>
         </div>
         <div className="admin-stat-badge">
           {counts.pending} pending
         </div>
       </div>
+
+      <div className="lead-call-workspace">
+        <div><p className="admin-kicker">AI-assisted follow-up</p><h2>Call a lead to check in or learn more.</h2><p>From each consented lead, IRAAC can queue a MobLink AI call that introduces IRAAC, explains relevant services and places a summary back into the shared conversation.</p><p className="intake-boundary">Demonstration only: no phone call or text is sent. Real calling requires verified consent, secure records and an approved escalation process.</p></div>
+        <div className="batch-call-panel"><label htmlFor="batch-numbers">Add several demo mobile numbers</label><textarea id="batch-numbers" rows={4} value={batchNumbers} onChange={(event) => { setBatchNumbers(event.target.value); setBatchQueued(0); setBatchRejected(0); }} placeholder={'0400 000 000\n0411 111 111'} /><label className="batch-consent"><input type="checkbox" checked={batchConsent} onChange={(event) => setBatchConsent(event.target.checked)} /><span>I have separately recorded AI voice-call permission for these demonstration numbers.</span></label><button type="button" className="admin-button" disabled={!batchConsent || !batchNumbers.trim()} onClick={handleBatchQueue}>Add to demo call queue</button>{batchQueued > 0 ? <strong className="batch-queued">{batchQueued} valid demo {batchQueued === 1 ? "number" : "numbers"} added to the queue.</strong> : null}{batchRejected > 0 ? <span className="batch-rejected">{batchRejected} invalid {batchRejected === 1 ? "entry was" : "entries were"} not added.</span> : null}{batchQueue.length > 0 ? <div className="batch-queue-list"><strong>Demo call queue</strong>{batchQueue.slice(-5).reverse().map((call) => <span key={call.id}>{call.maskedNumber}<b>{call.status}</b></span>)}</div> : null}</div>
+      </div>
+
+      {callMessage ? <div className="lead-created lead-call-message" role="status">{callMessage}</div> : null}
 
       <div className="admin-filter-row">
         <button
@@ -125,6 +167,7 @@ export default function AdminReferralsPage() {
                   <span className="admin-detail-label">Consent to follow-up</span>
                   <span>{referral.consentToFollowUp ? "Yes" : "No"}</span>
                 </div>
+                <div className="admin-referral-detail"><span className="admin-detail-label">AI call consent</span><span>{referral.consentToAICall ? "Recorded" : "Not recorded"}</span></div>
                 {referral.message && (
                   <div className="admin-referral-message">
                     <span className="admin-detail-label">Message</span>
@@ -139,6 +182,8 @@ export default function AdminReferralsPage() {
 
               <div className="admin-referral-actions">
                 <Link className="admin-small-btn admin-small-btn-primary" href={`/admin/referrals/${referral.id}`}>Open lead & chat</Link>
+                <button type="button" className="admin-small-btn admin-call-btn" disabled={!referral.consentToFollowUp || !referral.consentToAICall} onClick={() => handleAICall(referral.id, "check_in")}>AI check-in</button>
+                <button type="button" className="admin-small-btn admin-call-btn" disabled={!referral.consentToFollowUp || !referral.consentToAICall} onClick={() => handleAICall(referral.id, "needs")}>Learn more</button>
                 <select
                   value={referral.status}
                   onChange={(e) => handleStatusChange(referral.id, e.target.value as ReferralStatus)}

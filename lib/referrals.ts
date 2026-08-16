@@ -11,6 +11,14 @@ export type ReferralStatus =
 export type ReferralSource = "app" | "hotline" | "ai_outbound" | "provider";
 export type PreferredContact = "phone" | "sms" | "in_app";
 export type SupplierNotificationStatus = "not_required" | "queued" | "sent";
+export type AICallPurpose = "check_in" | "needs";
+
+export interface AICallActivity {
+  id: string;
+  purpose: AICallPurpose;
+  status: "queued";
+  createdAt: string;
+}
 
 export interface ReferralMessage {
   id: string;
@@ -32,9 +40,11 @@ export interface Referral {
   needCategory: string;
   message: string;
   consentToFollowUp: boolean;
+  consentToAICall: boolean;
   source: ReferralSource;
   preferredContact: PreferredContact;
   supplierNotification: SupplierNotificationStatus;
+  aiCalls: AICallActivity[];
   conversation: ReferralMessage[];
   status: ReferralStatus;
   staffNotes: string;
@@ -51,15 +61,19 @@ type ReferralInput = Omit<
   | "updatedAt"
   | "conversation"
   | "supplierNotification"
+  | "aiCalls"
   | "postcode"
   | "source"
   | "preferredContact"
+  | "consentToAICall"
 > & {
   conversation?: ReferralMessage[];
   supplierNotification?: SupplierNotificationStatus;
+  aiCalls?: AICallActivity[];
   postcode?: string;
   source?: ReferralSource;
   preferredContact?: PreferredContact;
+  consentToAICall?: boolean;
 };
 
 const STORAGE_KEY = "moblink_referrals";
@@ -72,10 +86,12 @@ export function createReferral(data: ReferralInput): Referral {
     postcode: data.postcode ?? "",
     source: data.source ?? "app",
     preferredContact: data.preferredContact ?? "phone",
+    consentToAICall: data.consentToAICall ?? false,
     id: `ref_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`,
     status: "requested",
     staffNotes: "",
     supplierNotification: data.supplierNotification ?? (data.consentToFollowUp ? "queued" : "not_required"),
+    aiCalls: data.aiCalls ?? [],
     conversation: data.conversation ?? [
       {
         id: `msg_${Date.now()}_welcome`,
@@ -96,13 +112,24 @@ export function getReferrals(): Referral[] {
   if (typeof window === "undefined") return [];
   try {
     const raw = localStorage.getItem(STORAGE_KEY) || localStorage.getItem(LEGACY_STORAGE_KEY);
-    if (!raw) return demoReferrals;
+    if (!raw) return cloneDemoReferrals();
     const parsed: unknown = JSON.parse(raw);
-    if (!Array.isArray(parsed)) return demoReferrals;
-    const referrals = parsed.filter(isStoredReferral).map(normalizeReferral);
-    return referrals.length > 0 || parsed.length === 0 ? referrals : demoReferrals;
+    if (!Array.isArray(parsed)) return cloneDemoReferrals();
+    const referrals = parsed
+      .filter(isStoredReferral)
+      .map(normalizeReferral)
+      .filter((referral) => referral.id !== "lead_demo_centrelink");
+    const missingDemoReferrals = cloneDemoReferrals().filter(
+      (demo) => !referrals.some((referral) => referral.id === demo.id),
+    );
+    if (missingDemoReferrals.length > 0 || referrals.length !== parsed.length) {
+      const migrated = [...missingDemoReferrals, ...referrals];
+      writeReferrals(migrated);
+      return migrated;
+    }
+    return referrals;
   } catch {
-    return demoReferrals;
+    return cloneDemoReferrals();
   }
 }
 
@@ -149,12 +176,65 @@ export function addReferralMessage(
   return referral;
 }
 
+export function scheduleAICall(
+  id: string,
+  purpose: AICallPurpose,
+): { status: "queued" | "blocked"; referral?: Referral; reason?: string } {
+  const referrals = getReferrals();
+  const referral = referrals.find((item) => item.id === id);
+  if (!referral) return { status: "blocked", reason: "Lead not found." };
+  if (!referral.serviceId.startsWith("iraac-")) {
+    return { status: "blocked", referral, reason: "This lead is not matched to an IRAAC service." };
+  }
+  if (!referral.consentToFollowUp) {
+    return { status: "blocked", referral, reason: "Follow-up consent is required before an AI call can be queued." };
+  }
+  if (!referral.consentToAICall) {
+    return { status: "blocked", referral, reason: "Specific AI voice-call consent is required before a call can be queued." };
+  }
+  if (["resolved", "withdrawn", "could_not_connect"].includes(referral.status)) {
+    return { status: "blocked", referral, reason: "Closed leads cannot be added to the AI call queue." };
+  }
+  if (referral.aiCalls.some((call) => call.purpose === purpose && call.status === "queued")) {
+    return { status: "blocked", referral, reason: "A demonstration call for this purpose is already queued." };
+  }
+
+  const now = new Date().toISOString();
+  const activity: AICallActivity = {
+    id: `call_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
+    purpose,
+    status: "queued",
+    createdAt: now,
+  };
+  referral.aiCalls.push(activity);
+  referral.status = "triage";
+  referral.conversation.push({
+    id: `msg_${Date.now()}_ai_call`,
+    sender: "moblink",
+    senderName: "MobLink AI call assistant",
+    body: purpose === "check_in"
+      ? "IRAAC queued a demonstration AI phone check-in. The call will ask whether the person is safe, whether they still want support, and record a summary here. No real call is placed in this prototype."
+      : "IRAAC queued a demonstration AI phone call to find out more about what support the person needs and explain relevant IRAAC services. A summary will be recorded here. No real call is placed in this prototype.",
+    createdAt: now,
+  });
+  referral.updatedAt = now;
+  writeReferrals(referrals);
+  return { status: "queued", referral };
+}
+
 export function getReferralById(id: string): Referral | undefined {
   return getReferrals().find((r) => r.id === id);
 }
 
-export function getReferralStats() {
-  const referrals = getReferrals();
+export function getIraacReferrals(): Referral[] {
+  return getReferrals().filter((referral) => referral.serviceId.startsWith("iraac-"));
+}
+
+export function getIraacReferralById(id: string): Referral | undefined {
+  return getIraacReferrals().find((referral) => referral.id === id);
+}
+
+export function getReferralStats(referrals = getReferrals()) {
   return {
     total: referrals.length,
     requested: referrals.filter((r) => r.status === "requested").length,
@@ -185,14 +265,25 @@ function writeReferrals(referrals: Referral[]): void {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(referrals));
 }
 
+function cloneDemoReferrals(): Referral[] {
+  return demoReferrals.map((referral) => ({
+    ...referral,
+    aiCalls: referral.aiCalls.map((call) => ({ ...call })),
+    conversation: referral.conversation.map((message) => ({ ...message })),
+  }));
+}
+
 function normalizeReferral(referral: Referral): Referral {
+  const isIraacDemo = demoReferrals.some((demo) => demo.id === referral.id);
   return {
     ...referral,
-    postcode: referral.postcode || "",
+    postcode: referral.id === "lead_demo_youthscape" && referral.postcode === "2541" ? "2500" : referral.postcode || "",
     source: referral.source || "app",
     preferredContact: referral.preferredContact || "phone",
+    consentToAICall: referral.consentToAICall === true || (isIraacDemo && referral.consentToAICall !== false),
     supplierNotification: referral.supplierNotification || "not_required",
-    conversation: referral.conversation || [],
+    conversation: Array.isArray(referral.conversation) ? referral.conversation : [],
+    aiCalls: Array.isArray(referral.aiCalls) ? referral.aiCalls : [],
   };
 }
 
@@ -214,40 +305,100 @@ function isStoredReferral(value: unknown): value is Referral {
 
 export const demoReferrals: Referral[] = [
   {
-    id: "lead_demo_centrelink",
-    serviceId: "shoalhaven-aboriginal-pension",
-    serviceName: "Shoalhaven Aboriginal Pension Support",
-    serviceCategory: "Centrelink",
-    requesterName: "Demo community member",
+    id: "lead_demo_youthscape",
+    serviceId: "iraac-youthscape",
+    serviceName: "IRAAC YouthScape",
+    serviceCategory: "Youth",
+    requesterName: "Jayden (demo)",
     requesterPhone: "04•• ••• 214",
     requesterEmail: "",
-    postcode: "2541",
-    needCategory: "Centrelink",
-    message: "Needs help understanding and completing a Centrelink application.",
+    postcode: "2500",
+    needCategory: "Youth legal support",
+    message: "A young person in Wollongong needs practical support around bail, a safe place to return to and connection with a trusted worker.",
     consentToFollowUp: true,
+    consentToAICall: true,
     source: "hotline",
     preferredContact: "sms",
     supplierNotification: "queued",
     status: "requested",
-    staffNotes: "Confirm the correct payment type before requesting documents.",
+    staffNotes: "Confirm that YouthScape is suitable and coordinate qualified legal support where needed.",
+    aiCalls: [],
     conversation: [
       {
         id: "msg_demo_1",
         sender: "moblink",
         senderName: "MobLink call centre",
-        body: "This person asked MobLink for Centrelink application support and agreed to an SMS follow-up.",
+        body: "This person asked MobLink for youth support in the Illawarra and agreed to an SMS follow-up from IRAAC.",
         createdAt: "2026-08-15T08:35:00.000Z",
       },
       {
         id: "msg_demo_2",
         sender: "community",
         senderName: "Community member",
-        body: "I would like to know what documents I need before we start.",
+        body: "I would like to talk with someone who can explain what happens next.",
         createdAt: "2026-08-15T08:42:00.000Z",
       },
     ],
     createdAt: "2026-08-15T08:35:00.000Z",
     updatedAt: "2026-08-15T08:42:00.000Z",
+  },
+  {
+    id: "lead_demo_country",
+    serviceId: "iraac-mcc",
+    serviceName: "IRAAC MCC - Mob and Country Connections",
+    serviceCategory: "Culture",
+    requesterName: "Aunty May (demo)",
+    requesterPhone: "04•• ••• 807",
+    requesterEmail: "",
+    postcode: "2526",
+    needCategory: "Culture and Country",
+    message: "Looking for a culturally safe way for family members in the Illawarra to reconnect with community and Country.",
+    consentToFollowUp: true,
+    consentToAICall: true,
+    source: "app",
+    preferredContact: "phone",
+    supplierNotification: "sent",
+    status: "follow_up_due",
+    staffNotes: "Call after 10am and ask which family members would like to participate.",
+    aiCalls: [],
+    conversation: [{
+      id: "msg_demo_country_1",
+      sender: "moblink",
+      senderName: "MobLink",
+      body: "This person chose IRAAC MCC and agreed to a phone follow-up for this request.",
+      createdAt: "2026-08-15T09:10:00.000Z",
+    }],
+    createdAt: "2026-08-15T09:10:00.000Z",
+    updatedAt: "2026-08-15T09:10:00.000Z",
+  },
+  {
+    id: "lead_demo_crew",
+    serviceId: "iraac-the-crew",
+    serviceName: "IRAAC The Crew",
+    serviceCategory: "Community",
+    requesterName: "Corey (demo)",
+    requesterPhone: "04•• ••• 391",
+    requesterEmail: "",
+    postcode: "2500",
+    needCategory: "Skills and community connection",
+    message: "Interested in practical activities, building skills and meeting other community members around Wollongong.",
+    consentToFollowUp: true,
+    consentToAICall: true,
+    source: "hotline",
+    preferredContact: "sms",
+    supplierNotification: "queued",
+    status: "requested",
+    staffNotes: "",
+    aiCalls: [],
+    conversation: [{
+      id: "msg_demo_crew_1",
+      sender: "moblink",
+      senderName: "MobLink hotline",
+      body: "This person asked about practical community programs and agreed to an IRAAC SMS follow-up.",
+      createdAt: "2026-08-15T10:20:00.000Z",
+    }],
+    createdAt: "2026-08-15T10:20:00.000Z",
+    updatedAt: "2026-08-15T10:20:00.000Z",
   },
 ];
 

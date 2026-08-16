@@ -2,8 +2,8 @@ import Link from "next/link";
 import SiteShell from "./SiteShell";
 
 const steps = [
-  { number: "01", title: "Tell Mobli what is going on", body: "Use your own words. You can explain what you need, where you are, and how you would like someone to contact you." },
-  { number: "02", title: "See services that fit", body: "Mobli can suggest nearby and national services for housing, Centrelink, legal support, health, culture and more." },
+  { number: "01", title: "Tell MobLink what is going on", body: "Use your own words. You can explain what you need, where you are, and how you would like someone to contact you." },
+  { number: "02", title: "See services that fit", body: "MobLink can suggest nearby and national services for housing, Centrelink, legal support, health, culture and more." },
   { number: "03", title: "Choose who you connect with", body: "You stay in control. When you agree, MobLink can introduce you and open a conversation with the service you choose." },
 ];
 
@@ -18,9 +18,9 @@ const supportAreas = [
 
 const exampleJourneys = [
   { category: "Housing", quote: "I could explain that I needed somewhere safe to stay, then see the housing services that covered my area.", outcome: "A clearer housing pathway" },
-  { category: "Centrelink", quote: "Mobli helped me work out which service could sit with me and go through my Centrelink claim.", outcome: "Application support" },
+  { category: "Centrelink", quote: "MobLink helped me work out which service could sit with me and go through my Centrelink claim.", outcome: "Application support" },
   { category: "Legal", quote: "I did not know who to call. MobLink showed me a legal service nearby and helped me start the conversation.", outcome: "Connected legal support" },
-  { category: "Culture", quote: "I wanted to feel more connected to culture and Country. Mobli showed me community organisations I could contact.", outcome: "Community and cultural connection" },
+  { category: "Culture", quote: "I wanted to feel more connected to culture and Country. MobLink showed me community organisations I could contact.", outcome: "Community and cultural connection" },
 ];
 
 export default function Home() {
@@ -30,26 +30,26 @@ export default function Home() {
         <section className="community-hero">
           <div className="container community-hero-grid">
             <div className="community-hero-copy">
-              <div className="eyebrow">Meet Mobli, your guide to local support</div>
+              <div className="eyebrow">Meet MobLink, your guide to local support</div>
               <h1>Tell us what&apos;s going on. We&apos;ll help you find the next step.</h1>
               <p>MobLink helps Aboriginal and Torres Strait Islander people find services that match what they need and where they live—without having to know which organisation to call first.</p>
               <div className="hero-actions">
                 <Link href="/app/" className="btn btn-primary">Open the MobLink app</Link>
                 <Link href="#how-it-works" className="btn btn-cream-outline">See how it works</Link>
               </div>
-              <div className="channel-note"><strong>Use the web app today.</strong><span>Phone and text conversations with Mobli are being prepared for launch.</span></div>
+              <div className="channel-note"><strong>Use the web app today.</strong><span>Phone and text conversations with MobLink are being prepared for launch.</span></div>
             </div>
 
-            <div className="mobli-demo" aria-label="Example conversation with Mobli">
-              <div className="mobli-demo-head">
-                <span className="mobli-avatar">M</span>
-                <div><strong>Mobli</strong><small>Your MobLink guide</small></div>
-                <span className="mobli-status">Ready to help</span>
+            <div className="moblink-demo" aria-label="Example conversation with MobLink">
+              <div className="moblink-demo-head">
+                <span className="moblink-avatar">M</span>
+                <div><strong>MobLink</strong><small>Your guide to local support</small></div>
+                <span className="moblink-status">Ready to help</span>
               </div>
-              <div className="mobli-thread">
-                <p className="mobli-message mobli-message-user">I need help with Centrelink and I don&apos;t know where to start.</p>
-                <div className="mobli-message mobli-message-agent"><strong>Mobli</strong><p>I can help with that. Based on postcode 2541, here are services that can help with a Centrelink application.</p></div>
-                <div className="mobli-result"><span>Suggested nearby service</span><strong>Shoalhaven Aboriginal Pension Support</strong><small>Centrelink help · Nowra area</small><span className="mobli-result-action">View service →</span></div>
+              <div className="moblink-thread">
+                <p className="moblink-message moblink-message-user">I need help with Centrelink and I don&apos;t know where to start.</p>
+                <div className="moblink-message moblink-message-agent"><strong>MobLink</strong><p>I can help with that. Based on postcode 2541, here are services that can help with a Centrelink application.</p></div>
+                <div className="moblink-result"><span>Suggested nearby service</span><strong>Shoalhaven Aboriginal Pension Support</strong><small>Centrelink help · Nowra area</small><span className="moblink-result-action">View service →</span></div>
               </div>
               <small className="example-label">Illustrative conversation using fictional details</small>
             </div>
@@ -66,7 +66,7 @@ export default function Home() {
 
         <section id="how-it-works" className="moblink-section community-how">
           <div className="container">
-            <div className="section-heading-row"><div><p className="section-kicker">How MobLink works</p><h2 className="section-title">You talk. Mobli helps make sense of the options.</h2></div><p>Mobli is the guide inside MobLink. It helps turn what you say into practical service options, while leaving the choice with you.</p></div>
+            <div className="section-heading-row"><div><p className="section-kicker">How MobLink works</p><h2 className="section-title">You talk. MobLink helps make sense of the options.</h2></div><p>MobLink helps turn what you say into practical service options, while leaving the choice with you.</p></div>
             <div className="journey-grid">{steps.map((step) => <article className="journey-card" key={step.number}><span>{step.number}</span><h3>{step.title}</h3><p>{step.body}</p></article>)}</div>
           </div>
         </section>
@@ -106,7 +106,7 @@ export default function Home() {
         </section>
 
         <section className="moblink-cta community-final-cta">
-          <div className="container"><span className="mobli-avatar large">M</span><div><p className="section-kicker">Start with Mobli</p><h2>Find the support that fits your life, your need and your area.</h2></div><Link href="/app/messages/" className="btn btn-light">Talk to Mobli</Link></div>
+          <div className="container"><span className="moblink-avatar large">M</span><div><p className="section-kicker">Start with MobLink</p><h2>Find the support that fits your life, your need and your area.</h2></div><Link href="/app/messages/" className="btn btn-light">Talk to MobLink</Link></div>
         </section>
       </main>
     </SiteShell>

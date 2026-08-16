@@ -3,18 +3,21 @@
 import { useState, useMemo } from "react";
 import { type Service, type ServiceCategory, serviceCategories } from "../../app/data";
 import ServiceCard from "./ServiceCard";
+import { useProviderServices } from "../../lib/provider-services";
 
 interface ServiceListProps {
   services: Service[];
   title?: string;
+  initialSearch?: string;
 }
 
-export default function ServiceList({ services, title }: ServiceListProps) {
-  const [search, setSearch] = useState("");
+export default function ServiceList({ services, title, initialSearch = "" }: ServiceListProps) {
+  const [search, setSearch] = useState(initialSearch);
   const [activeCategory, setActiveCategory] = useState<ServiceCategory | "all">("all");
+  const availableServices = useProviderServices(services);
 
   const filtered = useMemo(() => {
-    let result = services;
+    let result = availableServices;
 
     if (activeCategory !== "all") {
       result = result.filter((s) => s.category === activeCategory);
@@ -33,7 +36,7 @@ export default function ServiceList({ services, title }: ServiceListProps) {
     }
 
     return result;
-  }, [services, search, activeCategory]);
+  }, [availableServices, search, activeCategory]);
 
   return (
     <div className="service-list">

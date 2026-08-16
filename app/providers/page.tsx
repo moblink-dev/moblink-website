@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 };
 
 const providerSteps = [
-  { number: "01", title: "Show where and how you help", body: "Keep your services, locations, eligibility and contact details clear so Mobli can recommend you appropriately." },
+  { number: "01", title: "Show where and how you help", body: "Keep your services, locations, eligibility and contact details clear so MobLink can recommend you appropriately." },
   { number: "02", title: "Receive suitable enquiries", body: "When a person chooses your service and agrees to connect, the request appears in your provider portal with the context needed to respond." },
   { number: "03", title: "Turn a lead into support", body: "Message the person, arrange a call or visit, record the next step and keep follow-up visible to your team." },
 ];
