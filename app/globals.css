@@ -4861,6 +4861,104 @@ input {
   .community-hero h1, .provider-hero h1 { font-size: clamp(2.8rem, 14vw, 4.5rem); }
 }
 
+/* ===== Connected community CRM ===== */
+.crm-pipeline { display: grid; grid-template-columns: repeat(7, 1fr); gap: 7px; margin: 0 0 20px; }
+.crm-pipeline > div { display: grid; gap: 3px; min-height: 72px; align-content: center; border: 1px solid #e1d7ca; border-radius: 10px; padding: 10px; background: #fff; }
+.crm-pipeline strong { font-size: 1.25rem; }
+.crm-pipeline span, .crm-stage-label { color: #6f665e; font-size: .67rem; font-weight: 850; text-transform: uppercase; }
+.crm-stage-label { border-radius: 999px; padding: 5px 8px; background: #eee7dd; text-align: center; }
+.crm-stage-control { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 18px 0 0; border-radius: 10px; padding: 11px 13px; background: #211a16; color: #fff; font-size: .72rem; font-weight: 900; text-transform: uppercase; }
+.crm-stage-control select { min-height: 36px; max-width: 180px; border: 0; border-radius: 7px; padding: 0 9px; background: #fff; color: #211a16; font: inherit; }
+.crm-actions-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+.crm-action-buttons { display: flex; flex-wrap: wrap; gap: 7px; }
+.crm-survey-card { display: flex; justify-content: space-between; gap: 18px; margin-top: 18px; border-radius: 12px; padding: 16px; background: #e8f0ec; }
+.crm-survey-card h3 { margin: 4px 0; }
+.crm-survey-card p { margin: 0; color: #52615a; font-size: .78rem; line-height: 1.5; }
+.crm-survey-card > strong { align-self: center; color: #18563e; font-size: 1.2rem; }
+.member-list-row { grid-template-columns: minmax(150px, 1.2fr) auto minmax(90px, .7fr) auto minmax(90px, .6fr); }
+
+/* ===== Reports: surveys, narrative evidence, and funding flow ===== */
+.report-evidence-flow { display: flex; align-items: stretch; gap: 8px; margin: 0 0 28px; }
+.report-evidence-flow > div, .report-evidence-flow > a { flex: 1; display: grid; gap: 4px; border: 1px solid #ded4c7; border-radius: 11px; padding: 13px; background: #fff; color: #2a241f; text-decoration: none; }
+.report-evidence-flow > a { background: #211a16; color: #fff; }
+.report-evidence-flow strong { color: var(--ochre); font-size: .75rem; }
+.report-evidence-flow span { font-size: .75rem; font-weight: 850; }
+.report-evidence-flow i { align-self: center; color: #a3998f; font-style: normal; }
+.report-survey-kpis .report-kpi-card { min-height: 150px; }
+.qualitative-insights { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 14px; }
+.qualitative-insights article { border: 1px solid #dfd5c8; border-radius: 13px; padding: 19px; background: #fff; }
+.qualitative-insights span { color: var(--ochre-dark); font-size: .68rem; font-weight: 900; text-transform: uppercase; }
+.qualitative-insights h3 { margin: 14px 0 8px; font-size: 1.05rem; }
+.qualitative-insights p { margin: 0; color: #6b625a; font-size: .78rem; line-height: 1.55; }
+.written-community-report { display: grid; gap: 12px; margin: 28px 0; border-radius: 16px; padding: 25px; background: #211a16; color: #fff; }
+.written-report-head { display: flex; justify-content: space-between; align-items: start; gap: 20px; }
+.written-report-head h2 { margin: 5px 0 0; }
+.written-report-head > span { border-radius: 999px; padding: 6px 10px; background: #fff0ce; color: #7d5110; font-size: .68rem; font-weight: 900; text-transform: uppercase; }
+.written-community-report > p { max-width: 980px; margin: 0; color: #d7cec6; font-size: .88rem; line-height: 1.65; }
+.written-community-report > p strong { color: #fff; }
+.written-community-report .admin-button { width: fit-content; margin-top: 5px; text-decoration: none; }
+
+/* ===== Funding chat workspace ===== */
+.admin-funding-chat-page { height: calc(100vh - 56px); min-height: 620px; margin: -28px; background: #f6f2ec; }
+.funding-chat-shell { height: 100%; display: grid; grid-template-columns: 250px minmax(0, 1fr); overflow: hidden; }
+.funding-chat-shell-collapsed { grid-template-columns: 0 minmax(0, 1fr); }
+.funding-chat-rail { min-width: 0; overflow: hidden; display: grid; grid-template-rows: auto auto minmax(0, 1fr); gap: 13px; padding: 13px; background: #211d1c; color: #fff; transition: padding .2s; }
+.funding-chat-shell-collapsed .funding-chat-rail { padding: 0; }
+.funding-rail-actions { display: grid; grid-template-columns: 36px 1fr 36px; gap: 6px; }
+.funding-rail-actions a, .funding-rail-actions button, .funding-open-rail { min-height: 36px; border: 1px solid #4a4442; border-radius: 8px; padding: 0 9px; background: #302c2b; color: #fff; font: inherit; font-size: .76rem; font-weight: 850; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; }
+.funding-chat-rail > p { margin: 0; color: #d8a16e; font-size: .68rem; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
+.funding-thread-inbox { min-height: 0; overflow: auto; display: grid; align-content: start; gap: 5px; }
+.funding-thread-inbox > button { display: grid; gap: 3px; border: 1px solid transparent; border-radius: 9px; padding: 10px; background: transparent; color: #fff; font: inherit; text-align: left; cursor: pointer; }
+.funding-thread-inbox > button:hover, .funding-thread-inbox > button.active { border-color: #514b48; background: #35302f; }
+.funding-thread-inbox strong { font-size: .8rem; }
+.funding-thread-inbox span { overflow: hidden; color: #bdb4af; font-size: .68rem; line-height: 1.35; text-overflow: ellipsis; white-space: nowrap; }
+.funding-conversation { position: relative; min-width: 0; display: grid; grid-template-rows: auto minmax(0, 1fr) auto; background: #fbfaf8; }
+.funding-conversation > header { display: flex; justify-content: space-between; align-items: center; gap: 20px; border-bottom: 1px solid #e5ddd4; padding: 14px 24px; }
+.funding-conversation header span:first-child { color: #8d572a; font-size: .68rem; font-weight: 900; text-transform: uppercase; }
+.funding-conversation h1 { margin: 3px 0 0; font-size: 1.25rem; }
+.funding-demo-label { border-radius: 999px; padding: 5px 9px; background: #f2e6d7; color: #6d4a2d; font-size: .64rem; font-weight: 900; text-transform: uppercase; }
+.funding-open-rail { position: absolute; z-index: 2; top: 15px; left: 15px; }
+.funding-chat-shell-collapsed .funding-conversation > header { padding-left: 64px; }
+.funding-message-feed { min-height: 0; overflow: auto; display: grid; align-content: start; gap: 18px; padding: 26px max(24px, calc((100% - 820px) / 2)); }
+.funding-chat-message { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 11px; max-width: 820px; }
+.funding-chat-message-iraac { width: min(680px, 90%); justify-self: end; border-radius: 14px; padding: 13px; background: #eee7de; }
+.funding-avatar { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 10px; background: #211a16; color: #fff; font-weight: 900; }
+.funding-chat-message-sebenza .funding-avatar { background: #b66024; }
+.funding-chat-message-iraac .funding-avatar { background: #315f5b; }
+.funding-chat-message strong { font-size: .8rem; }
+.funding-chat-message p { margin: 5px 0 0; color: #4f4842; font-size: .88rem; line-height: 1.65; }
+.funding-sebenza-contact { border-left: 3px solid var(--ochre); padding-left: 10px; font-size: .74rem !important; }
+.funding-sebenza-contact a { color: #8e4c1d; font-weight: 850; }
+.funding-chat-composer { display: grid; gap: 8px; width: min(850px, calc(100% - 36px)); margin: 0 auto 14px; border: 1px solid #ddd3c7; border-radius: 15px; padding: 11px; background: #fff; box-shadow: 0 10px 30px rgba(32,28,26,.08); }
+.funding-mode-switch { display: flex; gap: 6px; }
+.funding-mode-switch button { min-height: 30px; border: 1px solid #ddd4ca; border-radius: 999px; padding: 0 11px; background: #fff; font: inherit; font-size: .7rem; font-weight: 850; cursor: pointer; }
+.funding-mode-switch button.active { border-color: #211a16; background: #211a16; color: #fff; }
+.funding-input-row { display: grid; grid-template-columns: 34px 34px minmax(0, 1fr) 38px; gap: 6px; }
+.funding-input-row input { min-width: 0; min-height: 42px; border: 0; padding: 0 8px; font: inherit; outline: none; }
+.funding-input-row button { border: 0; border-radius: 9px; background: #eee7de; color: #302923; font-size: 1rem; font-weight: 900; cursor: pointer; }
+.funding-input-row button:last-child { background: #211a16; color: #fff; }
+.funding-input-row button:disabled { opacity: .35; }
+.funding-chat-composer small { color: #7a7169; font-size: .66rem; text-align: center; }
+
+@media (max-width: 1100px) {
+  .crm-pipeline { grid-template-columns: repeat(4, 1fr); }
+  .member-list-row { grid-template-columns: minmax(160px, 1fr) auto; }
+  .crm-stage-label { display: none; }
+  .qualitative-insights { grid-template-columns: 1fr; }
+}
+@media (max-width: 700px) {
+  .crm-pipeline { grid-template-columns: repeat(2, 1fr); }
+  .crm-actions-grid { grid-template-columns: 1fr; }
+  .report-evidence-flow { display: grid; grid-template-columns: 1fr; }
+  .report-evidence-flow i { display: none; }
+  .admin-funding-chat-page { margin: -18px -14px; height: calc(100vh - 20px); }
+  .funding-chat-shell { grid-template-columns: 0 minmax(0, 1fr); }
+  .funding-chat-rail { padding: 0; }
+  .funding-conversation > header { padding-left: 64px; }
+  .funding-message-feed { padding: 20px 14px; }
+  .funding-chat-composer { width: calc(100% - 20px); }
+}
+
 @media (max-width: 390px) {
   .header-inner { padding-left: 12px; padding-right: 12px; }
   .wordmark { font-size: 1.12rem; }

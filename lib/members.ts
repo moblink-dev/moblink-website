@@ -1,7 +1,7 @@
 export type IraacProgram = "MCC" | "YouthScape" | "The Crew" | "DARC";
 export type MemberSupportLevel = "routine" | "elevated" | "high" | "urgent";
 export type MemberCaseStatus = "active" | "follow_up" | "stable" | "closed";
-export type MemberContactMethod = "phone" | "sms" | "in_app" | "ai_call" | "office";
+export type MemberContactMethod = "phone" | "sms" | "email" | "in_app" | "ai_call" | "office";
 
 export interface MemberActivity {
   id: string;
@@ -38,7 +38,7 @@ const PROGRAMS = new Set<IraacProgram>(["MCC", "YouthScape", "The Crew", "DARC"]
 const SUPPORT_LEVELS = new Set<MemberSupportLevel>(["routine", "elevated", "high", "urgent"]);
 const CASE_STATUSES = new Set<MemberCaseStatus>(["active", "follow_up", "stable", "closed"]);
 const PREFERRED_CONTACT_METHODS = new Set<Member["preferredContact"]>(["phone", "sms", "in_app"]);
-const MEMBER_CONTACT_METHODS = new Set<MemberContactMethod>(["phone", "sms", "in_app", "ai_call", "office"]);
+const MEMBER_CONTACT_METHODS = new Set<MemberContactMethod>(["phone", "sms", "email", "in_app", "ai_call", "office"]);
 
 function member(
   id: string,

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState, type FormEvent } from "react";
+import Link from "next/link";
 import { getMembers } from "../../../lib/members";
 import { getIraacReferrals } from "../../../lib/referrals";
 import { buildEmailReport, calculateProviderReport, formatReportDate, type ProviderReport } from "../../../lib/reporting";
@@ -69,6 +70,10 @@ export default function AdminReportsPage() {
 
       <div className="prototype-note report-boundary"><strong>Fictional demonstration data.</strong> Every figure below is calculated from the demo members and requests currently held in this browser. It is not an operational IRAAC report.</div>
 
+      <section className="report-evidence-flow" aria-label="How community evidence supports funding">
+        <div><strong>1</strong><span>New requests</span></div><i>→</i><div><strong>2</strong><span>Active members</span></div><i>→</i><div><strong>3</strong><span>Outcomes &amp; surveys</span></div><i>→</i><div><strong>4</strong><span>Reports</span></div><i>→</i><Link href="/admin/funding"><strong>5</strong><span>Funding evidence</span></Link>
+      </section>
+
       <section className="report-email-panel" aria-labelledby="report-email-heading">
         <div><p className="admin-kicker">Report delivery</p><h2 id="report-email-heading">Add people who should receive this report.</h2><p>Recipient addresses stay in this browser. Opening the draft uses your device email app; MobLink does not send anything automatically.</p></div>
         <div className="report-email-controls">
@@ -99,7 +104,7 @@ export default function AdminReportsPage() {
         <div className="report-insight-grid">
           <article><span>Most common request</span><h3>{topNeed?.label || "No requests yet"}</h3><p>{topNeed ? `${topNeed.count} request${topNeed.count === 1 ? "" : "s"} currently ${topNeed.count === 1 ? "points" : "point"} to this need.` : "Needs will appear as requests arrive."}</p></article>
           <article><span>Seriousness guardrail</span><h3>{report.urgentCases} high or urgent</h3><p>These requests should be reviewed before routine work so urgent needs do not disappear inside volume.</p></article>
-          <article><span>Member follow-up</span><h3>{report.checkInsDue} check-ins due</h3><p>Use the Members workspace to see who is due, their programs and their preferred contact method.</p></article>
+          <article><span>Member follow-up</span><h3>{report.checkInsDue} check-ins due</h3><p>Use the Community CRM to see who is due, their programs and their preferred contact method.</p></article>
         </div>
         <div className="admin-report-grid report-chart-grid">
           <ReportBars title="Requests by need" items={report.byNeed} max={maxNeed} />
@@ -110,6 +115,29 @@ export default function AdminReportsPage() {
       <section className="admin-report-section" aria-labelledby="program-heading">
         <div className="report-section-heading"><div><p className="admin-kicker">Program reach</p><h2 id="program-heading">How members are connected across IRAAC.</h2></div><p>A member can participate in more than one program.</p></div>
         <div className="admin-report-table-wrap"><table className="admin-report-table program-report-table"><thead><tr><th>Program</th><th>Members</th><th>Open requests</th><th>Average rating</th></tr></thead><tbody>{report.byProgram.map((program) => <tr key={program.program}><td><strong>{program.program}</strong></td><td>{program.members}</td><td>{program.openRequests}</td><td>{program.averageRating === null ? "No ratings" : `${program.averageRating} / 5`}</td></tr>)}</tbody></table></div>
+      </section>
+
+      <section className="admin-report-section" aria-labelledby="survey-heading">
+        <div className="report-section-heading"><div><p className="admin-kicker">Member surveys</p><h2 id="survey-heading">Feedback after support</h2></div><p>Surveys can be due in the MobLink app and shared by consented SMS or email links.</p></div>
+        <div className="report-kpi-grid report-survey-kpis">
+          <KpiCard value={`${report.surveyResponseRate}%`} label="Survey response rate" detail={`${report.surveyResponses} member surveys received.`} tone="blue" />
+          <KpiCard value={String(report.surveysDue)} label="Surveys due" detail="Active fictional members ready for a service check-in." tone="ochre" />
+          <KpiCard value={`${report.averageRating ?? "—"}/5`} label="Experience score" detail="Average across the feedback currently available." tone="green" />
+          <KpiCard value={String(report.unmetNeedsRaised)} label="Unmet needs raised" detail="Survey comments that identify waiting, delay or more support required." tone="red" />
+        </div>
+        <div className="qualitative-insights">
+          <article><span>What is working</span><h3>People value warm, plain-language follow-up.</h3><p>Feedback repeatedly mentions feeling listened to, understanding what happens next, and knowing who to contact with questions.</p></article>
+          <article><span>What needs attention</span><h3>Legal navigation and urgent responses need speed.</h3><p>Wollongong-area requests show legal support as a significant need. One member is still waiting for housing support and another asks for a quicker urgent response.</p></article>
+          <article><span>Question for the next survey</span><h3>What stopped you getting help sooner?</h3><p>Offer transport, service availability, trust, cost, timing, digital access and an open response so IRAAC can understand barriers without guessing.</p></article>
+        </div>
+      </section>
+
+      <section className="written-community-report" aria-labelledby="written-report-heading">
+        <div className="written-report-head"><div><p className="admin-kicker">Generated evidence brief</p><h2 id="written-report-heading">IRAAC community support findings</h2></div><span>Draft for human review</span></div>
+        <p><strong>Central finding.</strong> The current fictional IRAAC records point to consistent demand for legal navigation, cultural connection, practical participation and coordinated family support across the Illawarra. The records do not show only emergency demand; they show people needing trusted guidance before a situation becomes more serious.</p>
+        <p><strong>Evidence of response.</strong> IRAAC’s recorded first responses, successful service connections, check-ins, ratings and member comments provide a clearer picture of whether support was timely and useful. Positive comments emphasise respectful explanations and continued contact. Lower-rated feedback identifies housing delays and urgent response time as areas for improvement.</p>
+        <p><strong>Funding use.</strong> This evidence can support a funding case by describing the need, who is being reached, how quickly IRAAC responds, what changed, and what community members say. Every figure and quotation still requires consent, governance review and verification before external use.</p>
+        <Link className="admin-button" href="/admin/funding">Discuss this evidence with MobLink</Link>
       </section>
 
       <section className="admin-report-section" aria-labelledby="feedback-heading">

@@ -37,7 +37,7 @@ export default function AdminDashboard() {
       </div>
 
       <div className="admin-grid">
-        <Link href="/admin/referrals" className="admin-tile admin-tile-link">
+        <Link href="/admin/members" className="admin-tile admin-tile-link">
           <div>
             <h2>Lead inbox</h2>
             <p>Incoming app and hotline requests matched to IRAAC&apos;s programs and Illawarra coverage.</p>
@@ -77,7 +77,7 @@ export default function AdminDashboard() {
           </div>
           <div>
             <div className="admin-stat">AI</div>
-            <div className="admin-label"><Link href="/admin/referrals">Open leads &amp; AI calls →</Link></div>
+            <div className="admin-label"><Link href="/admin/members">Open Community CRM →</Link></div>
           </div>
         </div>
       </div>
@@ -118,7 +118,7 @@ export default function AdminDashboard() {
               </tbody>
             </table>
           )}
-          <Link href="/admin/referrals" className="admin-panel-link">
+          <Link href="/admin/members" className="admin-panel-link">
             View all leads →
           </Link>
         </div>

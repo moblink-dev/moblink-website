@@ -24,6 +24,10 @@ export interface ProviderReport {
   aiCallCompletionRate: number;
   averageRating: number | null;
   feedbackCount: number;
+  surveyResponses: number;
+  surveysDue: number;
+  surveyResponseRate: number;
+  unmetNeedsRaised: number;
   ratingDistribution: Record<1 | 2 | 3 | 4 | 5, number>;
   byNeed: Array<{ label: string; count: number }>;
   bySeriousness: Array<{ label: ReferralSeriousness; count: number }>;
@@ -61,6 +65,9 @@ export function calculateProviderReport(
   }] : []);
   const feedback = [...memberFeedback, ...requestFeedback];
   const ratings = feedback.map((item) => item.rating);
+  const surveyResponses = members.filter((member) => member.satisfactionRating && member.feedback).length;
+  const surveysDue = members.filter((member) => member.caseStatus !== "closed" && !member.satisfactionRating).length;
+  const unmetNeedsRaised = memberFeedback.filter((item) => /\b(still|waiting|need|quicker|delay)\b/i.test(item.comment)).length;
   const ratingDistribution: ProviderReport["ratingDistribution"] = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
   ratings.forEach((rating) => { ratingDistribution[rating as 1 | 2 | 3 | 4 | 5] += 1; });
 
@@ -80,6 +87,10 @@ export function calculateProviderReport(
     aiCallCompletionRate: percentage(completedCalls.length, calls.length),
     averageRating: ratings.length ? Number((ratings.reduce((sum, rating) => sum + rating, 0) / ratings.length).toFixed(2)) : null,
     feedbackCount: feedback.length,
+    surveyResponses,
+    surveysDue,
+    surveyResponseRate: percentage(surveyResponses, surveyResponses + surveysDue),
+    unmetNeedsRaised,
     ratingDistribution,
     byNeed: groupCounts(referrals.map((referral) => referral.needCategory)),
     bySeriousness: (["urgent", "high", "elevated", "routine"] as ReferralSeriousness[]).map((label) => ({
@@ -116,6 +127,8 @@ export function buildEmailReport(report: ProviderReport): { subject: string; bod
       `Check-ins due: ${report.checkInsDue}`,
       `AI calls completed: ${report.aiCallsCompleted} of ${report.aiCallsTotal}`,
       `Average feedback: ${report.averageRating === null ? "No ratings yet" : `${report.averageRating} out of 5`}`,
+      `Member surveys: ${report.surveyResponses} received, ${report.surveysDue} due`,
+      `Unmet needs raised: ${report.unmetNeedsRaised}`,
       "",
       "This report contains fictional demonstration data only. It is not an operational IRAAC record.",
     ].join("\n"),

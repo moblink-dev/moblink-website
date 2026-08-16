@@ -51,6 +51,9 @@ test("calculates response, connection, seriousness, calls, and ratings from sour
   assert.equal(report.aiCallCompletionRate, 100);
   assert.equal(report.averageRating, 4.67);
   assert.equal(report.checkInsDue, 1);
+  assert.equal(report.surveyResponses, 2);
+  assert.equal(report.surveysDue, 0);
+  assert.equal(report.surveyResponseRate, 100);
 });
 
 test("builds a plain-language email report without claiming the demo is operational", () => {

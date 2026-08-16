@@ -45,14 +45,14 @@ export default function LeadDetailPage() {
   };
 
   if (!referral) {
-    return <div className="admin-page-content"><div className="admin-empty"><p>This lead is not available in this browser session.</p><Link href="/admin/referrals">Back to leads</Link></div></div>;
+    return <div className="admin-page-content"><div className="admin-empty"><p>This lead is not available in this browser session.</p><Link href="/admin/members">Back to Community CRM</Link></div></div>;
   }
 
   return (
     <div className="admin-page-content">
       <div className="admin-top">
         <div><p className="admin-kicker">IRAAC matched lead</p><h1>{referral.needCategory}</h1></div>
-        <Link className="admin-small-btn" href="/admin/referrals">← All leads</Link>
+        <Link className="admin-small-btn" href="/admin/members">← Community CRM</Link>
       </div>
 
       <div className="lead-detail-grid">

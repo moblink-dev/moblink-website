@@ -15,8 +15,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   const links = [
     { href: "/admin/", label: "Overview" },
-    { href: "/admin/referrals", label: "Leads & AI calls", short: "Leads" },
-    { href: "/admin/members", label: "Members", short: "Members" },
+    { href: "/admin/members", label: "Community CRM", short: "CRM" },
     { href: "/admin/services", label: "Services", short: "Services" },
     { href: "/admin/reports", label: "Reports" },
     { href: "/admin/funding", label: "Funding" },

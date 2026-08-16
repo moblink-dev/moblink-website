@@ -77,10 +77,11 @@ export default function ChatPage() {
             <span className="inbox-item-avatar">📝</span>
             <div className="inbox-item-body">
               <div className="inbox-item-top">
-                <strong className="inbox-item-name">Have Your Say</strong>
-                <span className="inbox-item-time" />
+                <strong className="inbox-item-name">IRAAC service check-in</strong>
+                <span className="inbox-item-time">Due</span>
               </div>
-              <span className="inbox-item-preview">Complete the community survey — your voice matters</span>
+              <span className="inbox-item-preview">How is your support going? Tell IRAAC what helped and what you still need.</span>
+              <span className="inbox-item-badge">1 survey due</span>
             </div>
           </Link>
         </div>
