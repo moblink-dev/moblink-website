@@ -106,24 +106,18 @@ export default function AdminMembersPage() {
   };
 
   return (
-    <div className="admin-page-content">
-      <div className="admin-top">
-        <div><p className="admin-kicker">IRAAC provider portal</p><h1>Community CRM</h1><p className="admin-page-lead">One respectful support journey from first request to active membership, outcomes and follow-up.</p></div>
-        <div className="admin-stat-badge">{summary.active} active</div>
+    <div className="admin-page-content crm-page">
+      <div className="crm-command-head">
+        <div><p className="admin-kicker">IRAAC · AI-assisted case management</p><h1>AI CRM</h1><p>Leads, members, messages and next actions in one workspace.</p></div>
+        <div className="crm-head-actions"><span><b>{summary.due}</b> tasks due</span></div>
       </div>
 
-      <div className="prototype-note member-boundary"><strong>Fictional demonstration population.</strong> Names and mobile numbers are masked demo records. Production use requires authenticated staff, role-based access, consent history and secure case records.</div>
+      <div className="crm-demo-line"><strong>Demo records</strong><span>Masked details · contact permission stays visible on each record</span></div>
 
-      <section className="crm-pipeline" aria-label="Community support pathway">
-        {lifecycleStages.map((stage) => <div key={stage.value}><strong>{lifecycleCounts[stage.value] || 0}</strong><span>{stage.label}</span></div>)}
+      <section className="crm-overview-strip" aria-label="Community support overview">
+        <div className="crm-key-metrics"><div><strong>{members.length}</strong><span>People</span></div><div><strong>{summary.active}</strong><span>Active</span></div><div><strong>{summary.due}</strong><span>Due</span></div><div><strong>{summary.highPriority}</strong><span>Priority</span></div></div>
+        <div className="crm-pipeline">{lifecycleStages.map((stage) => <div key={stage.value}><strong>{lifecycleCounts[stage.value] || 0}</strong><span>{stage.label}</span></div>)}</div>
       </section>
-
-      <div className="admin-summary-cards member-summary-cards">
-        <div className="admin-mini-card"><div className="admin-mini-stat">{members.length}</div><div className="admin-mini-label">Total members</div></div>
-        <div className="admin-mini-card"><div className="admin-mini-stat">{summary.active}</div><div className="admin-mini-label">Active members</div></div>
-        <div className="admin-mini-card"><div className="admin-mini-stat">{summary.due}</div><div className="admin-mini-label">Check-ins due</div></div>
-        <div className="admin-mini-card"><div className="admin-mini-stat">{summary.highPriority}</div><div className="admin-mini-label">High or urgent</div></div>
-      </div>
 
       <div className="member-filters" aria-label="Filter members">
         <label><span>Search members</span><input type="search" value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Name, suburb, postcode or need" /></label>
@@ -133,7 +127,7 @@ export default function AdminMembersPage() {
 
       <div className="member-crm-layout">
         <section className="member-list-panel" aria-label="IRAAC member list">
-          <div className="member-list-heading"><div><h2>Leads &amp; members</h2><span>{filtered.length} people shown</span></div></div>
+          <div className="member-list-heading"><div><h2>People</h2><span>{filtered.length} shown</span></div></div>
           <div className="member-list">
             {filtered.length ? filtered.map((member) => (
               <button type="button" className={selected?.id === member.id ? "member-list-row selected" : "member-list-row"} onClick={() => { setSelectedId(member.id); setMessage(""); }} key={member.id}>
