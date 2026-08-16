@@ -12,12 +12,15 @@ export type ReferralSource = "app" | "hotline" | "ai_outbound" | "provider";
 export type PreferredContact = "phone" | "sms" | "in_app";
 export type SupplierNotificationStatus = "not_required" | "queued" | "sent";
 export type AICallPurpose = "check_in" | "needs";
+export type ReferralSeriousness = "routine" | "elevated" | "high" | "urgent";
+export type ReferralOutcome = "pending" | "progressing" | "connected" | "not_connected";
 
 export interface AICallActivity {
   id: string;
   purpose: AICallPurpose;
-  status: "queued";
+  status: "queued" | "completed" | "failed";
   createdAt: string;
+  completedAt?: string;
 }
 
 export interface ReferralMessage {
@@ -44,6 +47,11 @@ export interface Referral {
   source: ReferralSource;
   preferredContact: PreferredContact;
   supplierNotification: SupplierNotificationStatus;
+  seriousness: ReferralSeriousness;
+  firstResponseAt: string;
+  outcome: ReferralOutcome;
+  rating?: 1 | 2 | 3 | 4 | 5;
+  feedback?: string;
   aiCalls: AICallActivity[];
   conversation: ReferralMessage[];
   status: ReferralStatus;
@@ -66,6 +74,11 @@ type ReferralInput = Omit<
   | "source"
   | "preferredContact"
   | "consentToAICall"
+  | "seriousness"
+  | "firstResponseAt"
+  | "outcome"
+  | "rating"
+  | "feedback"
 > & {
   conversation?: ReferralMessage[];
   supplierNotification?: SupplierNotificationStatus;
@@ -74,10 +87,17 @@ type ReferralInput = Omit<
   source?: ReferralSource;
   preferredContact?: PreferredContact;
   consentToAICall?: boolean;
+  seriousness?: ReferralSeriousness;
+  firstResponseAt?: string;
+  outcome?: ReferralOutcome;
+  rating?: 1 | 2 | 3 | 4 | 5;
+  feedback?: string;
 };
 
 const STORAGE_KEY = "moblink_referrals";
 const LEGACY_STORAGE_KEY = "iraac_referrals";
+const REFERRAL_SERIOUSNESS = new Set<ReferralSeriousness>(["routine", "elevated", "high", "urgent"]);
+const REFERRAL_OUTCOMES = new Set<ReferralOutcome>(["pending", "progressing", "connected", "not_connected"]);
 
 export function createReferral(data: ReferralInput): Referral {
   const now = new Date().toISOString();
@@ -87,6 +107,11 @@ export function createReferral(data: ReferralInput): Referral {
     source: data.source ?? "app",
     preferredContact: data.preferredContact ?? "phone",
     consentToAICall: data.consentToAICall ?? false,
+    seriousness: data.seriousness ?? "elevated",
+    firstResponseAt: data.firstResponseAt ?? "",
+    outcome: data.outcome ?? "pending",
+    rating: data.rating,
+    feedback: data.feedback,
     id: `ref_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`,
     status: "requested",
     staffNotes: "",
@@ -274,7 +299,10 @@ function cloneDemoReferrals(): Referral[] {
 }
 
 function normalizeReferral(referral: Referral): Referral {
-  const isIraacDemo = demoReferrals.some((demo) => demo.id === referral.id);
+  const demo = demoReferrals.find((item) => item.id === referral.id);
+  const isIraacDemo = Boolean(demo);
+  const storedCalls = Array.isArray(referral.aiCalls) ? referral.aiCalls : [];
+  const demoCalls = demo?.aiCalls.filter((call) => !storedCalls.some((stored) => stored.id === call.id)) || [];
   return {
     ...referral,
     postcode: referral.id === "lead_demo_youthscape" && referral.postcode === "2541" ? "2500" : referral.postcode || "",
@@ -282,8 +310,13 @@ function normalizeReferral(referral: Referral): Referral {
     preferredContact: referral.preferredContact || "phone",
     consentToAICall: referral.consentToAICall === true || (isIraacDemo && referral.consentToAICall !== false),
     supplierNotification: referral.supplierNotification || "not_required",
+    seriousness: REFERRAL_SERIOUSNESS.has(referral.seriousness) ? referral.seriousness : demo?.seriousness || "elevated",
+    firstResponseAt: referral.firstResponseAt || demo?.firstResponseAt || "",
+    outcome: REFERRAL_OUTCOMES.has(referral.outcome) ? referral.outcome : demo?.outcome || "pending",
+    rating: [1, 2, 3, 4, 5].includes(referral.rating ?? 0) ? referral.rating : demo?.rating,
+    feedback: referral.feedback ?? demo?.feedback,
     conversation: Array.isArray(referral.conversation) ? referral.conversation : [],
-    aiCalls: Array.isArray(referral.aiCalls) ? referral.aiCalls : [],
+    aiCalls: [...storedCalls, ...demoCalls],
   };
 }
 
@@ -320,9 +353,14 @@ export const demoReferrals: Referral[] = [
     source: "hotline",
     preferredContact: "sms",
     supplierNotification: "queued",
+    seriousness: "urgent",
+    firstResponseAt: "2026-08-15T09:02:00.000Z",
+    outcome: "connected",
+    rating: 5,
+    feedback: "I felt listened to and understood what would happen next.",
     status: "requested",
     staffNotes: "Confirm that YouthScape is suitable and coordinate qualified legal support where needed.",
-    aiCalls: [],
+    aiCalls: [{ id: "call_demo_youth_1", purpose: "needs", status: "completed", createdAt: "2026-08-15T08:48:00.000Z", completedAt: "2026-08-15T08:55:00.000Z" }],
     conversation: [
       {
         id: "msg_demo_1",
@@ -358,9 +396,14 @@ export const demoReferrals: Referral[] = [
     source: "app",
     preferredContact: "phone",
     supplierNotification: "sent",
+    seriousness: "elevated",
+    firstResponseAt: "2026-08-15T10:05:00.000Z",
+    outcome: "progressing",
+    rating: 4,
+    feedback: "The follow-up was warm and explained the available options clearly.",
     status: "follow_up_due",
     staffNotes: "Call after 10am and ask which family members would like to participate.",
-    aiCalls: [],
+    aiCalls: [{ id: "call_demo_country_1", purpose: "check_in", status: "completed", createdAt: "2026-08-15T09:45:00.000Z", completedAt: "2026-08-15T09:51:00.000Z" }],
     conversation: [{
       id: "msg_demo_country_1",
       sender: "moblink",
@@ -387,6 +430,9 @@ export const demoReferrals: Referral[] = [
     source: "hotline",
     preferredContact: "sms",
     supplierNotification: "queued",
+    seriousness: "routine",
+    firstResponseAt: "",
+    outcome: "pending",
     status: "requested",
     staffNotes: "",
     aiCalls: [],
