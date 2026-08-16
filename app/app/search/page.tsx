@@ -44,17 +44,6 @@ export default async function SearchPage({
           </div>
         </header>
 
-        {/* Search bar */}
-        <div className="search-hero-bar">
-          <span className="search-hero-icon" aria-hidden="true">🔍</span>
-          <input
-            type="search"
-            className="search-hero-input"
-            placeholder="Housing support, legal help, health services..."
-            aria-label="Search services"
-          />
-        </div>
-
         {/* Browse nearby — mini map */}
         <section className="app-section">
           <div className="section-row">
@@ -109,6 +98,10 @@ export default async function SearchPage({
               </Link>
             ))}
           </div>
+        </section>
+
+        <section className="app-section">
+          <ServiceList services={services} initialSearch={q || ""} title={q ? `Services matching “${q}”` : "All services"} />
         </section>
 
         <BottomNav current="/app/search" />

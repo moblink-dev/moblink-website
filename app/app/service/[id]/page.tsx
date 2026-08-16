@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { services } from "../../../data";
-import ServiceCard from "../../../../components/app/ServiceCard";
+import ServiceDetailHero from "../../../../components/app/ServiceDetailHero";
 import BottomNav from "../../../../components/app/BottomNav";
 
 export async function generateStaticParams() {
@@ -47,12 +47,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
               🚨 Crisis support — available 24/7. Call <strong>{service.phone}</strong> if you need help right now.
             </div>
           )}
-          <ServiceCard service={service} showFull />
-          <div className="detail-actions">
-            <Link href={`/app/request-help/${service.id}`} className="service-card-button">
-              Request help from this service
-            </Link>
-          </div>
+          <ServiceDetailHero service={service} />
         </div>
 
 

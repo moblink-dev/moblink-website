@@ -6,12 +6,14 @@ import { useParams } from "next/navigation";
 
 import {
   addReferralMessage,
-  getReferralById,
+  getIraacReferralById,
   preferredContactLabels,
   referralSourceLabels,
   referralStatusLabels,
+  scheduleAICall,
   supplierNotificationLabels,
   updateReferralStatus,
+  type AICallPurpose,
   type Referral,
   type ReferralStatus,
 } from "../../../../lib/referrals";
@@ -21,8 +23,9 @@ export default function LeadDetailPage() {
   const id = params.id as string;
   const [referral, setReferral] = useState<Referral>();
   const [message, setMessage] = useState("");
+  const [callStatus, setCallStatus] = useState("");
 
-  useEffect(() => setReferral(getReferralById(id)), [id]);
+  useEffect(() => setReferral(getIraacReferralById(id)), [id]);
 
   const sendMessage = (event: FormEvent) => {
     event.preventDefault();
@@ -35,6 +38,12 @@ export default function LeadDetailPage() {
     setMessage("");
   };
 
+  const queueCall = (purpose: AICallPurpose) => {
+    const result = scheduleAICall(id, purpose);
+    if (result.referral) setReferral(result.referral);
+    setCallStatus(result.status === "queued" ? "Demonstration call queued and recorded below." : result.reason || "The call could not be queued.");
+  };
+
   if (!referral) {
     return <div className="admin-page-content"><div className="admin-empty"><p>This lead is not available in this browser session.</p><Link href="/admin/referrals">Back to leads</Link></div></div>;
   }
@@ -42,7 +51,7 @@ export default function LeadDetailPage() {
   return (
     <div className="admin-page-content">
       <div className="admin-top">
-        <div><p className="admin-kicker">MobLink network demo lead</p><h1>{referral.needCategory} support</h1></div>
+        <div><p className="admin-kicker">IRAAC matched lead</p><h1>{referral.needCategory}</h1></div>
         <Link className="admin-small-btn" href="/admin/referrals">← All leads</Link>
       </div>
 
@@ -55,9 +64,11 @@ export default function LeadDetailPage() {
             <div><dt>Source</dt><dd>{referralSourceLabels[referral.source]}</dd></div>
             <div><dt>Follow-up</dt><dd>{preferredContactLabels[referral.preferredContact]}</dd></div>
             <div><dt>Consent</dt><dd>{referral.consentToFollowUp ? "Confirmed for this request" : "Not confirmed"}</dd></div>
+            <div><dt>AI voice-call consent</dt><dd>{referral.consentToAICall ? "Recorded for this demo lead" : "Not recorded"}</dd></div>
             <div><dt>Supplier alert</dt><dd>{supplierNotificationLabels[referral.supplierNotification]}</dd></div>
           </dl>
           <label className="lead-status-control">Lead status<select value={referral.status} onChange={(event) => setReferral(updateReferralStatus(id, event.target.value as ReferralStatus))}>{Object.entries(referralStatusLabels).map(([value, label]) => <option value={value} key={value}>{label}</option>)}</select></label>
+          <div className="lead-ai-actions"><p className="admin-kicker">MobLink AI phone assistant</p><h2>Ask MobLink to call on IRAAC&apos;s behalf</h2><button type="button" className="admin-button" disabled={!referral.consentToFollowUp || !referral.consentToAICall} onClick={() => queueCall("check_in")}>AI call: quick check-in</button><button type="button" className="admin-small-btn" disabled={!referral.consentToFollowUp || !referral.consentToAICall} onClick={() => queueCall("needs")}>AI call: learn more</button>{callStatus ? <p className="lead-call-status" role="status">{callStatus}</p> : null}<small>No real call is placed in this prototype. A production call requires separately recorded AI voice-call consent and an approved script.</small></div>
           <p className="intake-boundary">Only use these details for the support request the person agreed to.</p>
         </aside>
 

@@ -1,30 +1,30 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { getReferrals, getReferralStats } from "../../../lib/referrals";
-import { services } from "../../data";
+import { getIraacReferrals, getReferralStats } from "../../../lib/referrals";
+import { iraacServices } from "../../data";
 
 export default function AdminReportsPage() {
   const [stats, setStats] = useState<ReturnType<typeof getReferralStats> | null>(null);
 
   useEffect(() => {
-    setStats(getReferralStats());
+    setStats(getReferralStats(getIraacReferrals()));
   }, []);
 
-  const totalServices = services.length;
-  const categories = [...new Set(services.map((s) => s.category))];
+  const totalServices = iraacServices.length;
+  const categories = [...new Set(iraacServices.map((s) => s.category))];
 
   return (
     <div className="admin-page-content">
       <div className="admin-top">
         <div>
-          <p className="admin-kicker">Staff console</p>
+          <p className="admin-kicker">IRAAC provider portal</p>
           <h1>Reports & insights</h1>
         </div>
       </div>
 
       <div className="admin-report-section">
-        <h2>Service directory overview</h2>
+        <h2>IRAAC services overview</h2>
         <div className="admin-summary-cards">
           <div className="admin-mini-card">
             <div className="admin-mini-stat">{totalServices}</div>
@@ -35,11 +35,11 @@ export default function AdminReportsPage() {
             <div className="admin-mini-label">Categories</div>
           </div>
           <div className="admin-mini-card">
-            <div className="admin-mini-stat">{services.filter((s) => s.suburb === "Nowra").length}</div>
-            <div className="admin-mini-label">Nowra services</div>
+            <div className="admin-mini-stat">{new Set(iraacServices.map((service) => service.suburb)).size}</div>
+            <div className="admin-mini-label">Primary regions</div>
           </div>
           <div className="admin-mini-card">
-            <div className="admin-mini-stat">{services.filter((s) => s.isAboriginalLed).length}</div>
+            <div className="admin-mini-stat">{iraacServices.filter((s) => s.isAboriginalLed).length}</div>
             <div className="admin-mini-label">Aboriginal-led</div>
           </div>
         </div>
@@ -56,7 +56,7 @@ export default function AdminReportsPage() {
             </thead>
             <tbody>
               {categories.map((cat) => {
-                const inCat = services.filter((s) => s.category === cat);
+                const inCat = iraacServices.filter((s) => s.category === cat);
                 return (
                   <tr key={cat}>
                     <td><strong>{cat}</strong></td>

@@ -22,6 +22,7 @@ const categoryEmoji: Record<string, string> = {
 };
 
 export default function ServiceCard({ service, showFull = false }: { service: Service; showFull?: boolean }) {
+  const callablePhone = /\d/.test(service.phone);
   return (
     <article className={`service-card ${service.isCrisis ? "service-card-crisis" : ""}`} data-service-id={service.id}>
       <div className="service-card-header">
@@ -57,12 +58,11 @@ export default function ServiceCard({ service, showFull = false }: { service: Se
           {service.isNational ? service.address : `${service.address}, ${service.suburb} ${service.state}`}
         </p>
         <p className="service-card-phone">
-          <a
-            href={`tel:${service.phone.replace(/[^0-9+]/g, "")}`}
-            onClick={(e) => e.stopPropagation()}
-          >
-            {service.phone}
-          </a>
+          {callablePhone ? (
+            <a href={`tel:${service.phone.replace(/[^0-9+]/g, "")}`} onClick={(e) => e.stopPropagation()}>
+              {service.phone}
+            </a>
+          ) : service.phone}
         </p>
         {service.hours && <p className="service-card-hours">{service.hours}</p>}
       </div>
