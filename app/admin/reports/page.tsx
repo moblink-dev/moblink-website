@@ -97,7 +97,7 @@ export default function AdminReportsPage() {
       <section className="admin-report-section" aria-labelledby="pulse-heading">
         <div className="report-section-heading"><div><p className="admin-kicker">From IRAAC</p><h2 id="pulse-heading">Community needs pulse</h2></div><p>Plain-language signals from what people are asking for.</p></div>
         <div className="report-insight-grid">
-          <article><span>Most common request</span><h3>{topNeed?.label || "No requests yet"}</h3><p>{topNeed ? `${topNeed.count} request${topNeed.count === 1 ? "" : "s"} currently point to this need.` : "Needs will appear as requests arrive."}</p></article>
+          <article><span>Most common request</span><h3>{topNeed?.label || "No requests yet"}</h3><p>{topNeed ? `${topNeed.count} request${topNeed.count === 1 ? "" : "s"} currently ${topNeed.count === 1 ? "points" : "point"} to this need.` : "Needs will appear as requests arrive."}</p></article>
           <article><span>Seriousness guardrail</span><h3>{report.urgentCases} high or urgent</h3><p>These requests should be reviewed before routine work so urgent needs do not disappear inside volume.</p></article>
           <article><span>Member follow-up</span><h3>{report.checkInsDue} check-ins due</h3><p>Use the Members workspace to see who is due, their programs and their preferred contact method.</p></article>
         </div>
