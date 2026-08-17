@@ -1,24 +1,11 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import {
-  getMembers,
-  recordMemberCheckIn,
-  type IraacProgram,
-  type Member,
-  type MemberContactMethod,
-  type MemberSupportLevel,
-} from "../../../lib/members";
+import { getMembers, recordMemberCheckIn, type IraacProgram, type Member, type MemberContactMethod, type MemberSupportLevel } from "../../../lib/members";
 import { getIraacReferrals, scheduleAICall, type Referral } from "../../../lib/referrals";
 
 const programs: Array<IraacProgram | "all"> = ["all", "MCC", "YouthScape", "The Crew", "DARC"];
-const DEMO_REPORT_DATE = new Date("2026-08-16T23:59:59.999Z");
-const supportLabels: Record<MemberSupportLevel, string> = {
-  routine: "Routine",
-  elevated: "Elevated",
-  high: "High",
-  urgent: "Urgent",
-};
+const supportLabels: Record<MemberSupportLevel, string> = { routine: "Routine", elevated: "Elevated", high: "High", urgent: "Urgent" };
 
 export default function AdminMembersPage() {
   const [members, setMembers] = useState<Member[]>([]);
@@ -27,12 +14,14 @@ export default function AdminMembersPage() {
   const [search, setSearch] = useState("");
   const [program, setProgram] = useState<IraacProgram | "all">("all");
   const [support, setSupport] = useState<MemberSupportLevel | "all">("all");
-  const [contactMethod, setContactMethod] = useState<MemberContactMethod>("phone");
-  const [checkInSummary, setCheckInSummary] = useState("");
-  const [message, setMessage] = useState("");
   const [channel, setChannel] = useState<MemberContactMethod>("in_app");
   const [outboundMessage, setOutboundMessage] = useState("");
+  const [contactMethod, setContactMethod] = useState<MemberContactMethod>("phone");
+  const [checkInSummary, setCheckInSummary] = useState("");
+  const [statusMessage, setStatusMessage] = useState("");
+  const [detailsOpen, setDetailsOpen] = useState(false);
   const [stageOverrides, setStageOverrides] = useState<Record<string, string>>({});
+  const [autoCheckIns, setAutoCheckIns] = useState<Record<string, boolean>>({ member_jayden: true, member_tahlia: true, member_sam: true });
 
   useEffect(() => {
     const loaded = getMembers();
@@ -41,141 +30,117 @@ export default function AdminMembersPage() {
     setSelectedId(loaded[0]?.id || "");
   }, []);
 
-  const summary = useMemo(() => ({
-    active: members.filter((member) => member.caseStatus !== "closed").length,
-    due: members.filter((member) => member.caseStatus !== "closed" && new Date(member.nextCheckInAt) <= DEMO_REPORT_DATE).length,
-    highPriority: members.filter((member) => member.supportLevel === "high" || member.supportLevel === "urgent").length,
-  }), [members]);
-
   const filtered = useMemo(() => {
     const query = search.trim().toLowerCase();
     return members.filter((member) => {
-      const matchesSearch = !query || [member.name, member.suburb, member.postcode, member.primaryNeed, member.phoneMasked]
-        .some((value) => value.toLowerCase().includes(query));
-      const matchesProgram = program === "all" || member.programs.includes(program);
-      const matchesSupport = support === "all" || member.supportLevel === support;
-      return matchesSearch && matchesProgram && matchesSupport;
+      const matchesSearch = !query || [member.name, member.suburb, member.postcode, member.primaryNeed, member.phoneMasked].some((value) => value.toLowerCase().includes(query));
+      return matchesSearch && (program === "all" || member.programs.includes(program)) && (support === "all" || member.supportLevel === support);
     });
   }, [members, program, search, support]);
 
   const selected = filtered.find((member) => member.id === selectedId) || filtered[0];
   const selectedReferral = selected ? referrals.find((referral) => normalizeName(referral.requesterName) === normalizeName(selected.name)) : undefined;
   const selectedStage = selected ? (stageOverrides[selected.id] || lifecycleFor(selected, selectedReferral)) : "new";
+  const dueCount = members.filter((member) => member.caseStatus !== "closed" && new Date(member.nextCheckInAt) <= new Date("2026-08-16T23:59:59.999Z")).length;
 
-  const lifecycleCounts = useMemo(() => {
-    return members.reduce<Record<string, number>>((counts, member) => {
-      const referral = referrals.find((item) => normalizeName(item.requesterName) === normalizeName(member.name));
-      const stage = stageOverrides[member.id] || lifecycleFor(member, referral);
-      counts[stage] = (counts[stage] || 0) + 1;
-      return counts;
-    }, {});
-  }, [members, referrals, stageOverrides]);
-
-  const handleCheckIn = () => {
-    if (!selected) return;
-    const updated = recordMemberCheckIn(selected.id, contactMethod, checkInSummary);
-    if (!updated) {
-      setMessage("A check-in needs recorded contact permission and a short summary.");
-      return;
-    }
-    setMembers((current) => current.map((member) => member.id === updated.id ? updated : member));
-    setCheckInSummary("");
-    setMessage("Demonstration check-in saved to this member record. No call or message was sent.");
+  const selectMember = (member: Member, openDetails = false) => {
+    setSelectedId(member.id);
+    setStatusMessage("");
+    if (openDetails) setDetailsOpen(true);
   };
 
   const handleMessage = () => {
     if (!selected || !outboundMessage.trim()) return;
     const updated = recordMemberCheckIn(selected.id, channel, outboundMessage);
-    if (!updated) {
-      setMessage("This person has not given permission for that contact.");
-      return;
-    }
+    if (!updated) return setStatusMessage("This person has not given permission for that contact.");
     setMembers((current) => current.map((member) => member.id === updated.id ? updated : member));
     setOutboundMessage("");
-    setMessage(`Demonstration ${contactLabel(channel)} saved to the timeline. Nothing was sent.`);
+    setStatusMessage(`Demo ${contactLabel(channel)} added to this conversation. Nothing was sent.`);
+  };
+
+  const handleCheckIn = () => {
+    if (!selected) return;
+    const updated = recordMemberCheckIn(selected.id, contactMethod, checkInSummary);
+    if (!updated) return setStatusMessage("A check-in needs contact permission and a short note.");
+    setMembers((current) => current.map((member) => member.id === updated.id ? updated : member));
+    setCheckInSummary("");
+    setStatusMessage("Demo check-in saved. No call or message was sent.");
   };
 
   const handleAiCall = () => {
-    if (!selectedReferral) {
-      setMessage("Create a support request before scheduling an AI-assisted call.");
-      return;
-    }
+    if (!selectedReferral) return setStatusMessage("This person needs a linked request before an AI-assisted call can be queued.");
     const result = scheduleAICall(selectedReferral.id, "check_in");
     if (result.referral) setReferrals((current) => current.map((item) => item.id === result.referral?.id ? result.referral : item));
-    setMessage(result.status === "queued" ? "Demonstration AI check-in added. No phone call was placed." : result.reason || "The check-in could not be added.");
+    setStatusMessage(result.status === "queued" ? "Demo AI check-in queued. No phone call was placed." : result.reason || "The check-in could not be queued.");
   };
 
-  return (
-    <div className="admin-page-content crm-page">
-      <div className="crm-command-head">
-        <div><p className="admin-kicker">IRAAC · AI-assisted case management</p><h1>AI CRM</h1><p>Leads, members, messages and next actions in one workspace.</p></div>
-        <div className="crm-head-actions"><span><b>{summary.due}</b> tasks due</span></div>
-      </div>
+  return <div className="admin-page-content crm-page crm-inbox-page">
+    <header className="crm-inbox-header">
+      <div><p className="admin-kicker">IRAAC community support</p><h1>CRM</h1><p>Messages, history and next actions in one respectful conversation.</p></div>
+      <div className="crm-inbox-summary"><span><b>{members.length}</b> people</span><span><b>{dueCount}</b> due</span><span><b>{members.filter((member) => member.supportLevel === "urgent" || member.supportLevel === "high").length}</b> priority</span></div>
+    </header>
 
-      <div className="crm-demo-line"><strong>Demo records</strong><span>Masked details · contact permission stays visible on each record</span></div>
+    <div className="crm-inbox-shell">
+      <aside className="crm-people-pane" aria-label="IRAAC member list">
+        <div className="crm-people-toolbar">
+          <div><strong>People</strong><span>{filtered.length}</span></div>
+          <input aria-label="Search people" type="search" value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Search people or needs" />
+          <div className="crm-compact-filters">
+            <select aria-label="Filter by program" value={program} onChange={(event) => setProgram(event.target.value as IraacProgram | "all")}>{programs.map((item) => <option key={item} value={item}>{item === "all" ? "All programs" : item}</option>)}</select>
+            <select aria-label="Filter by support level" value={support} onChange={(event) => setSupport(event.target.value as MemberSupportLevel | "all")}><option value="all">All levels</option>{Object.entries(supportLabels).map(([value, label]) => <option key={value} value={value}>{label}</option>)}</select>
+          </div>
+        </div>
+        <div className="crm-person-list">
+          {filtered.map((member) => {
+            const last = member.activities.at(-1);
+            return <button type="button" key={member.id} className={selected?.id === member.id ? "crm-person-row active" : "crm-person-row"} onClick={() => selectMember(member)} onDoubleClick={() => selectMember(member, true)}>
+              <span className="crm-person-avatar">{initials(member.name)}</span>
+              <span className="crm-person-copy"><span><strong>{member.name.replace(" (demo)", "")}</strong><time>{last ? shortDate(last.date) : "New"}</time></span><small>{last?.summary || member.primaryNeed}</small><em>{member.programs[0]} · {member.suburb}</em></span>
+              {(member.supportLevel === "urgent" || member.supportLevel === "high") ? <i aria-label={`${supportLabels[member.supportLevel]} priority`} /> : null}
+            </button>;
+          })}
+        </div>
+      </aside>
 
-      <section className="crm-overview-strip" aria-label="Community support overview">
-        <div className="crm-key-metrics"><div><strong>{members.length}</strong><span>People</span></div><div><strong>{summary.active}</strong><span>Active</span></div><div><strong>{summary.due}</strong><span>Due</span></div><div><strong>{summary.highPriority}</strong><span>Priority</span></div></div>
-        <div className="crm-pipeline">{lifecycleStages.map((stage) => <div key={stage.value}><strong>{lifecycleCounts[stage.value] || 0}</strong><span>{stage.label}</span></div>)}</div>
+      <section className="crm-conversation-pane" aria-label="Selected member conversation">
+        {selected ? <>
+          <header className="crm-conversation-head">
+            <div className="crm-selected-person"><span className="crm-person-avatar">{initials(selected.name)}</span><div><h2>{selected.name.replace(" (demo)", "")}</h2><p>{selected.phoneMasked} · {selected.suburb} {selected.postcode} · {selected.programs.join(", ")}</p></div></div>
+            <div className="crm-conversation-actions"><span className={`member-priority member-priority-${selected.supportLevel}`}>{supportLabels[selected.supportLevel]}</span><button type="button" onClick={() => setDetailsOpen(true)}>Member details</button></div>
+          </header>
+
+          <div className="crm-contact-bar">
+            <span><b>Assigned</b> {selected.assignedTo}</span><span><b>Stage</b> {lifecycleStages.find((stage) => stage.value === selectedStage)?.label}</span>
+            <label><input type="checkbox" checked={Boolean(autoCheckIns[selected.id])} onChange={(event) => setAutoCheckIns((current) => ({ ...current, [selected.id]: event.target.checked }))} /> AI auto check-in</label>
+          </div>
+
+          <div className="crm-message-feed">
+            <p className="crm-date-divider">Shared MobLink history · demo</p>
+            {conversationFor(selected).map((item) => <article key={item.id} className={`crm-message crm-message-${item.side}`}><span>{item.channel}</span><p>{item.body}</p><time>{item.date}</time></article>)}
+            {selected.activities.map((activity) => <article key={activity.id} className="crm-message crm-message-staff"><span>{contactLabel(activity.type)}</span><p>{activity.summary}</p><time>{formatDateTime(activity.date)}</time></article>)}
+            {statusMessage ? <p className="crm-status-message" role="status">{statusMessage}</p> : null}
+          </div>
+
+          <div className="crm-composer">
+            <div className="crm-channel-row"><select aria-label="Reply channel" value={channel} onChange={(event) => setChannel(event.target.value as MemberContactMethod)}><option value="in_app">MobLink app</option><option value="sms">SMS</option><option value="email">Email</option></select><span>{selected.consentToContact ? "Contact permission recorded" : "No contact permission"}</span></div>
+            <div className="crm-reply-row"><textarea rows={2} value={outboundMessage} onChange={(event) => setOutboundMessage(event.target.value)} placeholder={`Reply to ${selected.name.replace(" (demo)", "")}…`} /><button type="button" disabled={!selected.consentToContact || !outboundMessage.trim()} onClick={handleMessage}>Send demo reply</button></div>
+          </div>
+        </> : <div className="admin-empty"><p>No people match these filters.</p></div>}
       </section>
 
-      <div className="member-filters" aria-label="Filter members">
-        <label><span>Search members</span><input type="search" value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Name, suburb, postcode or need" /></label>
-        <label><span>Program</span><select value={program} onChange={(event) => setProgram(event.target.value as IraacProgram | "all")}>{programs.map((item) => <option value={item} key={item}>{item === "all" ? "All programs" : item}</option>)}</select></label>
-        <label><span>Support level</span><select value={support} onChange={(event) => setSupport(event.target.value as MemberSupportLevel | "all")}><option value="all">All levels</option>{Object.entries(supportLabels).map(([value, label]) => <option value={value} key={value}>{label}</option>)}</select></label>
-      </div>
-
-      <div className="member-crm-layout">
-        <section className="member-list-panel" aria-label="IRAAC member list">
-          <div className="member-list-heading"><div><h2>People</h2><span>{filtered.length} shown</span></div></div>
-          <div className="member-list">
-            {filtered.length ? filtered.map((member) => (
-              <button type="button" className={selected?.id === member.id ? "member-list-row selected" : "member-list-row"} onClick={() => { setSelectedId(member.id); setMessage(""); }} key={member.id}>
-                <span className="member-list-person"><strong>{member.name}</strong><small>{member.phoneMasked} · {member.suburb}</small></span>
-                <span className={`member-priority member-priority-${member.supportLevel}`}>{supportLabels[member.supportLevel]}</span>
-                <span className="member-programs">{member.programs.join(" · ")}</span>
-                <span className="crm-stage-label">{lifecycleStages.find((stage) => stage.value === (stageOverrides[member.id] || lifecycleFor(member, referrals.find((item) => normalizeName(item.requesterName) === normalizeName(member.name)))) )?.label}</span>
-                <span className="member-next">Next check-in<br /><b>{formatDate(member.nextCheckInAt)}</b></span>
-              </button>
-            )) : <div className="admin-empty"><p>No members match these filters.</p></div>}
-          </div>
-        </section>
-
-        <aside className="member-detail-panel" aria-label="Selected member details">
-          {selected ? <>
-            <div className="member-detail-head"><div><p className="admin-kicker">Member profile</p><h2>{selected.name}</h2><span>{selected.phoneMasked} · {selected.suburb} {selected.postcode}</span></div><span className={`member-priority member-priority-${selected.supportLevel}`}>{supportLabels[selected.supportLevel]}</span></div>
-            <label className="crm-stage-control">Support stage<select value={selectedStage} onChange={(event) => setStageOverrides((current) => ({ ...current, [selected.id]: event.target.value }))}>{lifecycleStages.map((stage) => <option key={stage.value} value={stage.value}>{stage.label}</option>)}</select></label>
-            <dl className="member-detail-grid">
-              <div><dt>Programs</dt><dd>{selected.programs.join(", ")}</dd></div>
-              <div><dt>Primary need</dt><dd>{selected.primaryNeed}</dd></div>
-              <div><dt>Assigned team</dt><dd>{selected.assignedTo}</dd></div>
-              <div><dt>Contact preference</dt><dd>{selected.preferredContact.replace("_", " ")}</dd></div>
-              <div><dt>Contact permission</dt><dd>{selected.consentToContact ? "Recorded" : "Not recorded"}</dd></div>
-              <div><dt>Member since</dt><dd>{formatDate(selected.joinedAt)}</dd></div>
-              <div><dt>Linked request</dt><dd>{selectedReferral ? selectedReferral.needCategory : "No open lead"}</dd></div>
-              <div><dt>AI call permission</dt><dd>{selectedReferral?.consentToAICall ? "Recorded for this request" : "Not recorded"}</dd></div>
-            </dl>
-            {selected.satisfactionRating ? <div className="member-feedback"><span aria-label={`${selected.satisfactionRating} out of 5 stars`}>{"★".repeat(selected.satisfactionRating)}{"☆".repeat(5 - selected.satisfactionRating)}</span><p>{selected.feedback}</p></div> : null}
-            <div className="crm-actions-grid">
-              <div className="member-check-in"><h3>Message {selected.name.replace(" (demo)", "")}</h3><label>Channel<select value={channel} onChange={(event) => setChannel(event.target.value as MemberContactMethod)}><option value="in_app">MobLink app</option><option value="sms">SMS</option><option value="email">Email</option></select></label><label>Message<textarea rows={3} value={outboundMessage} onChange={(event) => setOutboundMessage(event.target.value)} placeholder="Write a clear, respectful update..." /></label><button className="admin-button" type="button" disabled={!selected.consentToContact || !outboundMessage.trim()} onClick={handleMessage}>Save demo message</button></div>
-              <div className="member-check-in"><h3>Schedule a check-in</h3><label>Contact method<select value={contactMethod} onChange={(event) => setContactMethod(event.target.value as MemberContactMethod)}><option value="phone">Staff phone call</option><option value="sms">Text message</option><option value="in_app">MobLink chat</option><option value="ai_call">AI-assisted call</option><option value="office">Office visit</option></select></label><label>Summary<textarea rows={3} value={checkInSummary} onChange={(event) => setCheckInSummary(event.target.value)} placeholder="What should happen next?" /></label><div className="crm-action-buttons"><button className="admin-button" type="button" disabled={!selected.consentToContact || !checkInSummary.trim()} onClick={handleCheckIn}>Save check-in</button><button className="admin-small-btn" type="button" disabled={!selectedReferral?.consentToAICall} onClick={handleAiCall}>AI call check-in</button></div></div>
-            </div>
-            <div className="crm-survey-card"><div><span className="admin-kicker">Service feedback</span><h3>{selected.satisfactionRating ? "Survey completed" : "One survey due"}</h3><p>{selected.satisfactionRating ? selected.feedback : `Ask how ${selected.programs[0]} support is going and what IRAAC could do better.`}</p></div><strong>{selected.satisfactionRating ? `${selected.satisfactionRating}/5` : "Due"}</strong></div>
-            {message ? <p className="member-check-in-message" role="status">{message}</p> : null}
-            <div className="member-activity"><h3>Recent activity</h3>{selected.activities.slice(-4).reverse().map((activity) => <div key={activity.id}><span>{activity.type.replace("_", " ")} · {formatDate(activity.date)}</span><p>{activity.summary}</p></div>)}</div>
-          </> : <div className="admin-empty"><p>Select a member to view their profile.</p></div>}
-        </aside>
-      </div>
+      {detailsOpen && selected ? <aside className="crm-record-drawer" aria-label="Selected member details">
+        <header><div><p className="admin-kicker">Member record</p><h2>{selected.name.replace(" (demo)", "")}</h2></div><button type="button" aria-label="Close member details" onClick={() => setDetailsOpen(false)}>×</button></header>
+        <label className="crm-stage-control">Support stage<select value={selectedStage} onChange={(event) => setStageOverrides((current) => ({ ...current, [selected.id]: event.target.value }))}>{lifecycleStages.map((stage) => <option key={stage.value} value={stage.value}>{stage.label}</option>)}</select></label>
+        <dl className="crm-record-facts"><div><dt>Primary need</dt><dd>{selected.primaryNeed}</dd></div><div><dt>Preferred contact</dt><dd>{selected.preferredContact.replace("_", " ")}</dd></div><div><dt>Member since</dt><dd>{formatDate(selected.joinedAt)}</dd></div><div><dt>Next check-in</dt><dd>{formatDate(selected.nextCheckInAt)}</dd></div><div><dt>Contact permission</dt><dd>{selected.consentToContact ? "Recorded" : "Not recorded"}</dd></div><div><dt>AI call permission</dt><dd>{selectedReferral?.consentToAICall ? "Recorded for linked request" : "Not recorded"}</dd></div></dl>
+        <section className="crm-drawer-section"><h3>Schedule check-in</h3><select aria-label="Check-in method" value={contactMethod} onChange={(event) => setContactMethod(event.target.value as MemberContactMethod)}><option value="phone">Staff phone call</option><option value="sms">Text message</option><option value="in_app">MobLink chat</option><option value="office">Office visit</option></select><textarea rows={2} value={checkInSummary} onChange={(event) => setCheckInSummary(event.target.value)} placeholder="Next action or check-in note" /><div><button type="button" onClick={handleCheckIn} disabled={!checkInSummary.trim()}>Save note</button><button type="button" onClick={handleAiCall} disabled={!selectedReferral?.consentToAICall}>AI call</button></div></section>
+        <section className="crm-feedback-compact"><span>{selected.satisfactionRating ? `${selected.satisfactionRating}/5` : "Due"}</span><div><strong>{selected.satisfactionRating ? "Latest service survey" : "Survey due"}</strong><p>{selected.feedback || `Ask how ${selected.programs[0]} support is going.`}</p></div></section>
+        <p className="crm-demo-note">Fictional demonstration record. Production use requires secure staff access, consent history and protected case notes.</p>
+      </aside> : null}
     </div>
-  );
+  </div>;
 }
 
-const lifecycleStages = [
-  { value: "new", label: "New request" }, { value: "contacted", label: "Contacted" },
-  { value: "support_plan", label: "Support plan" }, { value: "connected", label: "Connected" },
-  { value: "member", label: "Active member" }, { value: "follow_up", label: "Follow-up" },
-  { value: "completed", label: "Completed" },
-];
+const lifecycleStages = [{ value: "new", label: "New request" }, { value: "contacted", label: "Contacted" }, { value: "support_plan", label: "Support plan" }, { value: "connected", label: "Connected" }, { value: "member", label: "Active member" }, { value: "follow_up", label: "Follow-up" }, { value: "completed", label: "Completed" }];
 
 function lifecycleFor(member: Member, referral?: Referral): string {
   if (member.caseStatus === "closed") return "completed";
@@ -187,10 +152,19 @@ function lifecycleFor(member: Member, referral?: Referral): string {
   return "member";
 }
 
-function normalizeName(value: string): string { return value.replace(/\s*\(demo\)\s*/i, "").trim().toLowerCase(); }
-function contactLabel(method: MemberContactMethod): string { return method === "in_app" ? "MobLink message" : method === "sms" ? "SMS" : method === "email" ? "email" : "contact note"; }
-
-function formatDate(value: string): string {
-  if (!value) return "Not recorded";
-  return new Date(value).toLocaleDateString("en-AU", { day: "numeric", month: "short", year: "numeric" });
+function conversationFor(member: Member) {
+  const firstName = member.name.replace(" (demo)", "").split(" ")[0];
+  return [
+    { id: `${member.id}_1`, side: "member", channel: "MobLink app", body: `Hi, I’m looking for help with ${member.primaryNeed.toLowerCase()}.`, date: "14 Aug · 9:18 am" },
+    { id: `${member.id}_2`, side: "moblink", channel: "MobLink assistant", body: `Thanks ${firstName}. IRAAC’s ${member.programs[0]} team may be able to help. Would you like me to connect you?`, date: "14 Aug · 9:19 am" },
+    { id: `${member.id}_3`, side: "member", channel: "MobLink app", body: "Yes please. A message in the app is easiest for me.", date: "14 Aug · 9:21 am" },
+    { id: `${member.id}_4`, side: "system", channel: "Connection created", body: `Shared conversation opened with ${member.assignedTo}.`, date: "14 Aug · 9:21 am" },
+  ];
 }
+
+function normalizeName(value: string) { return value.replace(/\s*\(demo\)\s*/i, "").trim().toLowerCase(); }
+function initials(value: string) { return value.replace(" (demo)", "").split(" ").map((part) => part[0]).slice(0, 2).join(""); }
+function contactLabel(method: MemberContactMethod) { return method === "in_app" ? "MobLink app" : method === "sms" ? "SMS" : method === "email" ? "Email" : method === "ai_call" ? "AI call" : method === "office" ? "Office visit" : "Phone"; }
+function formatDate(value: string) { return value ? new Date(value).toLocaleDateString("en-AU", { day: "numeric", month: "short", year: "numeric" }) : "Not recorded"; }
+function formatDateTime(value: string) { return value ? new Date(value).toLocaleString("en-AU", { day: "numeric", month: "short", hour: "numeric", minute: "2-digit" }) : "Not recorded"; }
+function shortDate(value: string) { return value ? new Date(value).toLocaleDateString("en-AU", { day: "numeric", month: "short" }) : "New"; }
