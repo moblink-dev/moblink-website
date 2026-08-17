@@ -74,6 +74,16 @@ export default function AdminReportsPage() {
         <div><strong>1</strong><span>New requests</span></div><i>→</i><div><strong>2</strong><span>Active members</span></div><i>→</i><div><strong>3</strong><span>Outcomes &amp; surveys</span></div><i>→</i><div><strong>4</strong><span>Reports</span></div><i>→</i><Link href="/admin/funding"><strong>5</strong><span>Funding evidence</span></Link>
       </section>
 
+      <section className="monthly-report-history" aria-labelledby="monthly-history-heading">
+        <header><div><p className="admin-kicker">Monthly intelligence</p><h2 id="monthly-history-heading">Reports over time</h2></div><span>Next report · 31 August</span></header>
+        <div className="monthly-report-tabs">
+          <details open><summary><b>August 2026</b><span>Current draft · 16 members</span></summary><div><h3>Legal navigation and transport are the clearest Illawarra pressure points.</h3><p><strong>Community:</strong> Monthly check-ins show people value clear, trusted guidance, but YouthScape members still describe transport as a barrier after legal support begins.</p><p><strong>IRAAC:</strong> Response discipline matters: four people currently need a reply, while 5/5 feedback supports the quality story. Prioritise urgent follow-up and record the resulting outcome.</p><p><strong>Funding:</strong> Use de-identified YouthScape outcomes, check-in transcripts and conversion evidence to build a youth justice and early-intervention case. Eligibility and consent still require human review.</p></div></details>
+          <details><summary><b>July 2026</b><span>Growth and family coordination</span></summary><div><h3>Membership grew while DARC coordination became more important.</h3><p>Members asked for fewer hand-offs between services. IRAAC’s opportunity is to show how one coordinated relationship reduces repetition and keeps families engaged across the Illawarra.</p></div></details>
+          <details><summary><b>June 2026</b><span>Culture and participation</span></summary><div><h3>MCC and The Crew strengthened ongoing participation.</h3><p>Feedback linked cultural connection and practical activity with greater confidence. The next report should track attendance, return participation and what helped members stay involved.</p></div></details>
+        </div>
+        <small>These are fictional monthly examples. A production schedule, approvals, consent checks and secure storage still need to be connected.</small>
+      </section>
+
       <section className="report-email-panel" aria-labelledby="report-email-heading">
         <div><p className="admin-kicker">Report delivery</p><h2 id="report-email-heading">Add people who should receive this report.</h2><p>Recipient addresses stay in this browser. Opening the draft uses your device email app; MobLink does not send anything automatically.</p></div>
         <div className="report-email-controls">
@@ -104,7 +114,7 @@ export default function AdminReportsPage() {
         <div className="report-insight-grid">
           <article><span>Most common request</span><h3>{topNeed?.label || "No requests yet"}</h3><p>{topNeed ? `${topNeed.count} request${topNeed.count === 1 ? "" : "s"} currently ${topNeed.count === 1 ? "points" : "point"} to this need.` : "Needs will appear as requests arrive."}</p></article>
           <article><span>Seriousness guardrail</span><h3>{report.urgentCases} high or urgent</h3><p>These requests should be reviewed before routine work so urgent needs do not disappear inside volume.</p></article>
-          <article><span>Member follow-up</span><h3>{report.checkInsDue} check-ins due</h3><p>Use the Community CRM to see who is due, their programs and their preferred contact method.</p></article>
+          <article><span>Member follow-up</span><h3>{report.checkInsDue} check-ins due</h3><p>Use Members to see who is due, their programs and their preferred contact method.</p></article>
         </div>
         <div className="admin-report-grid report-chart-grid">
           <ReportBars title="Requests by need" items={report.byNeed} max={maxNeed} />
@@ -132,7 +142,7 @@ export default function AdminReportsPage() {
         </div>
       </section>
 
-      <section className="written-community-report" aria-labelledby="written-report-heading">
+      <section className="written-community-report compact-written-report" aria-labelledby="written-report-heading">
         <div className="written-report-head"><div><p className="admin-kicker">Generated evidence brief</p><h2 id="written-report-heading">IRAAC community support findings</h2></div><span>Draft for human review</span></div>
         <p><strong>Central finding.</strong> The current fictional IRAAC records point to consistent demand for legal navigation, cultural connection, practical participation and coordinated family support across the Illawarra. The records do not show only emergency demand; they show people needing trusted guidance before a situation becomes more serious.</p>
         <p><strong>Evidence of response.</strong> IRAAC’s recorded first responses, successful service connections, check-ins, ratings and member comments provide a clearer picture of whether support was timely and useful. Positive comments emphasise respectful explanations and continued contact. Lower-rated feedback identifies housing delays and urgent response time as areas for improvement.</p>

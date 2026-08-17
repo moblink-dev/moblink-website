@@ -8,11 +8,20 @@ type Speaker = Advisor | "iraac";
 type Message = { id: string; speaker: Speaker; body: string; source?: { label: string; url: string } };
 type Thread = { id: string; title: string; preview: string; conversations: Record<Advisor, Message[]> };
 
-const sebenzaWelcome = (): Message => ({
-  id: `sebenza_${Date.now()}`,
-  speaker: "sebenza",
-  body: "Hi, I’m with Sebenza Consulting. I can see this thread and the IRAAC evidence behind it. Tell me which opportunity you want reviewed and our team will respond here within 48 hours.",
-});
+const sebenzaWelcome = (): Message[] => [
+  {
+    id: `sebenza_intro_${Date.now()}`,
+    speaker: "sebenza",
+    body: "Hi, I’m Simone O’Dowd, Principal Advisor at Sebenza Advisory. I work directly with Aboriginal community organisations on funding strategy, government grants, governance and reporting. I’ve joined this conversation as a real person, and I’m here to help IRAAC turn a promising opportunity into a clear, evidence-backed application.",
+    source: { label: "Meet Sebenza Advisory", url: "https://www.sebenza-advisory.com.au/" },
+  },
+  {
+    id: `sebenza_context_${Date.now() + 1}`,
+    speaker: "sebenza",
+    body: "From the context IRAAC has chosen to share in this thread, I can see strong stories across YouthScape, MCC, The Crew and DARC, supported by member demand, check-ins and service outcomes. I’d begin with youth justice and early-intervention funding, culture and Country programs, and practical community participation. Sebenza can help shape the case, test eligibility, organise evidence, prepare the application and get your team comfortable using MobLink. Tell me which program you want to fund first, or ask me to recommend the best starting point.",
+    source: { label: "Talk with Simone", url: "https://www.sebenza-advisory.com.au/contact.html" },
+  },
+];
 
 const initialThreads: Thread[] = [
   { id: "opportunities", title: "Funding opportunities for IRAAC", preview: "Official sources checked 16 August 2026.", conversations: { moblink: [
@@ -44,7 +53,13 @@ export default function AdminFundingPage() {
   }, []);
 
   const addMessage = (advisor: Advisor, message: Message) => setThreads((current) => current.map((thread) => thread.id === active.id ? { ...thread, conversations: { ...thread.conversations, [advisor]: [...thread.conversations[advisor], message] } } : thread));
-  const selectMode = (next: Advisor) => { setMode(next); setNotice(""); if (next === "sebenza" && active.conversations.sebenza.length === 0) addMessage("sebenza", sebenzaWelcome()); };
+  const selectMode = (next: Advisor) => {
+    setMode(next);
+    setNotice("");
+    if (next === "sebenza" && active.conversations.sebenza.length === 0) {
+      setThreads((current) => current.map((thread) => thread.id === active.id ? { ...thread, conversations: { ...thread.conversations, sebenza: sebenzaWelcome() } } : thread));
+    }
+  };
   const send = (event: FormEvent) => {
     event.preventDefault();
     if (!draft.trim()) return;
@@ -67,20 +82,19 @@ export default function AdminFundingPage() {
     </aside>
     <section className={`funding-conversation funding-conversation-${mode}`}>
       {!railOpen ? <button type="button" className="funding-open-rail" onClick={() => setRailOpen(true)} aria-label="Open funding conversations">☰</button> : null}
-      <header><div><span>{mode === "moblink" ? "IRAAC funding workspace" : "Sebenza consultant · shared thread context"}</span><h1>{active.title}</h1></div><span className="funding-demo-label">Demonstration</span></header>
+      <header><div><span>{mode === "moblink" ? "IRAAC funding workspace" : "Live chat with Simone · Sebenza Advisory"}</span><h1>{active.title}</h1></div></header>
       <div key={`${active.id}_${mode}`} className={`funding-message-feed funding-message-feed-${mode}`} aria-live="polite">
-        {mode === "sebenza" ? <div className="funding-lane-note"><span>MobLink context shared</span><strong>This is now a private Sebenza conversation within the same funding thread.</strong></div> : null}
-        {messages.map((message) => <article key={message.id} className={`funding-chat-message funding-chat-message-${message.speaker}`}><div className="funding-avatar" aria-hidden="true">{speakerInitial(message.speaker)}</div><div><strong>{speakerName(message.speaker)}</strong><p>{message.body}</p>{message.source ? <a className="funding-source-link" href={message.source.url} target="_blank" rel="noreferrer">{message.source.label} ↗</a> : null}{message.speaker === "sebenza" ? <p className="funding-sebenza-contact"><a href="https://sebenza-advisory.com.au/" target="_blank" rel="noreferrer">Sebenza Consulting</a> · Response target: 48 hours</p> : null}</div></article>)}
+        {messages.map((message) => <article key={message.id} className={`funding-chat-message funding-chat-message-${message.speaker}`}><div className={message.speaker === "sebenza" ? "funding-avatar funding-avatar-photo" : "funding-avatar"} aria-hidden="true">{message.speaker === "sebenza" ? <img src="/images/simone-odowd.png" alt="" /> : speakerInitial(message.speaker)}</div><div><strong>{speakerName(message.speaker)}</strong><p>{message.body}</p>{message.source ? <a className="funding-source-link" href={message.source.url} target="_blank" rel="noreferrer">{message.source.label} ↗</a> : null}</div></article>)}
       </div>
       <form className="funding-chat-composer" onSubmit={send}>
-        <div className="funding-mode-switch" aria-label="Choose conversation"><button type="button" aria-pressed={mode === "moblink"} className={mode === "moblink" ? "active" : ""} onClick={() => selectMode("moblink")}>{mode === "sebenza" ? "← " : ""}MobLink agent</button><button type="button" aria-pressed={mode === "sebenza"} className={mode === "sebenza" ? "active" : ""} onClick={() => selectMode("sebenza")}>Sebenza consultant{mode === "moblink" ? " →" : ""}</button></div>
+        <div className="funding-mode-switch" aria-label="Choose conversation"><button type="button" aria-pressed={mode === "moblink"} className={mode === "moblink" ? "active" : ""} onClick={() => selectMode("moblink")}>{mode === "sebenza" ? "← " : ""}MobLink agent</button><button type="button" aria-pressed={mode === "sebenza"} className={mode === "sebenza" ? "active funding-sebenza-mode" : "funding-sebenza-mode"} onClick={() => selectMode("sebenza")}><img src="/images/simone-odowd.png" alt="" /> Simone at Sebenza{mode === "moblink" ? " →" : ""}</button></div>
         <div className="funding-input-row"><button type="button" aria-label="Add image" title="Add image" onClick={() => setNotice("Image attachment is ready for production storage; no file was uploaded in this demonstration.")}>＋</button><button type="button" aria-label="Record voice message" title="Voice message" onClick={() => setNotice("Voice input is shown as a demonstration; the microphone was not accessed.")}>◉</button><input value={draft} onChange={(event) => setDraft(event.target.value)} aria-label="Message funding assistant" placeholder={mode === "moblink" ? "Ask MobLink about funding…" : "Message your Sebenza consultant…"} /><button type="submit" aria-label="Send message" disabled={!draft.trim()}>↑</button></div>
-        <small>{notice || (mode === "moblink" ? "Official sources first. IRAAC staff verify eligibility and approve every submission." : "This lane keeps the same thread context and moves the conversation to Sebenza.")}</small>
+        {notice || mode === "moblink" ? <small>{notice || "Official sources first. IRAAC staff verify eligibility and approve every submission."}</small> : null}
       </form>
     </section>
   </div></div>;
 }
 
-function speakerName(speaker: Speaker): string { if (speaker === "moblink") return "MobLink"; if (speaker === "sebenza") return "Sebenza Consultant"; return "IRAAC"; }
+function speakerName(speaker: Speaker): string { if (speaker === "moblink") return "MobLink"; if (speaker === "sebenza") return "Simone O’Dowd · Principal Advisor"; return "IRAAC"; }
 function speakerInitial(speaker: Speaker): string { return speakerName(speaker).charAt(0); }
 function replyFor(mode: Advisor): string { return mode === "moblink" ? "I’ll check the current official rules against IRAAC’s programs and evidence, then bring back the strongest fit and any missing information." : "Thanks. The Sebenza team has your question and this thread. A consultant would review it and respond here within 48 hours."; }

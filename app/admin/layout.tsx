@@ -18,11 +18,12 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   }
 
   const links = [
-    { href: "/admin/", label: "Overview" },
-    { href: "/admin/members", label: "CRM", short: "CRM" },
+    { href: "/admin/", label: "Dashboard" },
+    { href: "/admin/members", label: "Members", short: "Members" },
     { href: "/admin/services", label: "Services", short: "Services" },
     { href: "/admin/reports", label: "Reports" },
     { href: "/admin/profile", label: "Profile" },
+    { href: "/admin/billing", label: "Billing" },
     { href: "/admin/funding", label: "Funding" },
   ];
 

@@ -1,5 +1,6 @@
 .DS_Store
 *.png
+!public/images/simone-odowd.png
 node_modules/
 dist/
 .astro/

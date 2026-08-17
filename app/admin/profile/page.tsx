@@ -35,6 +35,7 @@ const initialProfile: ProviderProfile = {
   contacts: [
     { id: "primary", name: "Primary contact", role: "Organisation contact", email: "", phone: "", image: "" },
     { id: "programs", name: "Program contact", role: "Programs and referrals", email: "", phone: "", image: "" },
+    { id: "simone", name: "Simone O’Dowd", role: "Sebenza Principal Advisor", email: "simone@sebenzaadvisory.com.au", phone: "", image: "/images/simone-odowd.png" },
   ],
 };
 
@@ -47,7 +48,10 @@ export default function ProviderProfilePage() {
       const stored = localStorage.getItem(storageKey);
       if (stored) {
         const parsed = JSON.parse(stored) as Partial<ProviderProfile>;
-        setProfile({ ...initialProfile, ...parsed, contacts: Array.isArray(parsed.contacts) ? parsed.contacts : initialProfile.contacts });
+        const storedContacts = Array.isArray(parsed.contacts) ? parsed.contacts : [];
+        const contacts = [...storedContacts];
+        initialProfile.contacts.forEach((contact) => { if (!contacts.some((item) => item.id === contact.id)) contacts.push(contact); });
+        setProfile({ ...initialProfile, ...parsed, contacts });
       }
     } catch {
       localStorage.removeItem(storageKey);
@@ -106,7 +110,7 @@ export default function ProviderProfilePage() {
           <label className="provider-profile-wide">History<textarea rows={4} value={profile.history} onChange={(event) => update("history", event.target.value)} /></label>
         </div>
         <section className="provider-contacts-editor">
-          <div className="provider-profile-section"><h2>Key contacts</h2><p>Add the people community members and partner organisations should contact.</p></div>
+          <div className="provider-profile-section"><h2>Key people</h2><p>Record each person’s role, monitored email, public mobile and image. Blank details are never published.</p></div>
           <div className="provider-contact-list">{profile.contacts.map((contact) => <article className="provider-contact-editor" key={contact.id}>
             <label className="provider-contact-photo"><span>{contact.image ? <img src={contact.image} alt="" /> : contactInitials(contact.name)}</span><input type="file" accept="image/*" onChange={(event) => loadImage(contact.id, event.target.files?.[0])} />Add image</label>
             <div><label>Name<input value={contact.name} onChange={(event) => updateContact(contact.id, "name", event.target.value)} /></label><label>Role<input value={contact.role} onChange={(event) => updateContact(contact.id, "role", event.target.value)} /></label><label>Email<input type="email" value={contact.email} onChange={(event) => updateContact(contact.id, "email", event.target.value)} placeholder="Monitored email" /></label><label>Phone<input type="tel" value={contact.phone} onChange={(event) => updateContact(contact.id, "phone", event.target.value)} placeholder="Public number" /></label></div>

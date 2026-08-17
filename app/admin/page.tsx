@@ -1,153 +1,28 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import Link from "next/link";
-import { getIraacReferrals, getReferralStats } from "../../lib/referrals";
-import { iraacServices } from "../data";
+import { useEffect, useState } from "react";
+import { getMembers } from "../../lib/members";
+import { getIraacReferrals } from "../../lib/referrals";
+import { calculateProviderReport, type ProviderReport } from "../../lib/reporting";
 
 export default function AdminDashboard() {
-  const [stats, setStats] = useState<ReturnType<typeof getReferralStats> | null>(null);
-
-  useEffect(() => {
-    setStats(getReferralStats(getIraacReferrals()));
-  }, []);
-
-  const pendingReferrals = stats ? stats.requested + stats.triage : 0;
-  const totalReferrals = stats ? stats.total : 0;
-  const totalServices = iraacServices.length;
-
-  return (
-    <div className="admin-page-content">
-      <div className="admin-top">
-        <div>
-          <p className="admin-kicker">IRAAC provider portal</p>
-          <h1>Good morning, IRAAC</h1>
-        </div>
-        <div className="admin-stat-badge">{pendingReferrals > 0 ? `${pendingReferrals} pending` : "All clear"}</div>
-      </div>
-
-      <div className="admin-banner">
-        <div>
-          <strong>IRAAC&apos;s services are visible to community in MobLink.</strong>
-          <p>Review Illawarra leads, respond in the shared conversation or queue a consented AI phone check-in.</p>
-        </div>
-        <Link className="admin-button" href="/app/">
-          Open community app
-        </Link>
-      </div>
-
-      <div className="admin-grid">
-        <Link href="/admin/members" className="admin-tile admin-tile-link">
-          <div>
-            <h2>Lead inbox</h2>
-            <p>Incoming app and hotline requests matched to IRAAC&apos;s programs and Illawarra coverage.</p>
-          </div>
-          <div>
-            <div className="admin-stat">{totalReferrals}</div>
-            <div className="admin-label">{pendingReferrals > 0 ? `${pendingReferrals} need attention` : "No pending"}</div>
-          </div>
-        </Link>
-
-        <Link href="/admin/services" className="admin-tile admin-tile-link">
-          <div>
-            <h2>Services</h2>
-            <p>Manage MCC, YouthScape, The Crew and DARC as they appear in MobLink.</p>
-          </div>
-          <div>
-            <div className="admin-stat">{totalServices}</div>
-            <div className="admin-label">{totalServices} IRAAC programs</div>
-          </div>
-        </Link>
-
-        <Link href="/admin/reports" className="admin-tile admin-tile-link">
-          <div>
-            <h2>Reports & insights</h2>
-            <p>De-identified service gaps, outcomes and follow-up themes.</p>
-          </div>
-          <div>
-            <div className="admin-stat">{totalReferrals > 0 ? `${totalReferrals}` : "—"}</div>
-            <div className="admin-label">{totalReferrals > 0 ? "Referrals recorded" : "No data yet"}</div>
-          </div>
-        </Link>
-
-        <div className="admin-tile">
-          <div>
-            <h2>AI-assisted follow-up</h2>
-            <p>Queue a consented check-in or needs call from the lead inbox.</p>
-          </div>
-          <div>
-            <div className="admin-stat">AI</div>
-            <div className="admin-label"><Link href="/admin/members">Open Community CRM →</Link></div>
-          </div>
-        </div>
-      </div>
-
-      <div className="admin-panels">
-        <div className="admin-panel" id="queue">
-          <h2>Recent leads</h2>
-          {totalReferrals === 0 ? (
-            <div className="admin-empty">
-              <p>No leads yet. Leads appear here when a community member requests help by app or hotline.</p>
-            </div>
-          ) : (
-            <table>
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Service</th>
-                  <th>Need</th>
-                  <th>Status</th>
-                  <th>Time</th>
-                </tr>
-              </thead>
-              <tbody>
-                {getIraacReferrals()
-                  .slice(-5)
-                  .reverse()
-                  .map((r) => (
-                    <tr key={r.id}>
-                      <td>{r.requesterName}</td>
-                      <td>{r.serviceName}</td>
-                      <td>{r.needCategory}</td>
-                      <td>
-                        <span className="status-pill">{r.status}</span>
-                      </td>
-                      <td>{new Date(r.createdAt).toLocaleDateString()}</td>
-                    </tr>
-                  ))}
-              </tbody>
-            </table>
-          )}
-          <Link href="/admin/members" className="admin-panel-link">
-            View all leads →
-          </Link>
-        </div>
-
-        <div className="admin-panel" id="directory">
-          <h2>IRAAC services</h2>
-          <div className="admin-directory-stats">
-            <div className="admin-dir-stat">
-              <span className="admin-dir-num">{totalServices}</span>
-              <span className="admin-dir-label">Services</span>
-            </div>
-            <div className="admin-dir-stat">
-              <span className="admin-dir-num">{iraacServices.filter((s) => s.category === "Youth").length}</span>
-              <span className="admin-dir-label">Youth programs</span>
-            </div>
-            <div className="admin-dir-stat">
-              <span className="admin-dir-num">{iraacServices.filter((s) => s.category === "Culture").length}</span>
-              <span className="admin-dir-label">Culture &amp; capability</span>
-            </div>
-            <div className="admin-dir-stat">
-              <span className="admin-dir-num">{new Set(iraacServices.map((service) => service.suburb)).size}</span>
-              <span className="admin-dir-label">Primary region</span>
-            </div>
-          </div>
-          <Link href="/admin/services" className="admin-panel-link">
-            Manage services →
-          </Link>
-        </div>
-      </div>
-    </div>
-  );
+  const [report, setReport] = useState<ProviderReport | null>(null);
+  useEffect(() => setReport(calculateProviderReport(getIraacReferrals(), getMembers(), new Date("2026-08-16T23:59:59.999Z"))), []);
+  if (!report) return <div className="admin-page-content"><p>Preparing IRAAC dashboard…</p></div>;
+  const topProgram = [...report.byProgram].sort((a, b) => b.members - a.members)[0];
+  return <div className="admin-page-content compact-dashboard">
+    <header className="compact-dashboard-head"><div><p className="admin-kicker">IRAAC · 16 August 2026</p><h1>Community dashboard</h1><p>Members, response, service outcomes and funding readiness at a glance.</p></div><Link href="/admin/members">{report.checkInsDue} actions due →</Link></header>
+    <section className="dashboard-kpi-strip"><Metric value={String(report.activeMembers)} label="Active members" trend="+3 this month" /><Metric value={`${report.responseRate}%`} label="Response rate" trend={report.responseRate >= 80 ? "On track" : "Needs attention"} /><Metric value={`${report.successfulConnectionRate}%`} label="Lead conversion" trend={`${report.successfulConnections} connected`} /><Metric value={`${report.averageRating ?? "—"}/5`} label="Member happiness" trend={`${report.feedbackCount} responses`} /><Metric value={String(report.checkInsDue)} label="AI check-ins due" trend="Next batch today" /><Metric value={String(report.totalReferrals)} label="Leads received" trend="Illawarra matched" /></section>
+    <div className="dashboard-operations-grid">
+      <section className="dashboard-panel dashboard-priority"><header><div><p className="admin-kicker">Response queue</p><h2>Who needs IRAAC next</h2></div><Link href="/admin/members">Open inbox</Link></header><ul><li><b>Corey</b><span>New lead · The Crew</span><em>Needs response</em></li><li><b>Sam</b><span>Urgent DARC check-in</span><em>2h waiting</em></li><li><b>Jayden</b><span>Transport after YouthScape call</span><em>1 day</em></li><li><b>Tahlia</b><span>Training and transport follow-up</span><em>2 days</em></li></ul></section>
+      <section className="dashboard-panel"><header><div><p className="admin-kicker">Community pulse</p><h2>What members are saying</h2></div><Link href="/admin/reports">Full report</Link></header><div className="dashboard-sentiment"><strong>{report.averageRating ?? "—"}/5</strong><p><b>Working:</b> warm explanations, clear next steps and cultural connection.</p><p><b>Watch:</b> legal navigation, transport and urgent response time.</p></div></section>
+      <section className="dashboard-panel"><header><div><p className="admin-kicker">Program demand</p><h2>{topProgram?.program || "IRAAC services"} leads reach</h2></div><Link href="/admin/services">Manage</Link></header><div className="dashboard-program-bars">{report.byProgram.map((item) => <div key={item.program}><span>{item.program}</span><i><b style={{ width: `${Math.max(14, item.members / Math.max(...report.byProgram.map((value) => value.members)) * 100)}%` }} /></i><em>{item.members}</em></div>)}</div></section>
+      <section className="dashboard-panel"><header><div><p className="admin-kicker">Funding</p><h2>Evidence is building</h2></div><Link href="/admin/funding">Ask MobLink</Link></header><ul className="dashboard-funding-list"><li><b>Youth justice pathways</b><span>Strong member evidence</span></li><li><b>MCC culture and Country</b><span>Watch next suitable round</span></li><li><b>August evidence report</b><span>Draft due 31 Aug</span></li></ul></section>
+      <section className="dashboard-panel dashboard-schedule"><header><div><p className="admin-kicker">Next 30 days</p><h2>Automated support rhythm</h2></div></header><div><span><b>{report.checkInsDue}</b> AI check-ins</span><span><b>{report.surveysDue}</b> surveys due</span><span><b>31 Aug</b> monthly report</span><span><b>1 Sep</b> response allowance resets</span></div></section>
+      <section className="dashboard-panel"><header><div><p className="admin-kicker">Provider readiness</p><h2>Profile and operations</h2></div><Link href="/admin/profile">Complete profile</Link></header><p className="dashboard-readiness">Services are published. Public address, opening hours and IRAAC contact details still need confirmation. Funding conversations and reports remain drafts for staff review.</p></section>
+    </div><p className="dashboard-demo-boundary">Fictional demonstration data only. No calls, subscriptions, reports or messages are sent automatically.</p>
+  </div>;
 }
+
+function Metric({ value, label, trend }: { value: string; label: string; trend: string }) { return <article><strong>{value}</strong><span>{label}</span><small>{trend}</small></article>; }
