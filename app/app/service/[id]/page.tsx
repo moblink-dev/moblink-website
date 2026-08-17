@@ -30,11 +30,6 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
   return (
     <main className="app-page">
       <div className="phone-shell">
-        <div className="phone-status" aria-hidden="true">
-          <span className="phone-time">Moblink</span>
-          <span className="phone-signal">Near Nowra</span>
-        </div>
-
         <div className="detail-back">
           <Link href="/app/search" className="detail-back-link">
             ← Back to services

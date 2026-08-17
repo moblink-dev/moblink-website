@@ -65,10 +65,6 @@ export default function MapPage() {
   return (
     <main className="app-page">
       <div className="phone-shell phone-shell-compact">
-        <div className="phone-status" aria-hidden="true">
-          <span className="phone-time">Map</span>
-          <span className="phone-signal">Moblink</span>
-        </div>
       <div className="map-mobile-page">
         {/* Full-screen map */}
         <div className="map-mobile-canvas">

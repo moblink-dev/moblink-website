@@ -19,7 +19,6 @@ export default function ChatPage() {
     return (
       <main className="app-page">
         <div className="phone-shell phone-shell-compact mobile-chat-shell">
-          <div className="phone-status"><span>Moblink</span><span>Nowra · online</span></div>
           <button type="button" className="mobile-chat-back" onClick={() => setThread(null)}>← Inbox</button>
           {thread === "moblink" ? <HelpBot /> : <CentrelinkChat />}
           <BottomNav current="/app/messages" />
@@ -31,7 +30,6 @@ export default function ChatPage() {
   return (
     <main className="app-page">
       <div className="phone-shell phone-shell-compact inbox-shell-redesign">
-        <div className="phone-status"><span>Moblink</span><span>Wollongong 2500</span></div>
         <header className="mobile-page-head"><div><p>Conversations</p><h1>Chat</h1></div><span className="inbox-unread">2 new</span></header>
 
         <section className="inbox-welcome">

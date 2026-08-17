@@ -10,11 +10,6 @@ export default function ProfilePage() {
   return (
     <main className="app-page">
       <div className="phone-shell phone-shell-compact">
-        <div className="phone-status" aria-hidden="true">
-          <span className="phone-time">Moblink</span>
-          <span className="phone-signal">Wollongong 2500</span>
-        </div>
-
         <header className="app-top app-top-compact">
           <div>
             <p className="app-kicker">Your Moblink account</p>

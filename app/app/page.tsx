@@ -117,11 +117,6 @@ export default function MoblinkHome() {
   return (
     <main className="app-page">
       <div className="phone-shell phone-shell-compact">
-        <div className="phone-status" aria-hidden="true">
-          <span className="phone-time">Moblink</span>
-          <span className="phone-signal">South Coast, NSW</span>
-        </div>
-
         <header className="app-top app-top-compact">
           <div>
             <p className="app-kicker">Support that fits your situation</p>

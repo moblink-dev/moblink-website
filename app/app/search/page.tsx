@@ -32,11 +32,6 @@ export default async function SearchPage({
   return (
     <main className="app-page">
       <div className="phone-shell phone-shell-compact">
-        <div className="phone-status" aria-hidden="true">
-          <span className="phone-time">Moblink</span>
-          <span className="phone-signal">Nowra 2541</span>
-        </div>
-
         <header className="app-top app-top-compact">
           <div>
             <p className="app-kicker">{localCount} local services</p>

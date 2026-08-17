@@ -30,7 +30,6 @@ export default function ConnectedServiceChatPage() {
 
   return (
     <main className="app-page"><div className="phone-shell phone-shell-compact mobile-chat-shell">
-      <div className="phone-status"><span>Moblink</span><span>IRAAC · connected</span></div>
       <Link className="mobile-chat-back" href="/app/messages">← Inbox</Link>
       {!referral ? <div className="compact-empty"><p>This conversation is not available in this browser session.</p></div> : (
         <section className="provider-mobile-chat">

@@ -97,10 +97,6 @@ export default function SurveyPage() {
     return (
       <main className="app-page">
         <div className="phone-shell">
-          <div className="phone-status" aria-hidden="true">
-            <span className="phone-time">Survey complete</span>
-            <span className="phone-signal">Moblink</span>
-          </div>
           <div className="survey-thanks">
             <div className="survey-thanks-icon">🤝</div>
             <h1>Thank you</h1>
@@ -126,11 +122,6 @@ export default function SurveyPage() {
   return (
     <main className="app-page">
       <div className="phone-shell">
-        <div className="phone-status" aria-hidden="true">
-          <span className="phone-time">Have Your Say</span>
-          <span className="phone-signal">Moblink</span>
-        </div>
-
         <header className="app-top app-top-compact">
           <div>
             <p className="app-kicker">{variant === "iraac" ? "Optional IRAAC check-in" : "Monthly community pulse"}</p>

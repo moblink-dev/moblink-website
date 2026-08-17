@@ -4973,6 +4973,280 @@ input {
 .funding-conversation-sebenza .funding-chat-message p { max-width: 720px; font-size: .86rem; line-height: 1.6; }
 .funding-conversation-sebenza > header { padding-top: 14px; padding-bottom: 14px; }
 
+/* ===== Moblink community app — unified mobile design system ===== */
+.app-page {
+  --app-ink: #201d1a;
+  --app-muted: #706960;
+  --app-line: #e5ded3;
+  --app-surface: #fffefa;
+  --app-canvas: #f7f4ee;
+  --app-green: #155e54;
+  --app-green-soft: #e5f1ee;
+  --app-ochre: #b85f28;
+  --app-ochre-soft: #f8eadf;
+  min-height: 100dvh;
+  background:
+    radial-gradient(circle at 20% 0%, rgba(184, 95, 40, .08), transparent 28rem),
+    radial-gradient(circle at 90% 30%, rgba(21, 94, 84, .08), transparent 28rem),
+    #eee9e1;
+  color: var(--app-ink);
+}
+
+.app-page .phone-shell,
+.app-page .phone-shell-compact {
+  position: relative;
+  width: min(100%, 440px);
+  min-height: 100dvh;
+  margin: 0 auto;
+  padding: 24px 18px calc(104px + env(safe-area-inset-bottom));
+  overflow-x: hidden;
+  background: linear-gradient(180deg, #fbfaf7 0%, var(--app-canvas) 100%);
+  box-shadow: 0 28px 90px rgba(45, 37, 29, .14);
+}
+
+.app-page .phone-status { display: none !important; }
+
+.app-page .app-top,
+.app-page .mobile-page-head {
+  min-height: 58px;
+  margin: 0 0 18px;
+  align-items: flex-end;
+}
+
+.app-page .app-kicker,
+.app-page .mobile-page-head p {
+  margin: 0 0 5px;
+  color: var(--app-ochre);
+  font-size: .67rem;
+  font-weight: 850;
+  letter-spacing: .13em;
+}
+
+.app-page .app-top h1,
+.app-page .mobile-page-head h1 {
+  margin: 0;
+  color: var(--app-ink);
+  font-size: clamp(2.25rem, 10vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -.055em;
+  line-height: .96;
+}
+
+.app-page .app-section { margin-bottom: 24px; }
+.app-page .section-row { min-height: 28px; margin-bottom: 10px; }
+.app-page .app-section-title { margin: 0; font-size: 1.04rem; font-weight: 800; letter-spacing: -.025em; }
+.app-page .section-link { color: var(--app-green); font-size: .72rem; font-weight: 800; }
+
+.app-page .bottom-nav {
+  bottom: max(12px, env(safe-area-inset-bottom));
+  z-index: 100;
+  width: min(408px, calc(100% - 24px));
+  gap: 3px;
+  border: 1px solid rgba(221, 214, 203, .9);
+  border-radius: 23px;
+  padding: 6px;
+  background: rgba(255, 254, 250, .94);
+  box-shadow: 0 12px 35px rgba(39, 31, 24, .14), 0 1px 0 rgba(255,255,255,.9) inset;
+  backdrop-filter: blur(18px) saturate(1.25);
+}
+
+.app-page .bottom-nav-item {
+  min-height: 48px;
+  gap: 3px;
+  border-radius: 17px;
+  padding: 5px 2px 4px;
+  color: #7d766e;
+  font-size: .61rem;
+  font-weight: 750;
+}
+
+.app-page .bottom-nav-active { background: var(--app-green-soft); color: #104c44; }
+.app-page .bottom-nav-icon { width: 21px; height: 21px; display: grid; place-items: center; }
+.app-page .bottom-nav-icon svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.8; }
+
+/* Inbox */
+.app-page .inbox-shell-redesign { display: flex; flex-direction: column; }
+.app-page .inbox-unread { padding: 6px 10px; background: var(--app-ink); font-size: .63rem; }
+.app-page .inbox-welcome {
+  gap: 12px;
+  margin: 0 0 14px;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 19px;
+  padding: 14px;
+  background: linear-gradient(135deg, #173a35, #116b5e);
+  box-shadow: 0 12px 25px rgba(20, 78, 70, .16);
+}
+.app-page .inbox-welcome img { width: 46px; height: 46px; border: 2px solid rgba(255,255,255,.6); border-radius: 14px; }
+.app-page .inbox-welcome strong { font-size: .93rem; }
+.app-page .inbox-welcome span { color: #dcece9; font-size: .72rem; line-height: 1.35; }
+.app-page .inbox-list,
+.app-page .inbox-list-redesign { width: 100%; min-width: 0; display: grid; gap: 8px; padding: 0; }
+.app-page .inbox-list-redesign .inbox-item {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  gap: 12px;
+  overflow: hidden;
+  border: 1px solid var(--app-line);
+  border-radius: 17px;
+  padding: 12px;
+  background: rgba(255, 254, 250, .95);
+  box-shadow: 0 4px 14px rgba(45, 37, 29, .045);
+}
+.app-page .inbox-list-redesign .inbox-item:active { transform: scale(.99); background: #f5f1e9; }
+.app-page .inbox-item-avatar { width: 44px; height: 44px; border-radius: 14px; background: #eee7db; }
+.app-page .inbox-item-body { min-width: 0; overflow: hidden; }
+.app-page .inbox-item-top { width: 100%; }
+.app-page .inbox-item-name { min-width: 0; overflow: hidden; color: var(--app-ink); font-size: .91rem; text-overflow: ellipsis; white-space: nowrap; }
+.app-page .inbox-item-time { color: var(--app-muted); font-size: .68rem; }
+.app-page .inbox-item-preview { display: block; width: 100%; max-width: 100%; margin-top: 2px; color: var(--app-muted); font-size: .76rem; line-height: 1.35; text-overflow: ellipsis; }
+.app-page .inbox-item-badge { margin-top: 4px; color: var(--app-green); font-size: .64rem; font-weight: 800; }
+.app-page .inbox-item-unread { border-color: #ecc4a7 !important; box-shadow: inset 3px 0 var(--app-ochre), 0 4px 14px rgba(45,37,29,.045) !important; }
+.app-page .inbox-section-label { padding: 13px 4px 1px; color: var(--app-ochre); }
+.app-page .inbox-survey-item { background: #fffaf2 !important; }
+
+/* Browse and search */
+.app-page .location-search-card {
+  grid-template-columns: 38px minmax(0,1fr) 24px;
+  gap: 10px;
+  margin: -2px 0 14px;
+  border-color: var(--app-line);
+  border-radius: 17px;
+  padding: 11px;
+  background: var(--app-surface);
+  box-shadow: 0 5px 16px rgba(45,37,29,.045);
+}
+.app-page .location-search-card > span { width: 38px; height: 38px; border-radius: 12px; background: var(--app-green-soft); }
+.app-page .location-search-card strong { font-size: .82rem; }
+.app-page .location-search-card small { margin-top: 1px; color: var(--app-muted); font-size: .63rem; }
+.app-page .crisis-mini { margin-bottom: 21px; border-color: #f1c9c6; border-radius: 14px; padding: 8px; background: #fff7f5; }
+.app-page .crisis-mini-link { min-height: 30px; border-color: #eadfd9; padding: 0 11px; font-size: .65rem; }
+.app-page .rail-scroll { gap: 10px; margin-right: -18px; padding-right: 18px; scroll-snap-type: x proximity; }
+.app-page .rail-card { scroll-snap-align: start; border-color: var(--app-line); border-radius: 17px; background: var(--app-surface); box-shadow: 0 5px 18px rgba(45,37,29,.055); }
+.app-page .rail-card-img { min-height: 108px; }
+.app-page .rail-card-body { padding: 11px; }
+.app-page .rail-card-name { font-size: .84rem; line-height: 1.25; }
+.app-page .mobile-service-search { margin: 0 0 16px; border-color: var(--app-line); border-radius: 16px; padding: 7px 7px 7px 12px; box-shadow: 0 5px 16px rgba(45,37,29,.045); }
+.app-page .mobile-service-search input { min-height: 34px; font-size: .76rem; }
+.app-page .mobile-service-search button { min-height: 36px; border-radius: 11px; padding: 0 13px; background: var(--app-green); }
+.app-page .browse-grid { gap: 8px; }
+.app-page .browse-card { min-height: 88px; border-color: var(--app-line); border-radius: 16px; background: var(--app-surface); }
+.app-page .browse-cat-chip { min-height: 40px; border-color: var(--app-line); background: var(--app-surface); }
+.app-page .minimap-wrapper { overflow: hidden; border: 1px solid var(--app-line); border-radius: 18px; box-shadow: 0 6px 20px rgba(45,37,29,.06); }
+
+/* Service results and details */
+.app-page .service-list { min-width: 0; }
+.app-page .service-list-search { margin-bottom: 10px; }
+.app-page .service-list-input { min-height: 46px; border-color: var(--app-line); border-radius: 14px; background: var(--app-surface); }
+.app-page .service-list-categories { margin-right: -18px; padding-right: 18px; }
+.app-page .service-list-cat-btn { min-height: 36px; border-color: var(--app-line); border-radius: 999px; background: var(--app-surface); }
+.app-page .service-list-cat-btn.active { border-color: var(--app-green); background: var(--app-green); color: #fff; }
+.app-page .service-list-title { font-size: 1.05rem; }
+.app-page .service-card {
+  border-color: var(--app-line);
+  border-radius: 18px;
+  background: var(--app-surface);
+  box-shadow: 0 5px 20px rgba(45,37,29,.05);
+}
+.app-page .service-card-header { padding: 14px 14px 0; }
+.app-page .service-card-name,
+.app-page .service-card-meta,
+.app-page .service-card-description,
+.app-page .service-card-tags,
+.app-page .service-card-info,
+.app-page .service-card-full { margin-left: 14px; margin-right: 14px; }
+.app-page .service-card-name { margin-top: 9px; font-size: 1.12rem; letter-spacing: -.025em; }
+.app-page .service-card-description { font-size: .8rem; line-height: 1.48; }
+.app-page .service-card-actions { gap: 7px; padding: 12px 14px 14px; }
+.app-page .service-card-button { min-height: 46px; border-radius: 13px; background: var(--app-green); }
+.app-page .service-card-button-secondary { border-color: #cdc4b8; background: transparent; color: var(--app-ink); }
+.app-page .detail-back { padding: 0 0 18px; }
+.app-page .detail-back-link,
+.app-page .mobile-chat-back { min-height: 38px; display: inline-flex; align-items: center; color: var(--app-green); font-size: .75rem; }
+.app-page .detail-hero .service-card { box-shadow: 0 10px 28px rgba(45,37,29,.075); }
+.app-page .detail-actions { gap: 8px; margin-top: 10px; }
+.app-page .service-contact-note { border-left-color: var(--app-green); border-radius: 0 10px 10px 0; padding: 9px 11px; background: var(--app-green-soft); }
+.app-page .service-invite-link { min-height: 46px; display: grid; place-items: center; border-color: #dfaa83; border-radius: 13px; background: #fff9f3; }
+.app-page .mini-card { border-color: var(--app-line); border-radius: 16px; background: var(--app-surface); }
+
+/* Profile, settings, surveys and request forms */
+.app-page .profile-settings-btn { width: 42px; height: 42px; display: grid; place-items: center; border: 1px solid var(--app-line); background: var(--app-surface); }
+.app-page .profile-card { border: 1px solid var(--app-line); border-radius: 21px; padding: 20px 16px; background: var(--app-surface); box-shadow: 0 7px 22px rgba(45,37,29,.05); }
+.app-page .profile-avatar { width: 68px; height: 68px; box-shadow: 0 0 0 6px var(--app-green-soft); }
+.app-page .profile-name { font-size: 1.35rem; }
+.app-page .compact-grid { gap: 8px; }
+.app-page .compact-card,
+.app-page .settings-row { min-height: 62px; border-color: var(--app-line); border-radius: 15px; padding: 11px 12px; background: var(--app-surface); }
+.app-page .compact-card-name,
+.app-page .settings-row-label { font-size: .82rem; }
+.app-page .compact-card-meta,
+.app-page .settings-row-desc { color: var(--app-muted); font-size: .69rem; line-height: 1.35; }
+.app-page .survey-progress { margin-bottom: 26px; }
+.app-page .survey-progress-bar { height: 5px; background: #e4ddd3; }
+.app-page .survey-progress-fill { background: var(--app-green); }
+.app-page .survey-question { border: 1px solid var(--app-line); border-radius: 20px; padding: 18px; background: var(--app-surface); box-shadow: 0 7px 22px rgba(45,37,29,.045); }
+.app-page .survey-question-text { font-size: 1.2rem; letter-spacing: -.025em; }
+.app-page .survey-choice-btn,
+.app-page .survey-scale-btn { border-color: var(--app-line); border-radius: 13px; }
+.app-page .survey-choice-active,
+.app-page .survey-scale-active { border-color: var(--app-green); background: var(--app-green); }
+.app-page .survey-textarea { border-color: var(--app-line); border-radius: 13px; }
+.app-page .survey-thanks { margin-top: 10vh; border: 1px solid var(--app-line); border-radius: 22px; padding: 34px 20px; background: var(--app-surface); }
+.app-page .request-service-ref { border-color: var(--app-line); border-radius: 15px; background: var(--app-green-soft); }
+.app-page .request-form { gap: 15px; }
+.app-page .request-form-group input,
+.app-page .request-form-group select,
+.app-page .request-form-group textarea { min-height: 48px; border-color: var(--app-line); border-radius: 13px; background: var(--app-surface); }
+.app-page .request-form-group textarea { min-height: 112px; }
+.app-page .request-confirmed { margin-top: 8vh; border: 1px solid var(--app-line); border-radius: 22px; padding: 30px 20px; background: var(--app-surface); }
+
+/* Conversations */
+.app-page .mobile-chat-shell { height: 100dvh; grid-template-rows: auto minmax(0,1fr) auto; padding-top: 14px; padding-bottom: 82px; }
+.app-page .mobile-chat-shell .help-bot,
+.app-page .centrelink-chat,
+.app-page .provider-mobile-chat { border: 1px solid var(--app-line); border-radius: 20px; padding: 0 12px 10px; background: rgba(255,254,250,.78); box-shadow: 0 8px 28px rgba(45,37,29,.055); }
+.app-page .mobile-conversation-head,
+.app-page .help-bot-header { min-height: 62px; margin: 0; border-color: var(--app-line); }
+.app-page .mobile-message-feed,
+.app-page .help-bot-chat { gap: 10px; padding: 14px 1px; scrollbar-width: thin; }
+.app-page .mobile-message,
+.app-page .help-bot-msg { border-color: var(--app-line); border-radius: 17px 17px 17px 5px; padding: 11px 12px; background: #fff; }
+.app-page .mobile-message.user,
+.app-page .help-bot-msg-user { border-color: var(--app-green); border-radius: 17px 17px 5px 17px; background: var(--app-green); }
+.app-page .mobile-message p,
+.app-page .help-bot-msg { font-size: .79rem; line-height: 1.5; }
+.app-page .conversation-mode-switch button { min-height: 39px; border-color: var(--app-line); background: #fff; }
+.app-page .conversation-mode-switch button.active { border-color: var(--app-green); background: var(--app-green); }
+.app-page .mobile-chat-composer,
+.app-page .help-bot-input-row { border-color: var(--app-line); border-radius: 17px; background: #fff; box-shadow: 0 5px 16px rgba(45,37,29,.05); }
+.app-page .mobile-chat-composer button,
+.app-page .help-bot-send { background: var(--app-green); }
+
+/* Map */
+.app-page .map-mobile-page { border: 1px solid var(--app-line); border-radius: 22px; overflow: hidden; box-shadow: 0 8px 28px rgba(45,37,29,.075); }
+.app-page .map-mobile-search { border-color: var(--app-line); border-radius: 15px; background: rgba(255,254,250,.95); }
+.app-page .map-mobile-cat { min-height: 36px; border-color: var(--app-line); background: rgba(255,254,250,.94); }
+.app-page .map-mobile-cat.active,
+.app-page .map-mobile-btn { background: var(--app-green); }
+.app-page .map-mobile-sheet { border-radius: 22px 22px 0 0; background: var(--app-surface); }
+
+@media (min-width: 560px) {
+  .app-page { padding: 24px 0; }
+  .app-page .phone-shell,
+  .app-page .phone-shell-compact { min-height: calc(100dvh - 48px); border: 1px solid rgba(220,212,201,.8); border-radius: 28px; }
+  .app-page .mobile-chat-shell { height: calc(100dvh - 48px); }
+}
+
+@media (max-width: 559px) {
+  .app-page .phone-shell,
+  .app-page .phone-shell-compact { width: 100%; min-height: 100dvh; border-radius: 0; }
+  .app-page .bottom-nav { width: calc(100% - 20px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-page *, .app-page *::before, .app-page *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+}
+
 .compact-dashboard { max-width: 1400px; margin: 0 auto; }
 .compact-dashboard-head, .billing-head { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 12px; }
 .compact-dashboard-head h1, .billing-head h1 { margin: 2px 0; font-size: clamp(2rem, 4vw, 3.4rem); letter-spacing: -.055em; line-height: .95; }

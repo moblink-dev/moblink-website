@@ -67,10 +67,6 @@ export default function RequestHelpPage() {
     return (
       <main className="app-page">
         <div className="phone-shell">
-          <div className="phone-status" aria-hidden="true">
-            <span className="phone-time">Request sent</span>
-            <span className="phone-signal">Moblink</span>
-          </div>
           <div className="request-confirmed">
             <div className="request-confirmed-icon">✓</div>
             <h1>Request submitted</h1>
@@ -100,11 +96,6 @@ export default function RequestHelpPage() {
   return (
     <main className="app-page">
       <div className="phone-shell">
-        <div className="phone-status" aria-hidden="true">
-          <span className="phone-time">Request help</span>
-          <span className="phone-signal">Moblink</span>
-        </div>
-
         <div className="detail-back">
           <a href={`/app/service/${serviceId}`} className="detail-back-link">
             ← Back to service

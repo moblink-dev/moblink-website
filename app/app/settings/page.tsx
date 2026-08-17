@@ -10,11 +10,6 @@ export default function SettingsPage() {
   return (
     <main className="app-page">
       <div className="phone-shell phone-shell-compact">
-        <div className="phone-status" aria-hidden="true">
-          <span className="phone-time">Settings</span>
-          <span className="phone-signal">Moblink</span>
-        </div>
-
         <div className="detail-back">
           <Link href="/app/profile" className="detail-back-link">← Back to profile</Link>
         </div>
