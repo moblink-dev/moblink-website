@@ -58,7 +58,7 @@ export default function ProfilePage() {
               <span className="compact-card-emoji" aria-hidden="true">💬</span>
               <div className="compact-card-body">
                 <strong className="compact-card-name">Messages</strong>
-                <span className="compact-card-meta">Updates from MobLink and connected services</span>
+                <span className="compact-card-meta">Updates from Moblink and connected services</span>
               </div>
             </Link>
             <Link href="/app/settings" className="compact-card">

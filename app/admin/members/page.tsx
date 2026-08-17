@@ -79,7 +79,7 @@ export default function AdminMembersPage() {
 
   return <div className="admin-page-content crm-page crm-inbox-page">
     <header className="crm-inbox-header">
-      <div><p className="admin-kicker">IRAAC community support</p><h1>Members</h1><p>Messages, history and next actions in one respectful conversation.</p></div>
+      <div><p className="admin-kicker">IRAAC community support</p><h1>Chat</h1><p>One inbox for Moblink app messages, Messenger AI chats, AI-call transcripts and direct staff replies.</p></div>
       <div className="crm-inbox-summary"><span><b>{members.length}</b> people</span><span><b>{dueCount}</b> due</span><span><b>{members.filter((member) => member.supportLevel === "urgent" || member.supportLevel === "high").length}</b> priority</span></div>
     </header>
 
@@ -120,14 +120,14 @@ export default function AdminMembersPage() {
           </div>
 
           <div className="crm-message-feed">
-            <p className="crm-date-divider">Shared MobLink history · demo</p>
+            <p className="crm-date-divider">Shared Moblink contact history · app, Messenger, calls and messages</p>
             {conversationFor(selected).map((item) => <article key={item.id} className={`crm-message crm-message-${item.side}`}><span>{item.channel}</span><p>{item.body}</p><time>{item.date}</time></article>)}
             {selected.activities.map((activity) => <article key={activity.id} className="crm-message crm-message-staff"><span>{contactLabel(activity.type)}</span><p>{activity.summary}</p><time>{formatDateTime(activity.date)}</time></article>)}
             {statusMessage ? <p className="crm-status-message" role="status">{statusMessage}</p> : null}
           </div>
 
           <div className="crm-composer">
-            <div className="crm-channel-row"><select aria-label="Reply channel" value={channel} onChange={(event) => setChannel(event.target.value as MemberContactMethod)}><option value="in_app">MobLink app</option><option value="sms">SMS</option><option value="email">Email</option></select><span>{selected.consentToContact ? "Contact permission recorded" : "No contact permission"}</span></div>
+            <div className="crm-channel-row"><select aria-label="Reply channel" value={channel} onChange={(event) => setChannel(event.target.value as MemberContactMethod)}><option value="in_app">Moblink app</option><option value="sms">SMS</option><option value="email">Email</option></select><span>{selected.consentToContact ? "Contact permission recorded" : "No contact permission"}</span></div>
             <div className="crm-reply-row"><textarea rows={2} value={outboundMessage} onChange={(event) => setOutboundMessage(event.target.value)} placeholder={`Reply to ${selected.name.replace(" (demo)", "")}…`} /><button type="button" disabled={!selected.consentToContact || !outboundMessage.trim()} onClick={handleMessage}>Send demo reply</button></div>
           </div>
         </> : <div className="admin-empty"><p>No people match these filters.</p></div>}
@@ -140,8 +140,8 @@ export default function AdminMembersPage() {
           <dl className="crm-record-facts"><div><dt>Primary need</dt><dd>{selected.primaryNeed}</dd></div><div><dt>Programs</dt><dd>{selected.programs.join(", ")}</dd></div><div><dt>Member since</dt><dd>{formatDate(selected.joinedAt)}</dd></div><div><dt>Next check-in</dt><dd>{autoCheckIns[selected.id] ? nextMonthlyCheckIn(selected) : formatDate(selected.nextCheckInAt)}</dd></div><div><dt>Last contact</dt><dd>{formatDateTime(selected.lastContactAt)}</dd></div><div><dt>Assigned team</dt><dd>{selected.assignedTo}</dd></div><div><dt>Contact permission</dt><dd>{selected.consentToContact ? "Recorded" : "Not recorded"}</dd></div><div><dt>AI call permission</dt><dd>{selectedReferral?.consentToAICall ? "Recorded for linked request" : "Not recorded"}</dd></div></dl>
           <div className="crm-wellbeing-grid"><EditableArea label="Living situation" value={recordDrafts[`${selected.id}_living`] || "Staying with family; confirm current address at next contact."} onChange={(value) => setRecordDrafts((current) => ({ ...current, [`${selected.id}_living`]: value }))} /><EditableArea label="Health and wellbeing" value={recordDrafts[`${selected.id}_health`] || "No clinical assessment recorded. Ask what support feels safe and useful."} onChange={(value) => setRecordDrafts((current) => ({ ...current, [`${selected.id}_health`]: value }))} /><EditableArea label="Financial and practical" value={recordDrafts[`${selected.id}_finance`] || "Transport and service costs to be checked; no financial assessment recorded."} onChange={(value) => setRecordDrafts((current) => ({ ...current, [`${selected.id}_finance`]: value }))} /><EditableArea label="Safety and relationships" value={recordDrafts[`${selected.id}_safety`] || "Confirm privately at each contact; escalate only under IRAAC’s approved safeguarding process."} onChange={(value) => setRecordDrafts((current) => ({ ...current, [`${selected.id}_safety`]: value }))} /></div>
           <EditableArea label="Address and contact updates" value={recordDrafts[`${selected.id}_address`] || `${selected.suburb} ${selected.postcode} · ${selected.phoneMasked}`} onChange={(value) => setRecordDrafts((current) => ({ ...current, [`${selected.id}_address`]: value }))} />
-        </section><section className="crm-record-timeline"><h3>Complete contact history</h3>{conversationFor(selected).map((item) => <article key={`record_${item.id}`}><span>{item.date} · {item.channel}</span><p>{item.body}</p></article>)}{selected.activities.map((activity) => <article key={`record_${activity.id}`}><span>{formatDateTime(activity.date)} · {contactLabel(activity.type)}</span><p>{activity.summary}</p></article>)}<h3>Programs, visits and linked support</h3><p>{selected.programs.join(", ")} · No office visit or event attendance has been confirmed in this demonstration record.</p><p>Linked MobLink services and family accounts require explicit permission before they appear here.</p></section></div>
-        <section className="crm-drawer-section"><h3>Schedule check-in</h3><select aria-label="Check-in method" value={contactMethod} onChange={(event) => setContactMethod(event.target.value as MemberContactMethod)}><option value="phone">Staff phone call</option><option value="sms">Text message</option><option value="in_app">MobLink chat</option><option value="office">Office visit</option></select><textarea rows={2} value={checkInSummary} onChange={(event) => setCheckInSummary(event.target.value)} placeholder="Next action or check-in note" /><div><button type="button" onClick={handleCheckIn} disabled={!checkInSummary.trim()}>Save note</button><button type="button" onClick={handleAiCall} disabled={!selectedReferral?.consentToAICall}>AI call</button></div></section>
+        </section><section className="crm-record-timeline"><h3>Complete contact history</h3>{conversationFor(selected).map((item) => <article key={`record_${item.id}`}><span>{item.date} · {item.channel}</span><p>{item.body}</p></article>)}{selected.activities.map((activity) => <article key={`record_${activity.id}`}><span>{formatDateTime(activity.date)} · {contactLabel(activity.type)}</span><p>{activity.summary}</p></article>)}<h3>Programs, visits and linked support</h3><p>{selected.programs.join(", ")} · No office visit or event attendance has been confirmed in this demonstration record.</p><p>Linked Moblink services and family accounts require explicit permission before they appear here.</p></section></div>
+        <section className="crm-drawer-section"><h3>Schedule check-in</h3><select aria-label="Check-in method" value={contactMethod} onChange={(event) => setContactMethod(event.target.value as MemberContactMethod)}><option value="phone">Staff phone call</option><option value="sms">Text message</option><option value="in_app">Moblink chat</option><option value="office">Office visit</option></select><textarea rows={2} value={checkInSummary} onChange={(event) => setCheckInSummary(event.target.value)} placeholder="Next action or check-in note" /><div><button type="button" onClick={handleCheckIn} disabled={!checkInSummary.trim()}>Save note</button><button type="button" onClick={handleAiCall} disabled={!selectedReferral?.consentToAICall}>AI call</button></div></section>
         <section className="crm-feedback-compact"><span>{selected.satisfactionRating ? `${selected.satisfactionRating}/5` : "Due"}</span><div><strong>{selected.satisfactionRating ? "Latest service survey" : "Survey due"}</strong><p>{selected.feedback || `Ask how ${selected.programs[0]} support is going.`}</p></div></section>
         <p className="crm-demo-note">Fictional demonstration record. Production use requires secure staff access, consent history and protected case notes.</p>
       </aside> : null}
@@ -165,9 +165,9 @@ function conversationFor(member: Member) {
   const firstName = member.name.replace(" (demo)", "").split(" ")[0];
   const monthly = monthlyCheckInConversation(member);
   return [
-    { id: `${member.id}_1`, side: "member", channel: "MobLink app", body: `Hi, I’m looking for help with ${member.primaryNeed.toLowerCase()}.`, date: "14 Aug · 9:18 am" },
-    { id: `${member.id}_2`, side: "moblink", channel: "MobLink assistant", body: `Thanks ${firstName}. IRAAC’s ${member.programs[0]} team may be able to help. Would you like me to connect you?`, date: "14 Aug · 9:19 am" },
-    { id: `${member.id}_3`, side: "member", channel: "MobLink app", body: "Yes please. A message in the app is easiest for me.", date: "14 Aug · 9:21 am" },
+    { id: `${member.id}_1`, side: "member", channel: "Moblink app", body: `Hi, I’m looking for help with ${member.primaryNeed.toLowerCase()}.`, date: "14 Aug · 9:18 am" },
+    { id: `${member.id}_2`, side: "moblink", channel: "Moblink assistant", body: `Thanks ${firstName}. IRAAC’s ${member.programs[0]} team may be able to help. Would you like me to connect you?`, date: "14 Aug · 9:19 am" },
+    { id: `${member.id}_3`, side: "member", channel: "Moblink app", body: "Yes please. A message in the app is easiest for me.", date: "14 Aug · 9:21 am" },
     { id: `${member.id}_4`, side: "system", channel: "Connection created", body: `Shared conversation opened with ${member.assignedTo}.`, date: "14 Aug · 9:21 am" },
     ...monthly,
   ];
@@ -177,15 +177,15 @@ function monthlyCheckInConversation(member: Member) {
   const firstName = member.name.replace(" (demo)", "").split(" ")[0];
   const samples: Record<string, Array<{ id: string; side: string; channel: string; body: string; date: string }>> = {
     member_jayden: [
-      { id: "jayden_call_1", side: "moblink", channel: "AI phone check-in · transcript", body: `Hi ${firstName}, MobLink is checking in on behalf of IRAAC. You’re connected with YouthScape for legal support and a safe pathway. How is it going, has it helped, and do you need anything else?`, date: "16 Aug · 10:02 am" },
+      { id: "jayden_call_1", side: "moblink", channel: "AI phone check-in · transcript", body: `Hi ${firstName}, Moblink is checking in on behalf of IRAAC. You’re connected with YouthScape for legal support and a safe pathway. How is it going, has it helped, and do you need anything else?`, date: "16 Aug · 10:02 am" },
       { id: "jayden_call_2", side: "member", channel: "AI phone check-in · transcript", body: "It helped me understand the next court step. I still need help arranging transport, but I know who to call now.", date: "16 Aug · 10:03 am" },
       { id: "jayden_call_3", side: "system", channel: "Check-in outcome", body: "Experience: 5/5 · Legal question clearer: yes · Unmet need: transport · IRAAC follow-up created.", date: "16 Aug · 10:04 am" },
     ],
     member_corey: [
-      { id: "corey_call_1", side: "moblink", channel: "AI phone check-in · transcript", body: "MobLink checked in for IRAAC about The Crew. Corey said the practical sessions are helping, rated the experience 4/5, and asked for the next workshop date.", date: "16 Aug · 11:20 am" },
+      { id: "corey_call_1", side: "moblink", channel: "AI phone check-in · transcript", body: "Moblink checked in for IRAAC about The Crew. Corey said the practical sessions are helping, rated the experience 4/5, and asked for the next workshop date.", date: "16 Aug · 11:20 am" },
     ],
     member_kylie: [
-      { id: "kylie_call_1", side: "moblink", channel: "AI phone check-in · transcript", body: "MobLink checked in for IRAAC about DARC family coordination. Kylie rated support 5/5 and said the main issue is resolved, but would like a monthly message so nothing slips.", date: "12 Aug · 9:20 am" },
+      { id: "kylie_call_1", side: "moblink", channel: "AI phone check-in · transcript", body: "Moblink checked in for IRAAC about DARC family coordination. Kylie rated support 5/5 and said the main issue is resolved, but would like a monthly message so nothing slips.", date: "12 Aug · 9:20 am" },
     ],
   };
   return samples[member.id] || [];
@@ -203,7 +203,7 @@ function EditableArea({ label, value, onChange }: { label: string; value: string
 
 function normalizeName(value: string) { return value.replace(/\s*\(demo\)\s*/i, "").trim().toLowerCase(); }
 function initials(value: string) { return value.replace(" (demo)", "").split(" ").map((part) => part[0]).slice(0, 2).join(""); }
-function contactLabel(method: MemberContactMethod) { return method === "in_app" ? "MobLink app" : method === "sms" ? "SMS" : method === "email" ? "Email" : method === "ai_call" ? "AI call" : method === "office" ? "Office visit" : "Phone"; }
+function contactLabel(method: MemberContactMethod) { return method === "in_app" ? "Moblink app" : method === "sms" ? "SMS" : method === "email" ? "Email" : method === "ai_call" ? "AI call" : method === "office" ? "Office visit" : "Phone"; }
 function formatDate(value: string) { return value ? new Date(value).toLocaleDateString("en-AU", { day: "numeric", month: "short", year: "numeric" }) : "Not recorded"; }
 function formatDateTime(value: string) { return value ? new Date(value).toLocaleString("en-AU", { day: "numeric", month: "short", hour: "numeric", minute: "2-digit" }) : "Not recorded"; }
 function shortDate(value: string) { return value ? new Date(value).toLocaleDateString("en-AU", { day: "numeric", month: "short" }) : "New"; }

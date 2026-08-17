@@ -16,7 +16,7 @@ const service = {
   lat: -34.4,
   lng: 150.8,
   distance: "Illawarra region",
-  phone: "Connect through MobLink",
+  phone: "Connect through Moblink",
   website: "https://www.iraac-aco.com/",
   hours: "Contact IRAAC",
   description: "YouthScape connects young people with support.",

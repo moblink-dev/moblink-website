@@ -45,14 +45,14 @@ export default function LeadDetailPage() {
   };
 
   if (!referral) {
-    return <div className="admin-page-content"><div className="admin-empty"><p>This lead is not available in this browser session.</p><Link href="/admin/members">Back to Members</Link></div></div>;
+    return <div className="admin-page-content"><div className="admin-empty"><p>This lead is not available in this browser session.</p><Link href="/admin/members">Back to Chat</Link></div></div>;
   }
 
   return (
     <div className="admin-page-content">
       <div className="admin-top">
         <div><p className="admin-kicker">IRAAC matched lead</p><h1>{referral.needCategory}</h1></div>
-        <Link className="admin-small-btn" href="/admin/members">← Members</Link>
+        <Link className="admin-small-btn" href="/admin/members">← Chat</Link>
       </div>
 
       <div className="lead-detail-grid">
@@ -68,7 +68,7 @@ export default function LeadDetailPage() {
             <div><dt>Supplier alert</dt><dd>{supplierNotificationLabels[referral.supplierNotification]}</dd></div>
           </dl>
           <label className="lead-status-control">Lead status<select value={referral.status} onChange={(event) => setReferral(updateReferralStatus(id, event.target.value as ReferralStatus))}>{Object.entries(referralStatusLabels).map(([value, label]) => <option value={value} key={value}>{label}</option>)}</select></label>
-          <div className="lead-ai-actions"><p className="admin-kicker">MobLink AI phone assistant</p><h2>Ask MobLink to call on IRAAC&apos;s behalf</h2><button type="button" className="admin-button" disabled={!referral.consentToFollowUp || !referral.consentToAICall} onClick={() => queueCall("check_in")}>AI call: quick check-in</button><button type="button" className="admin-small-btn" disabled={!referral.consentToFollowUp || !referral.consentToAICall} onClick={() => queueCall("needs")}>AI call: learn more</button>{callStatus ? <p className="lead-call-status" role="status">{callStatus}</p> : null}<small>No real call is placed in this prototype. A production call requires separately recorded AI voice-call consent and an approved script.</small></div>
+          <div className="lead-ai-actions"><p className="admin-kicker">Moblink AI phone assistant</p><h2>Ask Moblink to call on IRAAC&apos;s behalf</h2><button type="button" className="admin-button" disabled={!referral.consentToFollowUp || !referral.consentToAICall} onClick={() => queueCall("check_in")}>AI call: quick check-in</button><button type="button" className="admin-small-btn" disabled={!referral.consentToFollowUp || !referral.consentToAICall} onClick={() => queueCall("needs")}>AI call: learn more</button>{callStatus ? <p className="lead-call-status" role="status">{callStatus}</p> : null}<small>No real call is placed in this prototype. A production call requires separately recorded AI voice-call consent and an approved script.</small></div>
           <p className="intake-boundary">Only use these details for the support request the person agreed to.</p>
         </aside>
 

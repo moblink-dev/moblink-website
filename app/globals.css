@@ -4635,7 +4635,7 @@ input {
   background: #fef9f0;
 }
 
-/* ===== MobLink public front door ===== */
+/* ===== Moblink public front door ===== */
 .wordmark b { color: var(--ochre); }
 .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin: 30px 0 18px; }
 .section-kicker { display: block; margin-bottom: 18px; color: var(--ochre); font-size: .75rem; font-weight: 900; letter-spacing: .13em; text-transform: uppercase; }
@@ -4712,7 +4712,7 @@ input {
   .moblink-cta .container { align-items: flex-start; flex-direction: column; }
 }
 
-/* ===== Community-first MobLink launch site ===== */
+/* ===== Community-first Moblink launch site ===== */
 .header-actions { display: flex; align-items: center; justify-content: flex-end; gap: 10px; }
 .nav-provider { min-height: 48px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid rgba(250, 246, 239, .42); border-radius: 6px; padding: 0 16px; color: var(--cream); font-size: .86rem; font-weight: 850; text-decoration: none; white-space: nowrap; }
 .nav-provider:hover { border-color: var(--ochre); color: #ffd9bd; }
@@ -4981,6 +4981,102 @@ input {
   .funding-conversation-sebenza .funding-message-feed { padding: 20px 12px; }
 }
 
+/* ===== Programs, sponsored placement and compact intelligence ===== */
+.programs-page, .report-workspace-compact { padding-top: 20px; }
+.programs-head, .report-compact-head { display: flex; justify-content: space-between; align-items: end; gap: 20px; margin-bottom: 14px; }
+.programs-head h1, .report-compact-head h1 { margin: 2px 0; font-size: clamp(2.1rem, 5vw, 4rem); line-height: .95; }
+.programs-head p, .report-compact-head p { margin: 5px 0 0; color: #6c645d; }
+.program-tabs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 7px; margin-bottom: 10px; }
+.program-tabs button { display: flex; justify-content: space-between; align-items: center; min-height: 48px; border: 1px solid #dcd2c6; border-radius: 10px; padding: 9px 12px; background: #fff; color: #282321; font: inherit; cursor: pointer; }
+.program-tabs button.active { border-color: #211a16; background: #211a16; color: #fff; }
+.program-tabs span { font-size: .68rem; opacity: .7; }
+.program-overview-card { display: grid; grid-template-columns: 1.4fr 1fr; gap: 18px; border: 1px solid #ddd3c7; border-radius: 13px; padding: 16px; background: #fff; }
+.program-overview-card h2 { margin: 2px 0 5px; font-size: 1.55rem; }
+.program-overview-card p { margin: 0 0 9px; color: #5f5751; line-height: 1.45; }
+.program-overview-card small { color: #615950; }
+.program-mini-kpis { display: grid; grid-template-columns: repeat(2, 1fr); gap: 7px; }
+.program-mini-kpis span { display: grid; place-content: center; border-radius: 9px; padding: 9px; background: #f4efe8; font-size: .66rem; text-align: center; text-transform: uppercase; }
+.program-mini-kpis b { font-size: 1.35rem; }
+.program-member-table { margin-top: 10px; border: 1px solid #ddd3c7; border-radius: 13px; padding: 14px; background: #fff; }
+.program-member-table > header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.program-member-table h2 { margin: 2px 0; font-size: 1.2rem; }
+.program-member-table td { max-width: 270px; font-size: .7rem; }
+.program-member-table td:first-child { min-width: 130px; }
+.program-member-table td small { display: block; color: #756d65; }
+.program-status { display: inline-flex; border-radius: 999px; padding: 4px 7px; background: #e8efe9; font-size: .58rem; font-weight: 900; text-transform: uppercase; }
+.program-status-urgent, .program-status-high { background: #fee2e2; color: #991b1b; }
+.billing-promotion { margin-top: 18px; border: 1px solid #d8cdbf; border-radius: 14px; padding: 16px; background: #fff; }
+.billing-promotion > header { display: flex; justify-content: space-between; gap: 18px; align-items: start; }
+.billing-promotion h2 { margin: 2px 0; font-size: 1.45rem; }
+.billing-promotion header p { max-width: 690px; margin: 4px 0; color: #6a625b; }
+.billing-promotion header > span { border-radius: 999px; padding: 6px 10px; background: #211a16; color: #fff; font-size: .65rem; font-weight: 900; white-space: nowrap; }
+.billing-promotion-grid { display: grid; grid-template-columns: 1fr 1fr .8fr; gap: 9px; margin-top: 12px; }
+.billing-promotion-grid article, .billing-promotion-grid aside { border: 1px solid #dfd6cc; border-radius: 11px; padding: 13px; background: #f8f5f1; }
+.billing-promotion-grid article.active { border-color: var(--ochre); box-shadow: inset 0 0 0 1px var(--ochre); }
+.billing-promotion-grid article > span { color: #9a5724; font-size: .6rem; font-weight: 900; text-transform: uppercase; }
+.billing-promotion-grid h3 { margin: 5px 0; }
+.billing-promotion-grid article > strong { display: block; font-size: 1.5rem; }
+.billing-promotion-grid article > strong small { font-size: .65rem; }
+.billing-promotion-grid p, .billing-promotion-grid li { color: #655d55; font-size: .7rem; line-height: 1.45; }
+.billing-promotion-grid button { min-height: 34px; border: 0; border-radius: 8px; padding: 0 10px; background: #211a16; color: #fff; font: inherit; font-size: .68rem; font-weight: 850; cursor: pointer; }
+.billing-promotion-grid article div { display: flex; gap: 5px; }
+.report-compact-head > span { border-left: 3px solid var(--ochre); padding-left: 10px; color: #6c6259; font-size: .65rem; text-transform: uppercase; }
+.report-demo-line { margin: 0 0 8px; border-left: 3px solid var(--ochre); padding: 5px 9px; color: #68605a; font-size: .68rem; }
+.report-command-centre { border: 1px solid #dcd2c6; border-radius: 13px; padding: 10px; background: #fff; }
+.report-compact-kpis { display: grid; grid-template-columns: repeat(8, 1fr); gap: 5px; }
+.report-compact-kpis article { display: grid; gap: 1px; border-radius: 8px; padding: 8px; background: #f3eee8; }
+.report-compact-kpis strong { font-size: 1.15rem; }
+.report-compact-kpis span { color: #69615a; font-size: .56rem; font-weight: 900; text-transform: uppercase; }
+.report-data-tables { display: grid; grid-template-columns: 1.25fr .85fr 1.25fr; gap: 7px; margin-top: 7px; }
+.report-data-tables table { width: 100%; border-collapse: collapse; font-size: .62rem; }
+.report-data-tables caption { padding: 6px 5px; color: #965722; font-size: .64rem; font-weight: 900; text-align: left; text-transform: uppercase; }
+.report-data-tables th, .report-data-tables td { border-top: 1px solid #e5ddd4; padding: 6px 5px; text-align: left; vertical-align: top; }
+.report-data-tables th { color: #6d655e; font-size: .54rem; text-transform: uppercase; }
+.report-data-tables a { color: inherit; }
+.report-feedback-compact { margin-top: 10px; padding: 12px; }
+.report-feedback-compact .feedback-report-layout { gap: 10px; }
+.report-feedback-compact .feedback-quotes { grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.report-feedback-compact .feedback-quotes blockquote { padding: 9px; }
+.report-feedback-compact .feedback-quotes p { font-size: .67rem; }
+.monthly-report-expanded { margin-top: 10px; }
+.monthly-report-list { display: grid; gap: 7px; margin-top: 9px; }
+.monthly-report-list details { border: 1px solid #ddd4ca; border-radius: 10px; background: #faf8f5; }
+.monthly-report-list summary { display: flex; justify-content: space-between; align-items: center; padding: 10px; cursor: pointer; }
+.monthly-report-list summary span { display: grid; gap: 2px; }
+.monthly-report-list summary small { color: #756c65; font-size: .6rem; }
+.monthly-report-list summary > strong { color: #8e501f; font-size: .65rem; }
+.monthly-report-body { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; border-top: 1px solid #ded5cb; padding: 12px; }
+.monthly-report-body > h3 { grid-column: 1 / -1; margin: 0; font-size: 1rem; }
+.monthly-report-body section { border-radius: 8px; padding: 9px; background: #fff; }
+.monthly-report-body h4 { margin: 0 0 4px; color: #94551f; font-size: .64rem; text-transform: uppercase; }
+.monthly-report-body p { margin: 0; color: #5d554e; font-size: .68rem; line-height: 1.5; }
+.monthly-report-sent { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.monthly-report-sent span { border-radius: 999px; padding: 4px 8px; background: #eee6dc; font-size: .58rem; }
+.monthly-report-body > a { color: #8d4e1d; font-size: .68rem; font-weight: 900; }
+.report-email-panel-end { margin: 10px 0 0; }
+.funding-chat-shell { grid-template-columns: 250px minmax(0, 1fr); }
+.funding-conversation > header { padding: 8px 18px; }
+.funding-conversation h1 { margin-top: 1px; font-size: 1.05rem; }
+.funding-conversation header span:first-child { font-size: .58rem; }
+.funding-message-feed { gap: 16px; padding-left: max(18px, calc((100% - 930px) / 2)); padding-right: max(18px, calc((100% - 930px) / 2)); }
+.funding-chat-message { max-width: 930px; }
+.funding-avatar { font-size: 1rem; }
+.funding-conversation-sebenza .funding-message-feed { width: min(930px, 100%); }
+@media (max-width: 900px) {
+  .program-tabs, .report-compact-kpis { grid-template-columns: repeat(4, 1fr); }
+  .report-data-tables, .billing-promotion-grid { grid-template-columns: 1fr; }
+  .report-feedback-compact .feedback-quotes { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 620px) {
+  .programs-head, .report-compact-head, .billing-promotion > header { align-items: start; flex-direction: column; }
+  .program-tabs { grid-template-columns: repeat(2, 1fr); }
+  .program-overview-card, .monthly-report-body { grid-template-columns: 1fr; }
+  .monthly-report-body > h3, .monthly-report-sent { grid-column: 1; }
+  .report-compact-kpis { grid-template-columns: repeat(2, 1fr); }
+  .report-feedback-compact .feedback-quotes { grid-template-columns: 1fr; }
+  .program-member-table { padding: 8px; }
+}
+
 /* ===== Connected community CRM ===== */
 .crm-pipeline { display: grid; grid-template-columns: repeat(7, 1fr); gap: 7px; margin: 0 0 20px; }
 .crm-pipeline > div { display: grid; gap: 3px; min-height: 72px; align-content: center; border: 1px solid #e1d7ca; border-radius: 10px; padding: 10px; background: #fff; }
@@ -5086,7 +5182,7 @@ input {
   .moblink-demo, .connected-chat, .provider-lead-preview { padding: 20px; border-radius: 18px; }
 }
 
-/* ===== MobLink information pages and IRAAC provider demo ===== */
+/* ===== Moblink information pages and IRAAC provider demo ===== */
 .info-hero { padding: 92px 0; background: #f2e5d3; }
 .services-info-hero { background: #e6eee9; }
 .info-hero-grid, .info-split { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(300px, .92fr); gap: 70px; align-items: end; }

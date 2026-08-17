@@ -36,7 +36,7 @@ export default function AdminServicesPage() {
       writeProviderServiceOverrides(toProviderServiceOverrides(next));
       return next;
     });
-    setSavedMessage(published ? "Service published to the MobLink app in this browser." : "Service moved to draft in this browser.");
+    setSavedMessage(published ? "Service published to the Moblink app in this browser." : "Service moved to draft in this browser.");
   };
 
   const cancelEdit = () => {
@@ -51,7 +51,7 @@ export default function AdminServicesPage() {
     <div className="admin-page-content">
       <div className="admin-top"><div><p className="admin-kicker">IRAAC provider demo</p><h1>Services</h1></div><div className="admin-stat-badge">{published} published</div></div>
 
-      <div className="admin-banner"><div><strong>These are the services IRAAC offers through MobLink.</strong><p>IRAAC can describe each program, set its Illawarra coverage and publish it to the MobLink app so community members can learn more and request a connection.</p></div><a className="admin-button" href="/app/service/iraac-youthscape" target="_blank" rel="noreferrer">Preview in app</a></div>
+      <div className="admin-banner"><div><strong>These are the services IRAAC offers through Moblink.</strong><p>IRAAC can describe each program, set its Illawarra coverage and publish it to the Moblink app so community members can learn more and request a connection.</p></div><a className="admin-button" href="/app/service/iraac-youthscape" target="_blank" rel="noreferrer">Preview in app</a></div>
 
       <div className="provider-service-summary"><div><strong>{providerServices.length}</strong><span>IRAAC programs</span></div><div><strong>{published}</strong><span>Visible in app</span></div><div><strong>Illawarra</strong><span>Primary lead area</span></div></div>
       <p className="prototype-note">Publishing and editing are browser-only demonstration controls. Production publishing will require verified IRAAC accounts, secure storage and an approval history.</p>

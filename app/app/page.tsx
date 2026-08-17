@@ -88,7 +88,7 @@ function ServiceRail({ title, services: items, link }: { title: string; services
   );
 }
 
-export default function MobLinkHome() {
+export default function MoblinkHome() {
   const effectiveServices = useProviderServices(services);
   // Recommended for you — top local services, sorted by distance, non-crisis
   const recommended = sortByDistance(

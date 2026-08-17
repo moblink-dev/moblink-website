@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "MobLink | Find support near you",
+  title: "Moblink | Find support near you",
   description: "Find Aboriginal and community services near you — health, legal, housing, crisis support and more.",
 };
 

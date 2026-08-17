@@ -2,8 +2,8 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "MobLink | Find the right support, close to home",
-  description: "MobLink connects Aboriginal and Torres Strait Islander people with suitable local and national services by app or phone.",
+  title: "Moblink | Find the right support, close to home",
+  description: "Moblink connects Aboriginal and Torres Strait Islander people with suitable local and national services by app or phone.",
 };
 
 export const viewport: Viewport = {

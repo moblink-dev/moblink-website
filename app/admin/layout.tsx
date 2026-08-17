@@ -19,7 +19,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   const links = [
     { href: "/admin/", label: "Dashboard" },
-    { href: "/admin/members", label: "Members", short: "Members" },
+    { href: "/admin/members", label: "Chat", short: "Chat" },
+    { href: "/admin/programs", label: "Programs", short: "Programs" },
     { href: "/admin/services", label: "Services", short: "Services" },
     { href: "/admin/reports", label: "Reports" },
     { href: "/admin/profile", label: "Profile" },
@@ -31,7 +32,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     <main className="admin-page">
       <div className={collapsed ? "admin-shell admin-shell-collapsed" : "admin-shell"}>
         <aside className={collapsed ? "admin-sidebar admin-sidebar-collapsed" : "admin-sidebar"}>
-          <div className="admin-sidebar-head"><Link className="brand" href="/" aria-label="MobLink home"><span className="admin-brand-full">MOBLINK</span><span className="admin-brand-short">M</span><b>.</b></Link><button type="button" className="admin-collapse-button" aria-label={collapsed ? "Expand provider navigation" : "Collapse provider navigation"} aria-expanded={!collapsed} onClick={() => { const next = !collapsed; setCollapsed(next); localStorage.setItem("moblink_admin_sidebar", next ? "collapsed" : "expanded"); }}>{collapsed ? "›" : "‹"}</button></div>
+          <div className="admin-sidebar-head"><Link className="brand" href="/" aria-label="Moblink home"><span className="admin-brand-full">MOBLINK</span><span className="admin-brand-short">M</span><b>.</b></Link><button type="button" className="admin-collapse-button" aria-label={collapsed ? "Expand provider navigation" : "Collapse provider navigation"} aria-expanded={!collapsed} onClick={() => { const next = !collapsed; setCollapsed(next); localStorage.setItem("moblink_admin_sidebar", next ? "collapsed" : "expanded"); }}>{collapsed ? "›" : "‹"}</button></div>
           <p className="admin-provider-name">IRAAC</p>
           <nav aria-label="Staff dashboard sections">
             {links.map((link) => {

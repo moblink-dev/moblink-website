@@ -150,7 +150,7 @@ test("returns fresh demo records when browser storage is empty", () => {
   firstRead[0]?.conversation.push({
     id: "temporary",
     sender: "moblink",
-    senderName: "MobLink",
+    senderName: "Moblink",
     body: "Temporary mutation",
     createdAt: new Date().toISOString(),
   });

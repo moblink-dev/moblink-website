@@ -74,7 +74,7 @@ export default function RequestHelpPage() {
           <div className="request-confirmed">
             <div className="request-confirmed-icon">✓</div>
             <h1>Request submitted</h1>
-            <p>Your request has been shared with {service?.name || "the selected service"}. You can track it and keep the conversation going in MobLink.</p>
+            <p>Your request has been shared with {service?.name || "the selected service"}. You can track it and keep the conversation going in Moblink.</p>
             <p className="request-confirmed-detail">
               Reference: <strong>{createdReferralId.slice(0, 12)}</strong>
             </p>
@@ -191,7 +191,7 @@ export default function RequestHelpPage() {
             >
               <option value="sms">Text message</option>
               <option value="phone">Phone call</option>
-              <option value="in_app">MobLink chat</option>
+              <option value="in_app">Moblink chat</option>
             </select>
           </div>
 
@@ -229,7 +229,7 @@ export default function RequestHelpPage() {
                 checked={form.consentToFollowUp}
                 onChange={(e) => setForm({ ...form, consentToFollowUp: e.target.checked })}
               />
-              <span>MobLink may share these details with this service so they can follow up about this request</span>
+              <span>Moblink may share these details with this service so they can follow up about this request</span>
             </label>
           </div>
 

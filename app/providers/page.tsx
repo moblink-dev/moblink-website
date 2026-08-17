@@ -3,12 +3,12 @@ import Link from "next/link";
 import SiteShell from "../SiteShell";
 
 export const metadata: Metadata = {
-  title: "For service organisations | MobLink",
-  description: "See how community service organisations can join MobLink, receive suitable enquiries and keep people connected to support.",
+  title: "For service organisations | Moblink",
+  description: "See how community service organisations can join Moblink, receive suitable enquiries and keep people connected to support.",
 };
 
 const providerSteps = [
-  { number: "01", title: "Show where and how you help", body: "Keep your services, locations, eligibility and contact details clear so MobLink can recommend you appropriately." },
+  { number: "01", title: "Show where and how you help", body: "Keep your services, locations, eligibility and contact details clear so Moblink can recommend you appropriately." },
   { number: "02", title: "Receive suitable enquiries", body: "When a person chooses your service and agrees to connect, the request appears in your provider portal with the context needed to respond." },
   { number: "03", title: "Turn a lead into support", body: "Message the person, arrange a call or visit, record the next step and keep follow-up visible to your team." },
 ];
@@ -22,7 +22,7 @@ export default function ProvidersPage() {
             <div className="provider-hero-copy">
               <p className="section-kicker">For Aboriginal organisations and community service providers</p>
               <h1>Help more people find the support you already provide.</h1>
-              <p>MobLink gives community members one place to explain what they need. When your organisation is a suitable match, they can choose to connect with you and begin a conversation.</p>
+              <p>Moblink gives community members one place to explain what they need. When your organisation is a suitable match, they can choose to connect with you and begin a conversation.</p>
               <div className="hero-actions"><Link href="/admin/" className="btn btn-primary">Open provider portal</Link><Link href="/" className="btn btn-dark-outline">See the community experience</Link></div>
               <small className="provider-boundary">The current portal is a fictional-data demonstration. Provider onboarding and verified accounts are still being prepared.</small>
             </div>
@@ -43,7 +43,7 @@ export default function ProvidersPage() {
 
         <section className="moblink-section">
           <div className="container">
-            <div className="section-heading-row"><div><p className="section-kicker">How the provider connection works</p><h2 className="section-title">From a community need to a useful next step.</h2></div><p>MobLink is designed to help organisations spend less time chasing incomplete enquiries and more time helping people who have chosen to connect.</p></div>
+            <div className="section-heading-row"><div><p className="section-kicker">How the provider connection works</p><h2 className="section-title">From a community need to a useful next step.</h2></div><p>Moblink is designed to help organisations spend less time chasing incomplete enquiries and more time helping people who have chosen to connect.</p></div>
             <div className="journey-grid">{providerSteps.map((step) => <article className="journey-card" key={step.number}><span>{step.number}</span><h3>{step.title}</h3><p>{step.body}</p></article>)}</div>
           </div>
         </section>
@@ -56,11 +56,11 @@ export default function ProvidersPage() {
         </section>
 
         <section className="provider-principles">
-          <div className="container"><div><p className="section-kicker">A respectful network</p><h2>People choose the connection. Providers earn the trust.</h2></div><div><p>MobLink is being designed around request-specific consent, minimal information, clear service coverage and provider-specific access.</p><p>Before real enquiries are accepted, the production service still needs verified onboarding, secure accounts, audited consent and protected records.</p></div></div>
+          <div className="container"><div><p className="section-kicker">A respectful network</p><h2>People choose the connection. Providers earn the trust.</h2></div><div><p>Moblink is being designed around request-specific consent, minimal information, clear service coverage and provider-specific access.</p><p>Before real enquiries are accepted, the production service still needs verified onboarding, secure accounts, audited consent and protected records.</p></div></div>
         </section>
 
         <section className="moblink-cta community-final-cta provider-final-cta">
-          <div className="container"><div><p className="section-kicker">Explore the provider experience</p><h2>See how MobLink can help community find your organisation.</h2></div><Link href="/admin/" className="btn btn-light">Open provider portal</Link></div>
+          <div className="container"><div><p className="section-kicker">Explore the provider experience</p><h2>See how Moblink can help community find your organisation.</h2></div><Link href="/admin/" className="btn btn-light">Open provider portal</Link></div>
         </section>
       </main>
     </SiteShell>

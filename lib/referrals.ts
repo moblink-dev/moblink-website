@@ -121,7 +121,7 @@ export function createReferral(data: ReferralInput): Referral {
       {
         id: `msg_${Date.now()}_welcome`,
         sender: "moblink",
-        senderName: "MobLink",
+        senderName: "Moblink",
         body: data.consentToFollowUp
           ? `Your request has been shared with ${data.serviceName}. You can keep the conversation here.`
           : `This request is saved on this device and has not been shared with ${data.serviceName}.`,
@@ -236,7 +236,7 @@ export function scheduleAICall(
   referral.conversation.push({
     id: `msg_${Date.now()}_ai_call`,
     sender: "moblink",
-    senderName: "MobLink AI call assistant",
+    senderName: "Moblink AI call assistant",
     body: purpose === "check_in"
       ? "IRAAC queued a demonstration AI phone check-in. The call will ask whether the person is safe, whether they still want support, and record a summary here. No real call is placed in this prototype."
       : "IRAAC queued a demonstration AI phone call to find out more about what support the person needs and explain relevant IRAAC services. A summary will be recorded here. No real call is placed in this prototype.",
@@ -365,8 +365,8 @@ export const demoReferrals: Referral[] = [
       {
         id: "msg_demo_1",
         sender: "moblink",
-        senderName: "MobLink call centre",
-        body: "This person asked MobLink for youth support in the Illawarra and agreed to an SMS follow-up from IRAAC.",
+        senderName: "Moblink call centre",
+        body: "This person asked Moblink for youth support in the Illawarra and agreed to an SMS follow-up from IRAAC.",
         createdAt: "2026-08-15T08:35:00.000Z",
       },
       {
@@ -407,7 +407,7 @@ export const demoReferrals: Referral[] = [
     conversation: [{
       id: "msg_demo_country_1",
       sender: "moblink",
-      senderName: "MobLink",
+      senderName: "Moblink",
       body: "This person chose IRAAC MCC and agreed to a phone follow-up for this request.",
       createdAt: "2026-08-15T09:10:00.000Z",
     }],
@@ -439,7 +439,7 @@ export const demoReferrals: Referral[] = [
     conversation: [{
       id: "msg_demo_crew_1",
       sender: "moblink",
-      senderName: "MobLink hotline",
+      senderName: "Moblink hotline",
       body: "This person asked about practical community programs and agreed to an IRAAC SMS follow-up.",
       createdAt: "2026-08-15T10:20:00.000Z",
     }],
@@ -460,8 +460,8 @@ export const referralStatusLabels: Record<ReferralStatus, string> = {
 };
 
 export const referralSourceLabels: Record<ReferralSource, string> = {
-  app: "MobLink app",
-  hotline: "MobLink hotline",
+  app: "Moblink app",
+  hotline: "Moblink hotline",
   ai_outbound: "AI-assisted outbound call",
   provider: "Provider-created",
 };
@@ -469,7 +469,7 @@ export const referralSourceLabels: Record<ReferralSource, string> = {
 export const preferredContactLabels: Record<PreferredContact, string> = {
   phone: "Phone call",
   sms: "Text message",
-  in_app: "MobLink chat",
+  in_app: "Moblink chat",
 };
 
 export const supplierNotificationLabels: Record<SupplierNotificationStatus, string> = {

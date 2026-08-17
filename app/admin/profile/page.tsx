@@ -89,7 +89,7 @@ export default function ProviderProfilePage() {
 
   return <div className="admin-page-content provider-profile-page">
     <div className="profile-page-head">
-      <div><p className="admin-kicker">Organisation settings</p><h1>IRAAC profile</h1><p>Keep public contact and service-area details accurate across MobLink.</p></div>
+      <div><p className="admin-kicker">Organisation settings</p><h1>IRAAC profile</h1><p>Keep public contact and service-area details accurate across Moblink.</p></div>
       <span>Provider profile</span>
     </div>
 

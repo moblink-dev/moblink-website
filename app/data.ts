@@ -165,7 +165,7 @@ export const publicPages: Record<
       {
         title: "Website and Platform Work",
         body: [
-          "IRAAC is building a single digital front door for public information, MobLink service navigation and staff operations.",
+          "IRAAC is building a single digital front door for public information, Moblink service navigation and staff operations.",
         ],
       },
     ],
@@ -329,7 +329,7 @@ const iraacServiceDefaults = {
   lat: -34.4278,
   lng: 150.8931,
   distance: "Illawarra region",
-  phone: "Connect through MobLink",
+  phone: "Connect through Moblink",
   hours: "Contact IRAAC to discuss support",
   isAboriginalLed: true,
   isCrisis: false,
