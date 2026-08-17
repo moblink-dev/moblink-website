@@ -8,6 +8,14 @@ import { addReferralMessage, getDemoReferrals, getReferralById, type Referral } 
 
 type Mode = "assistant" | "advisor";
 
+const messageDateFormatter = new Intl.DateTimeFormat("en-AU", {
+  day: "numeric",
+  month: "short",
+  hour: "numeric",
+  minute: "2-digit",
+  timeZone: "Australia/Sydney",
+});
+
 export default function ConnectedServiceChatPage() {
   const { id } = useParams<{ id: string }>();
   const [referral, setReferral] = useState<Referral | undefined>(() => getDemoReferrals().find((item) => item.id === id));
@@ -40,7 +48,7 @@ export default function ConnectedServiceChatPage() {
           </div>
           <div className="mobile-message-feed">
             {mode === "assistant" ? referral.conversation.map((item) => (
-              <article className={`mobile-message ${item.sender === "community" ? "user" : "assistant"}`} key={item.id}><strong>{item.sender === "community" ? "You" : item.senderName}</strong><p>{item.body}</p><time>{new Date(item.createdAt).toLocaleString()}</time></article>
+              <article className={`mobile-message ${item.sender === "community" ? "user" : "assistant"}`} key={item.id}><strong>{item.sender === "community" ? "You" : item.senderName}</strong><p>{item.body}</p><time>{messageDateFormatter.format(new Date(item.createdAt))}</time></article>
             )) : (
               <>
                 <article className="mobile-message assistant"><strong>IRAAC Lead Advisor</strong><p>Hi Jayden, I can see your YouthScape request and the context you chose to share with IRAAC. I’m a real person from the IRAAC team. How can I help today?</p></article>
