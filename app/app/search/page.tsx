@@ -5,7 +5,7 @@ import MiniMap from "../../../components/app/MiniMap";
 import BottomNav from "../../../components/app/BottomNav";
 
 export const metadata = {
-  title: "Search Services | 1800 Mob Link",
+  title: "Search services | Moblink",
   description: "Browse and search Aboriginal and community services by category, keyword, or location.",
 };
 
@@ -33,21 +33,23 @@ export default async function SearchPage({
     <main className="app-page">
       <div className="phone-shell phone-shell-compact">
         <div className="phone-status" aria-hidden="true">
-          <span className="phone-time">Search</span>
-          <span className="phone-signal">1800 MOB LINK</span>
+          <span className="phone-time">Moblink</span>
+          <span className="phone-signal">Nowra 2541</span>
         </div>
 
         <header className="app-top app-top-compact">
           <div>
-            <p className="app-kicker">1800 Mob Link</p>
-            <h1>Search</h1>
+            <p className="app-kicker">{localCount} local services</p>
+            <h1>Find nearby help</h1>
           </div>
         </header>
+
+        <form className="mobile-service-search" action="/app/search"><span>⌕</span><input name="q" defaultValue={q} placeholder="Try housing, legal or Centrelink" aria-label="Search services" /><button>Search</button></form>
 
         {/* Browse nearby — mini map */}
         <section className="app-section">
           <div className="section-row">
-            <h2 className="app-section-title">Browse nearby</h2>
+            <h2 className="app-section-title">Services around Nowra</h2>
           </div>
           <MiniMap />
         </section>
@@ -55,7 +57,7 @@ export default async function SearchPage({
         {/* Browse all — quick filters */}
         <section className="app-section">
           <div className="section-row">
-            <h2 className="app-section-title">Browse all</h2>
+            <h2 className="app-section-title">Quick filters</h2>
           </div>
           <div className="browse-grid">
             <Link href="/app/search?q=local" className="browse-card">

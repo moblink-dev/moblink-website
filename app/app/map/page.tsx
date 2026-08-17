@@ -67,7 +67,7 @@ export default function MapPage() {
       <div className="phone-shell phone-shell-compact">
         <div className="phone-status" aria-hidden="true">
           <span className="phone-time">Map</span>
-          <span className="phone-signal">1800 MOB LINK</span>
+          <span className="phone-signal">Moblink</span>
         </div>
       <div className="map-mobile-page">
         {/* Full-screen map */}

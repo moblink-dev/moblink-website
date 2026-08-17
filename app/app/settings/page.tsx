@@ -2,8 +2,8 @@ import Link from "next/link";
 import BottomNav from "../../../components/app/BottomNav";
 
 export const metadata = {
-  title: "Settings | 1800 Mob Link",
-  description: "Your 1800 Mob Link preferences and privacy settings.",
+  title: "Settings | Moblink",
+  description: "Your Moblink preferences and privacy settings.",
 };
 
 export default function SettingsPage() {
@@ -12,7 +12,7 @@ export default function SettingsPage() {
       <div className="phone-shell phone-shell-compact">
         <div className="phone-status" aria-hidden="true">
           <span className="phone-time">Settings</span>
-          <span className="phone-signal">1800 MOB LINK</span>
+          <span className="phone-signal">Moblink</span>
         </div>
 
         <div className="detail-back">
@@ -21,7 +21,7 @@ export default function SettingsPage() {
 
         <header className="app-top app-top-compact">
           <div>
-            <p className="app-kicker">1800 Mob Link</p>
+            <p className="app-kicker">Moblink</p>
             <h1>Settings</h1>
           </div>
         </header>

@@ -69,7 +69,7 @@ export default function RequestHelpPage() {
         <div className="phone-shell">
           <div className="phone-status" aria-hidden="true">
             <span className="phone-time">Request sent</span>
-            <span className="phone-signal">1800 MOB LINK</span>
+            <span className="phone-signal">Moblink</span>
           </div>
           <div className="request-confirmed">
             <div className="request-confirmed-icon">✓</div>
@@ -102,7 +102,7 @@ export default function RequestHelpPage() {
       <div className="phone-shell">
         <div className="phone-status" aria-hidden="true">
           <span className="phone-time">Request help</span>
-          <span className="phone-signal">1800 MOB LINK</span>
+          <span className="phone-signal">Moblink</span>
         </div>
 
         <div className="detail-back">
@@ -113,7 +113,7 @@ export default function RequestHelpPage() {
 
         <header className="app-top app-top-compact">
           <div>
-            <p className="app-kicker">1800 Mob Link</p>
+            <p className="app-kicker">Moblink</p>
             <h1>Request help</h1>
           </div>
         </header>

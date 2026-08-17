@@ -53,7 +53,7 @@ function getCardColor(index: number) {
 function ServiceRailCard({ service, index }: { service: typeof services[0]; index: number }) {
   return (
     <Link href={`/app/service/${service.id}`} className="rail-card">
-      <div className={`rail-card-img ${getCardColor(index)}`}>
+      <div className={`rail-card-img service-art-${index % 4} ${getCardColor(index)}`}>
         <span className="rail-card-emoji" aria-hidden="true">
           {service.isAboriginalLed ? "🪶" : service.isCrisis ? "🚨" : service.isFree ? "🎯" : "📍"}
         </span>
@@ -93,41 +93,43 @@ export default function MoblinkHome() {
   // Recommended for you — top local services, sorted by distance, non-crisis
   const recommended = sortByDistance(
     effectiveServices.filter((s) => !s.isNational && !s.isCrisis && s.suburb !== "National")
-  ).slice(0, 15);
+  ).slice(0, 8);
 
   // Newly added — services with createdAt >= 2026-08-05
   const newlyAdded = effectiveServices
     .filter((s) => s.createdAt >= "2026-08-05" && !s.isNational)
     .sort((a, b) => b.createdAt.localeCompare(a.createdAt))
-    .slice(0, 12);
+    .slice(0, 6);
 
   // National support
-  const national = effectiveServices.filter((s) => s.isNational && !s.isCrisis).slice(0, 10);
+  const national = effectiveServices.filter((s) => s.isNational && !s.isCrisis).slice(0, 6);
 
   // Closest to me — sorted by distance from Nowra, non-national, non-crisis
   const closest = sortByDistance(
     effectiveServices.filter((s) => !s.isNational && !s.isCrisis)
-  ).slice(0, 12);
+  ).slice(0, 6);
 
   // Aboriginal specific — all Aboriginal-led services, sorted by distance
   const aboriginal = sortByDistance(
     effectiveServices.filter((s) => s.isAboriginalLed && !s.isNational)
-  ).slice(0, 15);
+  ).slice(0, 8);
 
   return (
     <main className="app-page">
       <div className="phone-shell phone-shell-compact">
         <div className="phone-status" aria-hidden="true">
-          <span className="phone-time">South Coast, NSW</span>
-          <span className="phone-signal">1800 MOB LINK</span>
+          <span className="phone-time">Moblink</span>
+          <span className="phone-signal">South Coast, NSW</span>
         </div>
 
         <header className="app-top app-top-compact">
           <div>
-            <p className="app-kicker">1800 Mob Link</p>
-            <h1>Find support near you</h1>
+            <p className="app-kicker">Support that fits your situation</p>
+            <h1>Help near Nowra</h1>
           </div>
         </header>
+
+        <Link href="/app/search" className="location-search-card"><span>📍</span><div><strong>Nowra 2541</strong><small>Using your current area · change</small></div><b>⌕</b></Link>
 
         {/* Compact crisis strip */}
         <div className="crisis-mini">
@@ -140,11 +142,11 @@ export default function MoblinkHome() {
           </div>
         </div>
 
-        <ServiceRail title="Recommended for you" services={recommended} link="/app/search" />
+        <ServiceRail title="Best matches nearby" services={recommended} link="/app/search" />
         <ServiceRail title="Newly added" services={newlyAdded} link="/app/search" />
-        <ServiceRail title="National support" services={national} link="/app/search" />
         <ServiceRail title="Closest to me" services={closest} link="/app/search" />
         <ServiceRail title="Aboriginal specific" services={aboriginal} link="/app/search" />
+        <ServiceRail title="National support" services={national} link="/app/search" />
 
         <BottomNav current="/app/" />
       </div>

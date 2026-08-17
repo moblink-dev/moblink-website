@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   const service = services.find((s) => s.id === id);
   if (!service) return {};
   return {
-    title: `${service.name} | 1800 Mob Link`,
+    title: `${service.name} | Moblink`,
     description: service.description,
   };
 }
@@ -31,8 +31,8 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
     <main className="app-page">
       <div className="phone-shell">
         <div className="phone-status" aria-hidden="true">
-          <span className="phone-time">Service details</span>
-          <span className="phone-signal">1800 MOB LINK</span>
+          <span className="phone-time">Moblink</span>
+          <span className="phone-signal">Near Nowra</span>
         </div>
 
         <div className="detail-back">

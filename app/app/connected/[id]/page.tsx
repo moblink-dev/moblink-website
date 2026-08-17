@@ -3,36 +3,57 @@
 import { useEffect, useState, type FormEvent } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-
 import BottomNav from "../../../../components/app/BottomNav";
-import { addReferralMessage, getReferralById, referralStatusLabels, type Referral } from "../../../../lib/referrals";
+import { addReferralMessage, getDemoReferrals, getReferralById, type Referral } from "../../../../lib/referrals";
+
+type Mode = "assistant" | "advisor";
 
 export default function ConnectedServiceChatPage() {
-  const params = useParams();
-  const id = params.id as string;
-  const [referral, setReferral] = useState<Referral>();
+  const { id } = useParams<{ id: string }>();
+  const [referral, setReferral] = useState<Referral | undefined>(() => getDemoReferrals().find((item) => item.id === id));
+  const [mode, setMode] = useState<Mode>("assistant");
   const [message, setMessage] = useState("");
+  const [localReplies, setLocalReplies] = useState<string[]>([]);
 
   useEffect(() => setReferral(getReferralById(id)), [id]);
 
   const sendMessage = (event: FormEvent) => {
     event.preventDefault();
-    const updated = addReferralMessage(id, { sender: "community", senderName: "You", body: message });
-    if (updated) setReferral(updated);
+    if (!message.trim()) return;
+    if (mode === "advisor") setLocalReplies((items) => [...items, message.trim()]);
+    else {
+      const updated = addReferralMessage(id, { sender: "community", senderName: "Jayden", body: message });
+      if (updated) setReferral(updated);
+    }
     setMessage("");
   };
 
   return (
-    <main className="app-page"><div className="phone-shell phone-shell-compact">
-      <div className="phone-status" aria-hidden="true"><span className="phone-time">Connected</span><span className="phone-signal">MOBLINK</span></div>
-      <div className="detail-back"><Link className="detail-back-link" href="/app/connected">← Connected services</Link></div>
-      {!referral ? <div className="compact-empty"><p>This conversation is not available in this browser session.</p></div> : <>
-        <header className="app-top app-top-compact"><div><p className="app-kicker">Your service</p><h1>{referral.serviceName}</h1></div></header>
-        <div className="community-lead-summary"><span>{referral.needCategory}</span><strong>{referralStatusLabels[referral.status]}</strong><p>{referral.message}</p></div>
-        <div className="community-chat-thread">{referral.conversation.map((item) => <div className={`community-message community-message-${item.sender}`} key={item.id}><strong>{item.sender === "community" ? "You" : item.senderName}</strong><p>{item.body}</p><time>{new Date(item.createdAt).toLocaleString()}</time></div>)}</div>
-        <form className="community-composer" onSubmit={sendMessage}><label htmlFor="community-message">Message this service</label><div><input id="community-message" value={message} onChange={(event) => setMessage(event.target.value)} placeholder="Type a message..." /><button type="submit" disabled={!message.trim()}>Send</button></div></form>
-      </>}
-      <BottomNav current="/app/connected" />
+    <main className="app-page"><div className="phone-shell phone-shell-compact mobile-chat-shell">
+      <div className="phone-status"><span>Moblink</span><span>IRAAC · connected</span></div>
+      <Link className="mobile-chat-back" href="/app/messages">← Inbox</Link>
+      {!referral ? <div className="compact-empty"><p>This conversation is not available in this browser session.</p></div> : (
+        <section className="provider-mobile-chat">
+          <header className="mobile-conversation-head"><span className="inbox-iraac-avatar">I</span><div><h1>IRAAC</h1><p>YouthScape · youth legal support</p></div></header>
+          <div className="conversation-mode-switch" role="tablist" aria-label="Choose who to speak with">
+            <button className={mode === "assistant" ? "active" : ""} onClick={() => setMode("assistant")}>✨ IRAAC assistant</button>
+            <button className={mode === "advisor" ? "active" : ""} onClick={() => setMode("advisor")}>🙋 Lead Advisor</button>
+          </div>
+          <div className="mobile-message-feed">
+            {mode === "assistant" ? referral.conversation.map((item) => (
+              <article className={`mobile-message ${item.sender === "community" ? "user" : "assistant"}`} key={item.id}><strong>{item.sender === "community" ? "You" : item.senderName}</strong><p>{item.body}</p><time>{new Date(item.createdAt).toLocaleString()}</time></article>
+            )) : (
+              <>
+                <article className="mobile-message assistant"><strong>IRAAC Lead Advisor</strong><p>Hi Jayden, I can see your YouthScape request and the context you chose to share with IRAAC. I’m a real person from the IRAAC team. How can I help today?</p></article>
+                <article className="mobile-message assistant"><p>I can explain the next step, arrange a call or help organise an office visit. We’ll respond here during service hours.</p></article>
+                {localReplies.map((reply, index) => <article className="mobile-message user" key={`${reply}-${index}`}><strong>You</strong><p>{reply}</p></article>)}
+              </>
+            )}
+          </div>
+          <form className="mobile-chat-composer" onSubmit={sendMessage}><input value={message} onChange={(event) => setMessage(event.target.value)} placeholder={mode === "advisor" ? "Message the IRAAC Lead Advisor…" : "Message the IRAAC assistant…"} /><button type="submit" disabled={!message.trim()}>↑</button></form>
+        </section>
+      )}
+      <BottomNav current="/app/messages" />
     </div></main>
   );
 }

@@ -158,6 +158,10 @@ export function getReferrals(): Referral[] {
   }
 }
 
+export function getDemoReferrals(): Referral[] {
+  return cloneDemoReferrals();
+}
+
 export function saveReferral(referral: Referral): void {
   if (typeof window === "undefined") return;
   const referrals = getReferrals();

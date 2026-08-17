@@ -56,6 +56,7 @@ export default function MiniMap() {
 
     m.on("load", () => {
       setReady(true);
+      addServiceMarkers(m);
 
       // User location
       if ("geolocation" in navigator) {
@@ -75,10 +76,8 @@ export default function MiniMap() {
               .forEach((s) => bounds.extend([s.lng, s.lat]));
             m.fitBounds(bounds, { padding: 60, maxZoom: 11 });
           },
-          () => addServiceMarkers(m)
+          () => undefined
         );
-      } else {
-        addServiceMarkers(m);
       }
     });
 
@@ -92,7 +91,7 @@ export default function MiniMap() {
 
   function addServiceMarkers(m: maplibregl.Map) {
     const local = services.filter((s) => !s.isNational);
-    const clusters = clusterMarkers(local, 0.02);
+    const clusters = clusterMarkers(local, 0.008);
 
     clusters.forEach((cluster) => {
       if (cluster.count === 1) {
@@ -132,9 +131,21 @@ export default function MiniMap() {
   return (
     <div className="minimap-wrapper">
       <div ref={mapContainer} className="minimap" />
-      <div className="minimap-hint">
-        <span className="minimap-hint-text">Click map to explore services →</span>
+      <div className={`minimap-static-pins ${ready ? "is-ready" : ""}`} aria-label="Nearby service locations">
+        {[
+          { id: "nsw-housing-nowra", name: "Housing NSW Nowra", x: 42, y: 44, color: "#d97706" },
+          { id: "centrelink-nowra", name: "Centrelink Nowra", x: 57, y: 56, color: "#166a5e" },
+          { id: "south-coast-medical", name: "South Coast Medical Service", x: 68, y: 36, color: "#059669" },
+          { id: "waminda", name: "Waminda", x: 34, y: 66, color: "#7c3aed" },
+          { id: "als-nowra", name: "Aboriginal Legal Service Nowra", x: 73, y: 70, color: "#2563eb" },
+        ].map((pin) => (
+          <button key={pin.id} type="button" title={pin.name} aria-label={pin.name} style={{ left: `${pin.x}%`, top: `${pin.y}%`, backgroundColor: pin.color }} onClick={() => router.push(`/app/service/${pin.id}`)} />
+        ))}
       </div>
+      <div className="minimap-hint">
+        <span className="minimap-hint-text">Explore services near Nowra →</span>
+      </div>
+      {ready && <div className="minimap-legend"><span /> Local services</div>}
     </div>
   );
 }

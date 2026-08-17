@@ -72,18 +72,7 @@ function findServices(text: string) {
 const initialMessages: Message[] = [
   {
     role: "bot",
-    text:
-      "Hi, I'm the MobLink guide. 👋\n\n" +
-      "Tell me what's going on — I'll listen, find services that can help, " +
-      "or prepare a request for a participating service.\n\n" +
-      "For example, you can say things like:\n" +
-      '• "I need somewhere to live"\n' +
-      '• "I\'m having legal trouble"\n' +
-      '• "I need to see a doctor"\n' +
-      '• "I\'m feeling really down"\n\n' +
-      "You can also:\n" +
-      "• Tap **Talk to a person** to request a human follow-up\n" +
-      "• Browse services by need and location",
+    text: "Hi Jayden — I’m the Moblink assistant. Tell me what’s going on and I’ll help you find a useful next step near you. You can ask about housing, legal support, Centrelink, health, culture or anything else.",
   },
 ];
 
@@ -150,8 +139,7 @@ export default function HelpBot({ onBackToContact }: { onBackToContact?: () => v
         lower.includes("number")
       ) {
         addBotMessage(
-          "The MobLink hotline is being prepared for launch.\n\n" +
-            "For now, I can help you search services in the app or prepare a request for a participating provider. " +
+            "I can help you search services or prepare a request for a participating provider. " +
             "Call **000** if you are in immediate danger.\n\n" +
             "Would you like me to help with anything else in the meantime?"
         );
@@ -234,9 +222,9 @@ export default function HelpBot({ onBackToContact }: { onBackToContact?: () => v
     <div className="help-bot">
       <div className="help-bot-header">
         <div className="help-bot-header-info">
-          <span className="help-bot-avatar">🤖</span>
+          <span className="help-bot-avatar help-bot-image-avatar"><img src="/images/ai-agent.jpg" alt="" /></span>
           <div>
-            <strong>MobLink guide</strong>
+            <strong>Moblink assistant</strong>
             <span className="help-bot-status">Online</span>
           </div>
         </div>
@@ -251,7 +239,7 @@ export default function HelpBot({ onBackToContact }: { onBackToContact?: () => v
                 showHumanMode();
               }}
             >
-              🙋 Talk to a person
+              🙋 Human support
             </button>
           )}
         </div>
@@ -299,9 +287,7 @@ export default function HelpBot({ onBackToContact }: { onBackToContact?: () => v
         <div className="chat-human-mode">
           <div className="chat-human-mode-icon">🙋</div>
           <h3>We&apos;re here to help</h3>
-          <p>
-            This prototype has recorded your preference for human support. Live operator follow-up is not connected yet; you can still browse and request help from listed services.
-          </p>
+          <p>Your request for human support is saved. A participating organisation can respond in its own service chat; you can keep using Moblink while you wait.</p>
           <div className="chat-human-actions">
             <Link href="/app/search/" className="chat-human-btn chat-human-btn-primary" onClick={onBackToContact}>
               Find a participating service
@@ -316,7 +302,7 @@ export default function HelpBot({ onBackToContact }: { onBackToContact?: () => v
                 );
               }}
             >
-              💬 Continue chatting with the bot
+              💬 Continue with Moblink
             </button>
           </div>
         </div>
