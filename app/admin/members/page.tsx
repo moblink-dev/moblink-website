@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { getMembers, recordMemberCheckIn, type IraacProgram, type Member, type MemberContactMethod, type MemberSupportLevel } from "../../../lib/members";
-import { getIraacReferrals, scheduleAICall, type Referral } from "../../../lib/referrals";
+import { addReferralMessage, getReferrals, getIraacReferrals, scheduleAICall, type Referral } from "../../../lib/referrals";
 
 const programs: Array<IraacProgram | "all"> = ["all", "MCC", "YouthScape", "The Crew", "DARC"];
 const supportLabels: Record<MemberSupportLevel, string> = { routine: "Routine", elevated: "Elevated", high: "High", urgent: "Urgent" };
@@ -54,6 +54,15 @@ export default function AdminMembersPage() {
 
   const handleMessage = () => {
     if (!selected || !outboundMessage.trim()) return;
+    if (selected.id === "member_jayden" && channel === "in_app" && selected.consentToContact) {
+      try {
+        addReferralMessage("lead_demo_youthscape", {sender:"provider", senderName:"IRAAC adviser · demo", body:outboundMessage, mode:"advisor"});
+        setReferrals(getIraacReferrals());
+        setOutboundMessage("");
+        setStatusMessage("Demo reply saved to Jayden’s app conversation in this browser. Nothing was sent externally.");
+      } catch { setStatusMessage("Couldn’t save the reply. Please try again."); }
+      return;
+    }
     const updated = recordMemberCheckIn(selected.id, channel, outboundMessage);
     if (!updated) return setStatusMessage("This person has not given permission for that contact.");
     setMembers((current) => current.map((member) => member.id === updated.id ? updated : member));
@@ -162,6 +171,7 @@ function lifecycleFor(member: Member, referral?: Referral): string {
 }
 
 function conversationFor(member: Member) {
+  if (member.id === "member_jayden") return getReferrals().find(item => item.id === "lead_demo_youthscape")?.conversation.map(item => ({ id:item.id, side:item.sender === "community" ? "member" : item.sender === "provider" ? "staff" : "moblink", channel:item.senderName, body:item.body, date:formatDateTime(item.createdAt) })) ?? [];
   const firstName = member.name.replace(" (demo)", "").split(" ")[0];
   const monthly = monthlyCheckInConversation(member);
   return [
@@ -205,5 +215,5 @@ function normalizeName(value: string) { return value.replace(/\s*\(demo\)\s*/i, 
 function initials(value: string) { return value.replace(" (demo)", "").split(" ").map((part) => part[0]).slice(0, 2).join(""); }
 function contactLabel(method: MemberContactMethod) { return method === "in_app" ? "Moblink app" : method === "sms" ? "SMS" : method === "email" ? "Email" : method === "ai_call" ? "AI call" : method === "office" ? "Office visit" : "Phone"; }
 function formatDate(value: string) { return value ? new Date(value).toLocaleDateString("en-AU", { day: "numeric", month: "short", year: "numeric" }) : "Not recorded"; }
-function formatDateTime(value: string) { return value ? new Date(value).toLocaleString("en-AU", { day: "numeric", month: "short", hour: "numeric", minute: "2-digit" }) : "Not recorded"; }
+function formatDateTime(value: string) { return value ? new Date(value).toLocaleString("en-AU", { day: "numeric", month: "short", hour: "numeric", minute: "2-digit", timeZone: "Australia/Sydney" }) : "Not recorded"; }
 function shortDate(value: string) { return value ? new Date(value).toLocaleDateString("en-AU", { day: "numeric", month: "short" }) : "New"; }

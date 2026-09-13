@@ -1,127 +1,138 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import * as maplibregl from "maplibre-gl";
-import "maplibre-gl/dist/maplibre-gl.css";
-import { type Service } from "../../app/data";
+import * as L from "leaflet";
+import "leaflet/dist/leaflet.css";
+import type { Service } from "../../app/data";
 
-const NOWRA_CENTER: [number, number] = [150.600, -34.882];
-
-const categoryColors: Record<string, string> = {
-  Crisis: "#dc2626",
-  Health: "#059669",
-  Legal: "#2563eb",
-  Housing: "#d97706",
-  Family: "#7c3aed",
-  Youth: "#0891b2",
-  Culture: "#c026d3",
-  Education: "#65a30d",
-  Employment: "#0d9488",
-  Centrelink: "#78716c",
-  Financial: "#ca8a04",
-  "Mental Health": "#4f46e5",
-  Addiction: "#b91c1c",
-  Elderly: "#a21caf",
-  Disability: "#6366f1",
-};
+const NOWRA: L.LatLngTuple = [-34.882, 150.6];
 
 export default function FullMap({
-  services: activeServices,
+  services,
   onSelectService,
+  focusResults = false,
 }: {
   services: Service[];
   onSelectService: (service: Service) => void;
+  focusResults?: boolean;
 }) {
-  const mapContainer = useRef<HTMLDivElement>(null);
-  const map = useRef<maplibregl.Map | null>(null);
-  const markers = useRef<maplibregl.Marker[]>([]);
+  const container = useRef<HTMLDivElement>(null);
+  const map = useRef<L.Map | null>(null);
   const [ready, setReady] = useState(false);
-  const [userDot, setUserDot] = useState<maplibregl.Marker | null>(null);
+  const [zoom, setZoom] = useState(13);
+  const [tileError, setTileError] = useState(false);
 
-  // Initialize map once
   useEffect(() => {
-    if (!mapContainer.current || map.current) return;
-
-    const m = new maplibregl.Map({
-      container: mapContainer.current,
-      style: "https://basemaps.cartocdn.com/gl/positron-gl-style/style.json",
-      center: NOWRA_CENTER,
-      zoom: 10,
+    if (!container.current) return;
+    const instance = L.map(container.current, {
+      zoomControl: false,
       attributionControl: false,
-    });
-
-    m.addControl(new maplibregl.NavigationControl({ showCompass: false }), "top-right");
-    m.addControl(new maplibregl.AttributionControl({ compact: true }), "bottom-right");
-
-    m.on("load", () => {
-      setReady(true);
-
-      // User location
-      if ("geolocation" in navigator) {
-        navigator.geolocation.getCurrentPosition(
-          (pos) => {
-            const el = document.createElement("div");
-            el.className = "map-full-user-dot";
-            el.innerHTML = '<div class="map-full-user-pulse"></div>';
-            const marker = new maplibregl.Marker({ element: el })
-              .setLngLat([pos.coords.longitude, pos.coords.latitude])
-              .addTo(m);
-            setUserDot(marker);
-          },
-          () => {}
-        );
-      }
-    });
-
-    map.current = m;
-
+    }).setView(NOWRA, 13);
+    map.current = instance;
+    instance.on("zoomend", () => setZoom(instance.getZoom()));
+    L.control.zoom({ position: "bottomright" }).addTo(instance);
+    const tiles = L.tileLayer(
+      "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+      {
+        attribution:
+          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        maxZoom: 19,
+      },
+    ).addTo(instance);
+    tiles.on("tileerror", () => setTileError(true));
+    tiles.on("tileload", () => setTileError(false));
+    const observer = new ResizeObserver(() => instance.invalidateSize());
+    observer.observe(container.current);
+    setReady(true);
     return () => {
-      m.remove();
+      observer.disconnect();
+      instance.remove();
       map.current = null;
     };
   }, []);
 
-  // Update markers when services change or map is ready
   useEffect(() => {
-    if (!map.current || !ready) return;
-
-    // Clear existing markers
-    markers.current.forEach((m) => m.remove());
-    markers.current = [];
-
-    // Add markers for active services
-    activeServices.forEach((s) => {
-      const el = document.createElement("div");
-      el.className = "map-full-marker";
-      el.style.backgroundColor = categoryColors[s.category] ?? "#666";
-      el.title = s.name;
-      el.setAttribute("aria-label", s.name);
-
-      const marker = new maplibregl.Marker({ element: el })
-        .setLngLat([s.lng, s.lat])
-        .addTo(map.current!);
-
-      el.addEventListener("click", () => {
-        onSelectService(s);
-        // Highlight the marker
-        document.querySelectorAll(".map-full-marker").forEach((m) => m.classList.remove("map-full-marker-active"));
-        el.classList.add("map-full-marker-active");
-      });
-
-      markers.current.push(marker);
+    if (!ready || !map.current) return;
+    const group = L.layerGroup().addTo(map.current);
+    // Shared coordinates represent service areas, not invented street addresses.
+    const locations = new Map<string, Service[]>();
+    services.forEach((service) => {
+      if (!Number.isFinite(service.lat) || !Number.isFinite(service.lng))
+        return;
+      const point = map.current!.project([service.lat, service.lng], zoom);
+      const key = `${Math.round(point.x / 44)},${Math.round(point.y / 44)}`;
+      locations.set(key, [...(locations.get(key) ?? []), service]);
     });
+    locations.forEach((items) => {
+      const icon = L.divIcon({
+        className: "service-map-pin",
+        html: `<span>${items.length > 1 ? items.length : ""}</span>`,
+        iconSize: [32, 42],
+        iconAnchor: [16, 42],
+      });
+      const label =
+        items.length === 1
+          ? items[0].name
+          : `${items.length} services near ${items[0].suburb}`;
+      const marker = L.marker([items[0].lat, items[0].lng], {
+        icon,
+        title: label,
+        alt: label,
+        keyboard: true,
+      }).addTo(group);
+      marker.getElement()?.setAttribute("aria-label", label);
+      if (items.length === 1)
+        marker.on("click", () => onSelectService(items[0]));
+      else {
+        const list = document.createElement("div");
+        list.className = "map-pin-services";
+        items.forEach((service) => {
+          const button = document.createElement("button");
+          button.type = "button";
+          button.textContent = service.name;
+          button.addEventListener("click", () => {
+            onSelectService(service);
+            marker.closePopup();
+          });
+          list.appendChild(button);
+        });
+        marker.bindPopup(list, { maxHeight: 200 });
+      }
+    });
+    return () => {
+      group.remove();
+    };
+  }, [services, ready, onSelectService, zoom]);
 
-    // Fit bounds to show all markers
-    if (activeServices.length > 0) {
-      const bounds = new maplibregl.LngLatBounds();
-      activeServices.forEach((s) => bounds.extend([s.lng, s.lat]));
-      map.current.fitBounds(bounds, { padding: 50, maxZoom: 12 });
-    }
-  }, [activeServices, ready, onSelectService]);
+  useEffect(() => {
+    if (!map.current || !ready || !focusResults || !services.length) return;
+    map.current.fitBounds(
+      L.latLngBounds(services.map((service) => [service.lat, service.lng])),
+      { paddingTopLeft: [40, 140], paddingBottomRight: [40, 80], maxZoom: 14 },
+    );
+  }, [services, ready, focusResults]);
 
   return (
     <div className="map-full-inner">
-      <div ref={mapContainer} className="map-full-canvas" />
+      <div
+        ref={container}
+        className="map-full-canvas"
+        role="region"
+        aria-label="Nowra service map"
+      />
+      <button
+        type="button"
+        className="map-reset"
+        onClick={() => map.current?.setView(NOWRA, 13)}
+      >
+        ⌖ Nowra
+      </button>
+      {tileError && (
+        <p className="map-tile-error" role="status">
+          Map tiles couldn’t load. Check your connection or open the service
+          list.
+        </p>
+      )}
     </div>
   );
 }

@@ -1,5 +1,6 @@
 "use client";
 
+import HumanSupport from "./HumanSupport";
 import { useState, useRef, useEffect, type FormEvent } from "react";
 import Link from "next/link";
 import { services } from "../../app/data";
@@ -52,7 +53,7 @@ export default function HelpBot({ initialServiceId }: { initialServiceId?: strin
   }, [messages, humanMode]);
 
   function send(text: string) {
-    if (!text.trim()) return;
+    if (!text.trim() || humanMode) return;
     const reply = replyToMessage(catalogue, text, context);
     const time = new Intl.DateTimeFormat("en-AU", { hour: "numeric", minute: "2-digit" }).format(new Date());
     setMessages(previous => [...previous.slice(-78), { role: "user", text: text.trim(), time }, { role: "bot", text: reply.text, serviceIds: reply.serviceIds, crisis: reply.crisis, time }]);
@@ -69,10 +70,11 @@ export default function HelpBot({ initialServiceId }: { initialServiceId?: strin
       <header className="help-bot-header">
         <div className="help-bot-header-info">
           <span className="assistant-mark" aria-hidden="true">✳</span>
-          <div><strong>MobLink assistant</strong><span className="help-bot-status">Service guide · demo</span></div>
+          <div><strong>{humanMode ? "MobLink human support" : "MobLink assistant"}</strong><span className="help-bot-status">{humanMode ? "Messages with the MobLink team" : "Service guide · demo"}</span></div>
         </div>
-        <button type="button" className="help-bot-human-toggle" onClick={() => setHumanMode(!humanMode)} aria-expanded={humanMode}>Human support</button>
+        <button type="button" className="help-bot-human-toggle" onClick={() => setHumanMode(!humanMode)} aria-expanded={humanMode}>{humanMode ? "Back to assistant" : "Human support"}</button>
       </header>
+      {humanMode ? <HumanSupport history={messages.map(item=>({role:item.role === "bot" ? "MobLink assistant" : "Customer", text:item.text}))} initialLocation={context.postcode ?? ""} /> : <>
       <div className="help-bot-chat" ref={feed} role="log" aria-label="Messages" aria-live="polite">
         <p className="chat-date-label">Here to help, at your pace</p>
         {messages.map((msg, i) => (
@@ -91,12 +93,13 @@ export default function HelpBot({ initialServiceId }: { initialServiceId?: strin
           </div>
         ))}
         {messages.length === 1 && <div className="chat-suggestions" aria-label="Start a conversation">{(context.serviceId ? ["Am I eligible?", "How do I contact them?"] : ["Find housing", "Health & wellbeing", "Money & Centrelink", "Youth support"]).map(text => <button type="button" onClick={() => send(text)} key={text}>{text}</button>)}</div>}
-        {humanMode && <aside className="chat-human-panel"><strong>Prefer to speak to a person?</strong><p>Open a service to call its team or prepare a support request. No live adviser is connected to this demo chat.</p><Link href="/app/search">Find a service to contact ↗</Link><button type="button" onClick={() => setHumanMode(false)}>Continue chatting</button><button type="button" onClick={() => { setMessages([greeting]); setContext({}); setHumanMode(false); }}>Clear this chat</button></aside>}
+
       </div>
       <form className="help-bot-input-row" onSubmit={submit}>
         <textarea ref={composer} rows={1} className="help-bot-input" placeholder="Message MobLink…" value={input} maxLength={2000} onChange={event => setInput(event.target.value)} onKeyDown={event => { if (event.key === "Enter" && !event.shiftKey && !event.nativeEvent.isComposing) { event.preventDefault(); send(input); } }} aria-label="Message MobLink" />
         <button className="help-bot-send" disabled={!input.trim()} aria-label="Send message"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 7-7 7 7M12 5v14" /></svg></button>
       </form>
+      </>}
     </section>
   );
 }
