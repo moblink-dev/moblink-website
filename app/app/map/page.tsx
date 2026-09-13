@@ -2,6 +2,8 @@
 
 import { useState, useMemo, useCallback } from "react";
 import Link from "next/link";
+import { serviceDistanceLabel } from "../../../lib/service-distance";
+import { serviceImage } from "../../../lib/service-images";
 import { services, serviceCategories, type Service } from "../../data";
 import BottomNav from "../../../components/app/BottomNav";
 import dynamic from "next/dynamic";
@@ -25,8 +27,8 @@ const categoryColorMap: Record<string, string> = {
   Elderly: "#a21caf", Disability: "#6366f1",
 };
 
-export default function MapPage() {
-  const [search, setSearch] = useState("");
+export default function MapPage({ initialSearch = "" }: { initialSearch?: string }) {
+  const [search, setSearch] = useState(initialSearch);
   const [activeCategory, setActiveCategory] = useState<string | "all">("all");
   const [selectedService, setSelectedService] = useState<Service | null>(null);
   const [showSheet, setShowSheet] = useState(false);
@@ -64,11 +66,11 @@ export default function MapPage() {
 
   return (
     <main className="app-page">
-      <div className="phone-shell phone-shell-compact">
+      <div className="phone-shell phone-shell-compact map-search-shell">
       <div className="map-mobile-page">
         {/* Full-screen map */}
         <div className="map-mobile-canvas">
-          <FullMap services={filtered} onSelectService={handleSelectService} />
+          <FullMap focusResults={Boolean(search.trim())} services={filtered} onSelectService={handleSelectService} />
         </div>
 
         {/* Overlaid search bar */}
@@ -78,9 +80,9 @@ export default function MapPage() {
             <input
               type="search"
               className="map-mobile-search-input"
-              placeholder="Search..."
+              placeholder="Search services around Nowra…"
               value={search}
-              onChange={(e) => setSearch(e.target.value)}
+              onChange={(e) => { setSearch(e.target.value); setSelectedService(null); }}
               aria-label="Search services"
             />
           </div>
@@ -88,7 +90,7 @@ export default function MapPage() {
             <button
               type="button"
               className={`map-mobile-cat ${activeCategory === "all" ? "active" : ""}`}
-              onClick={() => setActiveCategory("all")}
+              onClick={() => { setActiveCategory("all"); setSelectedService(null); }}
             >
               All
             </button>
@@ -96,7 +98,7 @@ export default function MapPage() {
               <button
                 type="button"
                 className={`map-mobile-cat ${activeCategory === cat ? "active" : ""}`}
-                onClick={() => setActiveCategory(cat)}
+                onClick={() => { setActiveCategory(cat); setSelectedService(null); }}
                 key={cat}
               >
                 {cat}
@@ -106,15 +108,15 @@ export default function MapPage() {
         </div>
 
         {/* Count badge */}
-        <div className="map-mobile-count" onClick={() => setShowSheet(!showSheet)}>
-          {filtered.length} services
-        </div>
+        <button type="button" className="map-mobile-count" onClick={() => { setSelectedService(null); setShowSheet(!showSheet); }}>
+          {filtered.length} services · Show list
+        </button>
 
         {/* Bottom sheet */}
         <div className={`map-mobile-sheet ${showSheet ? "open" : ""}`}>
-          <div className="map-mobile-sheet-handle" onClick={handleToggleSheet}>
-            <div className="map-mobile-sheet-bar" />
-          </div>
+          <button type="button" aria-label="Close service panel" className="map-mobile-sheet-handle" onClick={handleToggleSheet}>
+            <span className="map-mobile-sheet-bar" />
+          </button>
 
           {selectedService ? (
             <div className="map-mobile-sheet-body">
@@ -125,8 +127,9 @@ export default function MapPage() {
                 </div>
                 <button type="button" className="map-mobile-sheet-x" onClick={() => { setSelectedService(null); }}>✕</button>
               </div>
+              <img className="map-service-image" src={serviceImage(selectedService)} alt="" />
               <div className="map-mobile-sheet-info">
-                <span>{selectedService.distance} · {selectedService.suburb}</span>
+                <span>{serviceDistanceLabel(selectedService)} · {selectedService.suburb}</span>
                 {selectedService.isFree && <span className="map-mobile-sheet-free">Free</span>}
                 {selectedService.isAboriginalLed && <span className="map-mobile-sheet-ac">Aboriginal-led</span>}
               </div>
@@ -143,18 +146,16 @@ export default function MapPage() {
                 <button type="button" className="map-mobile-sheet-x" onClick={() => setShowSheet(false)}>✕</button>
               </div>
               <div className="map-mobile-sheet-list">
-                {filtered.slice(0, 30).map((s) => (
+                {filtered.map((s) => (
                   <Link href={`/app/service/${s.id}`} className="map-mobile-sheet-item" key={s.id}>
                     <div className="map-mobile-sheet-dot" style={{ background: categoryColorMap[s.category] || "#666" }} />
                     <div className="map-mobile-sheet-item-body">
                       <strong>{s.name}</strong>
-                      <span>{s.distance} · {s.suburb}</span>
+                      <span>{serviceDistanceLabel(s)} · {s.suburb}</span>
                     </div>
                   </Link>
                 ))}
-                {filtered.length > 30 && (
-                  <p className="map-mobile-sheet-more">+{filtered.length - 30} more</p>
-                )}
+                <p className="map-location-note">Pins show directory service areas. Confirm the address before travelling.</p><Link href="/app/list">All services, including phone support ↗</Link>
               </div>
             </div>
           )}
@@ -165,8 +166,9 @@ export default function MapPage() {
           {showSheet ? "🗺️" : "📋"}
         </button>
       </div>
+      <p className="map-source-credit">Service areas · © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a></p>
+      <BottomNav current="/app/search" />
       </div>
-      <BottomNav current="/app/map" />
     </main>
   );
 }

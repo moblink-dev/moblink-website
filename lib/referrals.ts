@@ -1,3 +1,5 @@
+import { iraacDemoConversation, upgradeYouthscapeConversation } from "./iraac-demo-conversation.ts";
+
 export type ReferralStatus =
   | "requested"
   | "triage"
@@ -27,6 +29,7 @@ export interface ReferralMessage {
   id: string;
   sender: "community" | "provider" | "moblink";
   senderName: string;
+  mode?: "assistant" | "advisor";
   body: string;
   createdAt: string;
 }
@@ -190,7 +193,7 @@ export function updateReferralStatus(id: string, status: ReferralStatus, notes?:
 
 export function addReferralMessage(
   id: string,
-  message: Pick<ReferralMessage, "sender" | "senderName" | "body">,
+  message: Pick<ReferralMessage, "sender" | "senderName" | "body" | "mode">,
 ): Referral | undefined {
   const referrals = getReferrals();
   const referral = referrals.find((item) => item.id === id);
@@ -321,7 +324,7 @@ function normalizeReferral(referral: Referral): Referral {
     outcome: REFERRAL_OUTCOMES.has(referral.outcome) ? referral.outcome : demo?.outcome || "pending",
     rating: [1, 2, 3, 4, 5].includes(referral.rating ?? 0) ? referral.rating : demo?.rating,
     feedback: referral.feedback ?? demo?.feedback,
-    conversation: Array.isArray(referral.conversation) ? referral.conversation : [],
+    conversation: referral.id === "lead_demo_youthscape" ? upgradeYouthscapeConversation(Array.isArray(referral.conversation) ? referral.conversation : []) : Array.isArray(referral.conversation) ? referral.conversation : [],
     aiCalls: [...storedCalls, ...demoCalls],
   };
 }
@@ -367,22 +370,7 @@ export const demoReferrals: Referral[] = [
     status: "requested",
     staffNotes: "Confirm that YouthScape is suitable and coordinate qualified legal support where needed.",
     aiCalls: [{ id: "call_demo_youth_1", purpose: "needs", status: "completed", createdAt: "2026-08-15T08:48:00.000Z", completedAt: "2026-08-15T08:55:00.000Z" }],
-    conversation: [
-      {
-        id: "msg_demo_1",
-        sender: "moblink",
-        senderName: "Moblink call centre",
-        body: "This person asked Moblink for youth support in the Illawarra and agreed to an SMS follow-up from IRAAC.",
-        createdAt: "2026-08-15T08:35:00.000Z",
-      },
-      {
-        id: "msg_demo_2",
-        sender: "community",
-        senderName: "Community member",
-        body: "I would like to talk with someone who can explain what happens next.",
-        createdAt: "2026-08-15T08:42:00.000Z",
-      },
-    ],
+    conversation: iraacDemoConversation,
     createdAt: "2026-08-15T08:35:00.000Z",
     updatedAt: "2026-08-15T08:42:00.000Z",
   },

@@ -6119,3 +6119,17 @@ input {
   .crm-record-workspace .crm-drawer-section { grid-template-columns: 1fr; }
   .funding-conversation-sebenza .funding-message-feed { padding: 20px 12px; }
 }
+
+.staff-support-page { max-width:1200px; margin:auto; padding:32px 20px; }
+.staff-support-layout { display:grid; grid-template-columns:260px minmax(0,1fr); gap:24px; }
+.staff-support-layout>aside { display:flex; flex-direction:column; gap:8px; }
+.staff-support-layout>aside button { padding:16px; border:1px solid #d5dfd4; border-radius:12px; text-align:left; background:white; }
+.staff-support-layout>aside button[aria-pressed=true] { background:#e0eee3; }
+.staff-support-layout>aside span { display:block; font-size:13px; margin-top:4px; }
+.staff-support-login { max-width:400px; display:grid; gap:16px; }
+.staff-support-login label { display:grid; gap:8px; }
+.staff-support-login input { padding:12px; border:1px solid #ccdace; border-radius:8px; }
+.staff-support-login button { padding:12px; border:0; background:#215846; color:white; border-radius:8px; }
+.support-history-message { padding:10px 14px; margin:8px 0; background:#f2f6f2; border-radius:10px; }
+.support-history-message p { white-space:pre-wrap; }
+@media(max-width:600px) { .staff-support-layout { grid-template-columns:1fr; } }
