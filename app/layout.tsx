@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Moblink | Find the right support, close to home",
-  description: "Moblink connects Aboriginal and Torres Strait Islander people with suitable local and national services by app or phone.",
+  description: "Explore local and national support services for Aboriginal and Torres Strait Islander people with the MobLink web app.",
 };
 
 export const viewport: Viewport = {

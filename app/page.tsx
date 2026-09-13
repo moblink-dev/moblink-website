@@ -1,114 +1,40 @@
 import Link from "next/link";
 import SiteShell from "./SiteShell";
 
+const areas = [
+  { title: "A place to call home", category: "Housing", image: "shoalhaven-aboriginal-housing", body: "Housing, tenancy and finding somewhere safe to stay." },
+  { title: "Health & wellbeing", category: "Health", image: "waminda", body: "Care for your physical, emotional and family wellbeing." },
+  { title: "Money & Centrelink", category: "Centrelink", image: "centrelink-nowra", body: "Help with payments, applications and getting organised." },
+  { title: "Legal help", category: "Legal", image: "wollongong-als", body: "Find legal advice, advocacy and practical support." },
+  { title: "Young people & family", category: "Youth", image: "iraac-youthscape", body: "Support with opportunities, connection and next steps." },
+  { title: "Culture & Country", category: "Culture", image: "bush-tucker-walk", body: "Explore community programs and cultural connections." },
+];
 const steps = [
-  { number: "01", title: "Tell Moblink what is going on", body: "Use your own words. You can explain what you need, where you are, and how you would like someone to contact you." },
-  { number: "02", title: "See services that fit", body: "Moblink can suggest nearby and national services for housing, Centrelink, legal support, health, culture and more." },
-  { number: "03", title: "Choose who you connect with", body: "You stay in control. When you agree, Moblink can introduce you and open a conversation with the service you choose." },
-];
-
-const supportAreas = [
-  { title: "Housing", body: "Find homelessness, tenancy and housing support near you." },
-  { title: "Centrelink", body: "Get help understanding payments, claims and applications." },
-  { title: "Legal help", body: "Connect with suitable legal and advocacy services." },
-  { title: "Health & wellbeing", body: "Look for health, disability and social-emotional wellbeing support." },
-  { title: "Family & young people", body: "Find practical support for children, families and young people." },
-  { title: "Culture & Country", body: "Discover organisations supporting culture, community and connection to Country." },
-];
-
-const exampleJourneys = [
-  { category: "Housing", quote: "I could explain that I needed somewhere safe to stay, then see the housing services that covered my area.", outcome: "A clearer housing pathway" },
-  { category: "Centrelink", quote: "Moblink helped me work out which service could sit with me and go through my Centrelink claim.", outcome: "Application support" },
-  { category: "Legal", quote: "I did not know who to call. Moblink showed me a legal service nearby and helped me start the conversation.", outcome: "Connected legal support" },
-  { category: "Culture", quote: "I wanted to feel more connected to culture and Country. Moblink showed me community organisations I could contact.", outcome: "Community and cultural connection" },
+  { title: "Start where you are", body: "Search for what you need, or explain it in your own words to the MobLink assistant." },
+  { title: "Explore your options", body: "See services, read what they offer and explore the map. You choose what feels right." },
+  { title: "Take your next step", body: "Open a service’s details to find contact options. Try an example conversation to see how support could work." },
 ];
 
 export default function Home() {
-  return (
-    <SiteShell>
-      <main>
-        <section className="community-hero">
-          <div className="container community-hero-grid">
-            <div className="community-hero-copy">
-              <div className="eyebrow">Meet Moblink, your guide to local support</div>
-              <h1>Tell us what&apos;s going on. We&apos;ll help you find the next step.</h1>
-              <p>Moblink helps Aboriginal and Torres Strait Islander people find services that match what they need and where they live—without having to know which organisation to call first.</p>
-              <div className="hero-actions">
-                <Link href="/app/" className="btn btn-primary">Open the Moblink app</Link>
-                <Link href="#how-it-works" className="btn btn-cream-outline">See how it works</Link>
-              </div>
-              <div className="channel-note"><strong>Use the web app today.</strong><span>Phone and text conversations with Moblink are being prepared for launch.</span></div>
-            </div>
-
-            <div className="moblink-demo" aria-label="Example conversation with Moblink">
-              <div className="moblink-demo-head">
-                <span className="moblink-avatar">M</span>
-                <div><strong>Moblink</strong><small>Your guide to local support</small></div>
-                <span className="moblink-status">Ready to help</span>
-              </div>
-              <div className="moblink-thread">
-                <p className="moblink-message moblink-message-user">I need help with Centrelink and I don&apos;t know where to start.</p>
-                <div className="moblink-message moblink-message-agent"><strong>Moblink</strong><p>I can help with that. Based on postcode 2541, here are services that can help with a Centrelink application.</p></div>
-                <div className="moblink-result"><span>Suggested nearby service</span><strong>Shoalhaven Aboriginal Pension Support</strong><small>Centrelink help · Nowra area</small><span className="moblink-result-action">View service →</span></div>
-              </div>
-              <small className="example-label">Illustrative conversation using fictional details</small>
-            </div>
-          </div>
-        </section>
-
-        <section className="community-promises" aria-label="Why use Moblink">
-          <div className="container community-promise-grid">
-            <div><strong>Start with your story</strong><span>You do not need to know the service system.</span></div>
-            <div><strong>Find support near you</strong><span>Search by location, need and service type.</span></div>
-            <div><strong>Stay connected</strong><span>Message the organisation after you connect.</span></div>
-          </div>
-        </section>
-
-        <section id="how-it-works" className="moblink-section community-how">
-          <div className="container">
-            <div className="section-heading-row"><div><p className="section-kicker">How Moblink works</p><h2 className="section-title">You talk. Moblink helps make sense of the options.</h2></div><p>Moblink helps turn what you say into practical service options, while leaving the choice with you.</p></div>
-            <div className="journey-grid">{steps.map((step) => <article className="journey-card" key={step.number}><span>{step.number}</span><h3>{step.title}</h3><p>{step.body}</p></article>)}</div>
-          </div>
-        </section>
-
-        <section id="ways-we-can-help" className="moblink-section support-section">
-          <div className="container">
-            <p className="section-kicker">Ways Moblink can help</p>
-            <div className="section-heading-row compact"><h2 className="section-title">Whatever is happening, you can start here.</h2><Link href="/app/search/" className="text-link">Browse all services →</Link></div>
-            <div className="support-area-grid">{supportAreas.map((area, index) => <article className="support-area-card" key={area.title}><span>{String(index + 1).padStart(2, "0")}</span><h3>{area.title}</h3><p>{area.body}</p></article>)}</div>
-          </div>
-        </section>
-
-        <section id="community-stories" className="moblink-section story-section">
-          <div className="container">
-            <div className="story-intro"><p className="section-kicker">What support could look like</p><h2 className="section-title">One good connection can change what happens next.</h2><p>These are illustrative journeys showing the kinds of outcomes Moblink is being designed to support. They are not verified customer testimonials.</p></div>
-            <div className="story-grid">{exampleJourneys.map((story) => <article className="story-card" key={story.category}><span>{story.category}</span><blockquote>“{story.quote}”</blockquote><p>{story.outcome}</p></article>)}</div>
-          </div>
-        </section>
-
-        <section className="moblink-section connected-section">
-          <div className="container connected-grid">
-            <div className="connected-copy"><p className="section-kicker">More than a directory</p><h2 className="section-title">Once you connect, you can keep the conversation in one place.</h2><p>A service can message you with the next step, tell you what to bring, arrange a call or invite you to their office. You can reply when it suits you and keep track of what is happening.</p><Link href="/app/connected/" className="btn btn-primary">See your connections</Link></div>
-            <div className="connected-chat" aria-label="Example connected service conversation">
-              <div><span className="connected-avatar">S</span><p><strong>South Coast Housing Support</strong><small>Connected through Moblink</small></p></div>
-              <p className="connected-bubble provider">Hi, we can help you understand the housing application. Would you like us to call tomorrow morning?</p>
-              <p className="connected-bubble person">Yes please, after 10 would be good.</p>
-              <small>Illustrative conversation · no real customer information</small>
-            </div>
-          </div>
-        </section>
-
-        <section className="community-safety">
-          <div className="container safety-grid">
-            <div><p className="section-kicker">Your choice matters</p><h2>You decide what to share and who you connect with.</h2></div>
-            <div className="safety-points"><p><strong>Permission first.</strong> Moblink asks before sharing a request with a service.</p><p><strong>Use only what is needed.</strong> Never share passwords, bank details or tax file numbers in Moblink.</p><p><strong>Not an emergency service.</strong> Call 000 if you or someone else is in immediate danger.</p></div>
-          </div>
-        </section>
-
-        <section className="moblink-cta community-final-cta">
-          <div className="container"><span className="moblink-avatar large">M</span><div><p className="section-kicker">Start with Moblink</p><h2>Find the support that fits your life, your need and your area.</h2></div><Link href="/app/messages/" className="btn btn-light">Talk to Moblink</Link></div>
-        </section>
-      </main>
-    </SiteShell>
-  );
+  return <SiteShell><main id="main-content" className="welcome-page">
+    <section className="welcome-hero"><div className="welcome-container welcome-hero-grid">
+      <div className="welcome-copy"><p className="welcome-eyebrow">Local support. A place to start.</p>
+        <h1>Your next step.<br /><em>A little closer.</em></h1>
+        <p className="welcome-intro">Find Aboriginal and Torres Strait Islander community services for what’s happening in your life. You don’t need to know who to call first.</p>
+        <form action="/app/search/" className="welcome-search"><label htmlFor="support-search">What can we help you find?</label><div><input id="support-search" name="q" type="search" placeholder="Housing, health, Nowra…" maxLength={120} /><button type="submit" aria-label="Find support">Search <span aria-hidden="true">→</span></button></div></form>
+        <div className="welcome-start"><Link href="/app/messages/?assistant=1">Not sure? Ask the MobLink assistant <span aria-hidden="true">↗</span></Link><span>Explore the web demo · No download needed</span></div>
+      </div>
+      <figure className="welcome-visual"><img src="/images/services/iraac-mcc.webp" alt="Illustration of people talking together around a table" width="800" height="600" fetchPriority="high" /><div className="welcome-photo-note"><span aria-hidden="true">✳</span><div><strong>A conversation can be a beginning.</strong><p>Find support at your own pace.</p></div></div><figcaption>AI-generated illustration · not actual staff or premises</figcaption></figure>
+    </div></section>
+    <div className="welcome-values welcome-container"><span>Built around your needs</span><span>Local &amp; national services</span><span>Your choices, at your pace</span></div>
+    <section id="ways-we-can-help" className="welcome-section welcome-container"><div className="welcome-section-head"><div><p className="welcome-eyebrow">Find your starting point</p><h2>What would help today?</h2></div><Link href="/app/">Explore all services <span aria-hidden="true">↗</span></Link></div>
+      <div className="welcome-service-grid">{areas.map(area => <Link className="welcome-service" key={area.category} href={`/app/list/?q=${encodeURIComponent(area.category)}`}><img src={`/images/services/${area.image}.webp`} alt="" width="800" height="600" loading="lazy" /><div><h3>{area.title}<span aria-hidden="true">↗</span></h3><p>{area.body}</p></div></Link>)}</div>
+      <div className="welcome-map-link"><div><strong>Prefer to see what’s nearby?</strong><p>Start around Nowra and explore services on the map.</p></div><Link href="/app/search/">Open the service map →</Link></div><p className="welcome-image-caption">Service images are AI-generated illustrations.</p>
+    </section>
+    <section id="how-it-works" className="welcome-how"><div className="welcome-container"><p className="welcome-eyebrow">A simpler way to find support</p><h2>You don’t have to work it all out at once.</h2><div className="welcome-steps">{steps.map((step,i)=><article key={step.title}><span>0{i+1}</span><h3>{step.title}</h3><p>{step.body}</p></article>)}</div></div></section>
+    <section id="community-stories" className="welcome-section welcome-container welcome-story"><div><p className="welcome-eyebrow">See a journey in the demo</p><h2>Less repeating.<br />More understanding.</h2><p>Follow Jayden’s example conversation with IRAAC YouthScape, from explaining what’s happening to planning a next step with an adviser.</p><Link className="welcome-button" href="/app/connected/lead_demo_youthscape/">Explore Jayden’s conversation →</Link><p className="welcome-small">Fictional people and messages. Live staff messaging is not yet connected.</p></div><div className="welcome-chat-preview"><header><span aria-hidden="true">I</span><div><strong>IRAAC YouthScape</strong><small>Example conversation</small></div></header><p className="welcome-chat-user">I get stressed when there’s a lot at once.</p><p className="welcome-chat-adviser">We can keep each message short and check that it makes sense before moving on. You can ask questions or take a break at any point.</p><Link href="/app/connected/lead_demo_youthscape/">See the whole conversation ↗</Link></div></section>
+    <section className="welcome-container welcome-choice"><div><p className="welcome-eyebrow">Your choice matters</p><h2>Support starts with trust.</h2></div><div><p><strong>Share at your own pace.</strong> Explore the directory without telling us your story. Keep passwords, bank details and identity documents out of demo chats.</p><p><strong>Know who you’re speaking with.</strong> Assistant and example adviser conversations are clearly labelled. The app tells you when human support is unavailable.</p></div></section>
+    <section className="welcome-container welcome-final"><div><p className="welcome-eyebrow">Whenever you’re ready</p><h2>Let’s find your next step.</h2><p>Start with a service, a place or a conversation.</p></div><div><Link className="welcome-button" href="/app/">Explore the app <span aria-hidden="true">↗</span></Link><Link className="welcome-final-secondary" href="/providers/">Working with your community? For organisations →</Link></div></section>
+    <p className="welcome-emergency">In immediate danger? Call <a href="tel:000">000</a>. MobLink is not an emergency service.</p>
+  </main></SiteShell>;
 }

@@ -22,7 +22,7 @@ const serviceGroups = [
 export default function ServicesPage() {
   return (
     <SiteShell>
-      <main>
+      <main id="main-content">
         <section className="info-hero services-info-hero">
           <div className="container info-hero-grid"><div><p className="section-kicker">Services</p><h1>Tell Moblink what you need. Explore support that fits.</h1></div><div><p>You do not need to know the right program name. Start with what is happening, your area and how you would like to connect.</p><div className="hero-actions"><Link className="btn btn-primary" href="/app/search/">Browse all services</Link><Link className="btn btn-dark-outline" href="/app/messages/">Talk to Moblink</Link></div></div></div>
         </section>

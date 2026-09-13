@@ -1,0 +1,140 @@
+/* Public website: scoped separately from the customer and staff applications. */
+.public-site { color:#243b30; background:#fffefa; --site-green:#235b46; --site-muted:#64766b; }
+.public-site .site-header { background:rgba(255,254,250,.97); color:#243b30; box-shadow:none; border-bottom:1px solid #e3e9de; }
+.public-site .header-inner { display:flex; flex-wrap:nowrap; max-width:1180px; min-height:78px; gap:30px; padding:12px 28px; }
+.public-site .wordmark { font-size:23px; letter-spacing:-1px; color:#243b30; flex-shrink:0; }
+.public-site .wordmark span, .public-site .wordmark b { color:#48745b; }
+.public-site .main-nav { display:flex; flex:1; justify-content:center; gap:24px; }
+.public-site .main-nav a { color:#53665a; font-size:13px; font-weight:600; white-space:nowrap; padding:10px 0; }
+.public-site .header-actions { display:flex; align-items:center; gap:18px; }
+.public-site .nav-provider { color:#53665a; border:0; background:none; padding:8px 0; font-size:12px; box-shadow:none; white-space:nowrap; }
+.public-site .nav-login { padding:11px 20px; font-size:13px; font-weight:650; border-radius:24px; background:#235b46; color:white; box-shadow:none; border:1px solid #235b46; white-space:nowrap; }
+.public-site a:focus-visible, .public-site button:focus-visible, .public-site input:focus-visible { outline:3px solid #aa773b; outline-offset:4px; }
+.public-skip-link { position:fixed; top:8px; left:8px; z-index:100; transform:translateY(-200%); padding:12px 20px; border-radius:8px; background:#235b46; color:white; }
+.public-skip-link:focus { transform:none; }
+.welcome-page { overflow:hidden; }
+.welcome-container { width:min(100% - 56px,1120px); margin-inline:auto; }
+.welcome-page section { padding:0; scroll-margin-top:100px; }
+.welcome-page h1, .welcome-page h2, .welcome-page h3, .welcome-page p { margin:0; }
+.welcome-page .welcome-eyebrow { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; color:#5b795f; margin-bottom:15px; }
+.welcome-page .welcome-hero { padding:56px 0 40px; background:linear-gradient(115deg,#f2f5e9,#fffefa 65%); }
+.welcome-hero-grid { display:grid; grid-template-columns:1.05fr 1fr; gap:55px; align-items:center; }
+.welcome-copy h1 { font-size:clamp(40px,4.8vw,62px); line-height:1.07; letter-spacing:-2.4px; font-weight:650; }
+.welcome-copy h1 em { font-family:Georgia,serif; font-weight:400; color:#477154; }
+.welcome-page .welcome-intro { font-size:16px; line-height:1.75; color:#617062; margin:23px 0; max-width:490px; }
+.welcome-search label { display:block; font-size:12px; font-weight:650; margin-bottom:8px; }
+.welcome-search > div { display:flex; border:1px solid #d9e2d3; padding:6px; border-radius:32px; background:white; box-shadow:0 4px 20px #335a3610; }
+.welcome-search input { flex:1; min-width:0; width:100%; border:0; background:transparent; padding:10px 12px; font-size:14px; color:#243b30; border-radius:24px; }
+.welcome-search button { border:0; background:#235b46; color:white; border-radius:25px; padding:10px 18px; font-size:13px; cursor:pointer; }
+.welcome-search button span { margin-left:7px; }
+.welcome-start { margin-top:17px; display:grid; gap:8px; }
+.welcome-start a { color:#285e43; font-size:13px; font-weight:650; text-decoration:none; }
+.welcome-start > span { font-size:10px; color:#75816e; }
+.welcome-visual { margin:0; position:relative; padding-bottom:28px; }
+.welcome-visual > img { width:100%; height:435px; object-fit:cover; border-radius:24px 70px 24px 24px; }
+.welcome-photo-note { position:absolute; left:-20px; bottom:52px; right:24px; display:flex; gap:12px; align-items:center; padding:18px; background:#fffffff2; backdrop-filter:blur(10px); border:1px solid #ffffff; border-radius:16px; box-shadow:0 10px 30px #243b3010; }
+.welcome-photo-note > span { display:grid; place-items:center; flex-shrink:0; width:40px; height:40px; background:#e3eddd; color:#326449; border-radius:50%; font-size:24px; }
+.welcome-photo-note strong { font-size:13px; }
+.welcome-photo-note p { color:#6d7d70; font-size:11px; margin-top:3px; }
+.welcome-visual figcaption { position:absolute; bottom:0; right:0; font-size:10px; color:#7a8477; }
+.welcome-values { display:flex; justify-content:space-between; gap:18px; padding:22px 0; border-bottom:1px solid #e3e8dc; color:#6b796b; font-size:12px; }
+.welcome-values span::before { content:'✓'; margin-right:9px; color:#477154; }
+.welcome-page .welcome-section { padding-block:64px; }
+.welcome-section-head { display:flex; justify-content:space-between; align-items:end; gap:30px; margin-bottom:26px; }
+.welcome-page h2 { font-size:clamp(28px,3vw,38px); line-height:1.2; font-weight:650; letter-spacing:-1.2px; }
+.welcome-section-head a { font-size:13px; color:#38644c; text-decoration:none; white-space:nowrap; padding:10px 0; }
+.welcome-service-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:28px 22px; }
+.welcome-service { text-decoration:none; display:block; }
+.welcome-service img { width:100%; height:190px; object-fit:cover; border-radius:16px; transition:filter .2s; }
+.welcome-service:hover img { filter:brightness(.95); }
+.welcome-service h3 { display:flex; align-items:center; justify-content:space-between; gap:8px; font-size:16px; line-height:1.35; margin:13px 0 5px; letter-spacing:-.25px; }
+.welcome-service h3 span { color:#6f8b74; font-size:17px; }
+.welcome-service p { font-size:13px; color:#69786c; line-height:1.6; }
+.welcome-map-link { display:flex; align-items:center; justify-content:space-between; gap:20px; border-radius:14px; background:#f0f4e9; padding:20px 24px; margin-top:28px; }
+.welcome-map-link strong { font-size:14px; }
+.welcome-map-link p { font-size:12px; color:#6b7a6b; margin-top:3px; }
+.welcome-map-link a { color:#316045; font-size:13px; font-weight:650; text-decoration:none; }
+.welcome-page .welcome-image-caption { margin-top:9px; font-size:10px; color:#788573; }
+.welcome-page .welcome-how { background:#edf2e6; padding:60px 0; }
+.welcome-how h2 { max-width:560px; }
+.welcome-steps { display:grid; grid-template-columns:repeat(3,1fr); gap:40px; margin-top:35px; }
+.welcome-steps article > span { display:inline-block; font-family:Georgia,serif; font-size:26px; color:#809474; margin-bottom:14px; }
+.welcome-steps h3 { font-size:17px; margin-bottom:9px; }
+.welcome-steps p { font-size:14px; color:#697864; line-height:1.75; }
+.welcome-story { display:grid; grid-template-columns:1fr 1fr; align-items:center; gap:70px; }
+.welcome-story > div > p:not(.welcome-eyebrow):not(.welcome-small) { font-size:15px; line-height:1.8; color:#677669; margin:20px 0; }
+.welcome-button { display:inline-flex; align-items:center; justify-content:center; gap:16px; text-decoration:none; font-size:13px; font-weight:650; padding:14px 22px; border-radius:28px; background:#235b46; color:white; }
+.welcome-page .welcome-small { font-size:11px; color:#7a8475; margin-top:12px; line-height:1.6; }
+.welcome-chat-preview { padding:24px; background:#f0f4ec; border:1px solid #e1e8da; border-radius:22px; }
+.welcome-chat-preview header { display:flex; align-items:center; gap:12px; padding-bottom:18px; border-bottom:1px solid #dce5d6; }
+.welcome-chat-preview header > span { display:grid; place-items:center; width:40px; height:40px; background:#264f3e; color:white; border-radius:12px; }
+.welcome-chat-preview header strong { display:block; font-size:14px; }
+.welcome-chat-preview header small { display:block; font-size:11px; color:#788573; }
+.welcome-chat-preview .welcome-chat-user { margin:20px 0 12px 35px; padding:14px; border-radius:14px 14px 3px 14px; background:#deecd4; font-size:14px; line-height:1.6; }
+.welcome-chat-preview .welcome-chat-adviser { padding:14px; margin-right:28px; border-radius:3px 14px 14px 14px; background:white; font-size:14px; line-height:1.6; }
+.welcome-chat-preview > a { display:block; padding-top:20px; text-decoration:none; color:#4f7657; font-size:12px; }
+.welcome-page .welcome-choice { display:grid; grid-template-columns:1fr 1fr; gap:70px; padding-block:20px 60px; }
+.welcome-choice > div > p:not(.welcome-eyebrow) { color:#6b796c; font-size:13px; line-height:1.8; margin-bottom:14px; }
+.welcome-choice strong { color:#334e3b; }
+.welcome-page .welcome-final { background:#254f3e; color:white; border-radius:24px; padding:36px; display:flex; align-items:center; justify-content:space-between; gap:25px; }
+.welcome-final .welcome-eyebrow { color:#bdceb5; }
+.welcome-final p:not(.welcome-eyebrow) { color:#cfdbca; font-size:14px; margin-top:12px; }
+.welcome-final > div:last-child { display:grid; gap:14px; justify-items:start; }
+.welcome-final .welcome-button { background:#e6edda; color:#264d3a; }
+.welcome-final-secondary { color:#d4e0ce; font-size:11px; text-decoration:none; }
+.welcome-page .welcome-emergency { text-align:center; color:#74816f; font-size:11px; margin:22px 20px 40px; }
+.public-site .acknowledgement { padding:25px 0; background:#f1f4e9; color:#627460; border:0; font-size:12px; }
+.public-site .site-footer { background:#fffefa; color:#536650; padding:40px 0 20px; }
+.public-site .site-footer h4 { color:#2f4b36; font-size:14px; margin-bottom:10px; }
+.public-site .site-footer p, .public-site .site-footer li { color:#6a7965; font-size:12px; }
+.public-site .site-footer a { color:#486243; }
+.public-site .footer-admin-button { border:1px solid #d4decf; background:transparent; box-shadow:none; padding:8px 12px; font-size:11px; border-radius:20px; }
+.public-site .footer-bottom { border-color:#e0e7d8; color:#829078; font-size:10px; }
+@media(max-width:950px) { .public-site .header-inner { gap:18px; } .public-site .nav-provider { display:none; } .welcome-hero-grid { gap:28px; } .welcome-visual > img { height:380px; } .welcome-photo-note { left:-10px; padding:14px; } }
+@media(max-width:680px) {
+  .welcome-container { width:calc(100% - 36px); }
+  .public-site .header-inner { display:grid; grid-template-columns:1fr auto; padding:10px 18px 0; gap:0 18px; min-height:62px; }
+  .public-site .wordmark { font-size:21px; }
+  .public-site .header-actions { grid-column:2; grid-row:1; }
+  .public-site .main-nav { grid-column:1 / -1; grid-row:2; justify-content:flex-start; gap:26px; padding:5px 0 0; }
+  .public-site .main-nav a { font-size:11px; padding:9px 0; }
+  .public-site .nav-login { padding:9px 16px; font-size:12px; }
+  .welcome-page .welcome-hero { padding:34px 0 20px; }
+  .welcome-hero-grid { grid-template-columns:1fr; gap:30px; }
+  .welcome-copy h1 { font-size:45px; letter-spacing:-1.8px; }
+  .welcome-page .welcome-intro { font-size:14px; margin:18px 0; }
+  .welcome-search input { font-size:16px; padding-left:8px; }
+  .welcome-search button { padding-inline:14px; }
+  .welcome-visual > img { height:280px; border-radius:20px 45px 20px 20px; }
+  .welcome-photo-note { left:12px; right:12px; bottom:44px; }
+  .welcome-values { flex-wrap:wrap; justify-content:flex-start; gap:8px 18px; font-size:10px; padding:17px 0; }
+  .welcome-page .welcome-section { padding-block:40px; }
+  .welcome-section-head { align-items:start; gap:12px; flex-direction:column; margin-bottom:20px; }
+  .welcome-section-head a { padding:0; font-size:12px; }
+  .welcome-service-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:22px 14px; }
+  .welcome-service img { height:140px; }
+  .welcome-service h3 { font-size:14px; }
+  .welcome-service p { font-size:12px; }
+  .welcome-map-link { align-items:start; flex-direction:column; padding:18px; gap:12px; }
+  .welcome-page .welcome-how { padding:38px 0; }
+  .welcome-steps { grid-template-columns:1fr; gap:25px; margin-top:25px; }
+  .welcome-steps article { padding-left:44px; position:relative; }
+  .welcome-steps article > span { position:absolute; left:0; top:-5px; font-size:24px; }
+  .welcome-steps p { font-size:13px; }
+  .welcome-story { grid-template-columns:1fr; gap:25px; }
+  .welcome-page .welcome-choice { grid-template-columns:1fr; gap:20px; padding-block:0 35px; }
+  .welcome-page .welcome-final { flex-direction:column; align-items:start; padding:26px; }
+  .public-site .footer-grid { grid-template-columns:1fr 1fr; gap:24px; }
+  .public-site .footer-intro { grid-column:1 / -1; }
+  .public-site .footer-bottom { flex-direction:column; gap:10px; }
+}
+@media(prefers-reduced-motion:reduce) { .public-site * { transition:none !important; scroll-behavior:auto !important; } }
+/* Carry the same scale and actions through supporting information pages. */
+.public-site :is(.info-hero,.provider-hero) { background:#f0f4e8; padding:54px 0; }
+.public-site :is(.info-hero,.provider-hero) h1 { font-size:clamp(34px,4vw,52px); line-height:1.12; letter-spacing:-1.8px; }
+.public-site :is(.info-hero,.provider-hero) p { font-size:15px; line-height:1.75; }
+.public-site .section-title { font-size:clamp(28px,3vw,38px); line-height:1.2; letter-spacing:-1px; }
+.public-site .section-kicker { color:#58765b; }
+.public-site .btn { border-radius:24px; padding:12px 21px; min-height:44px; font-size:13px; box-shadow:none; }
+.public-site .btn-primary { background:#235b46; border-color:#235b46; color:white; }
+.public-site .btn-dark-outline { border-color:#b9cab3; color:#315c40; }
