@@ -29,7 +29,8 @@ export default function AdminMembersPage() {
     const loaded = getMembers();
     setMembers(loaded);
     setReferrals(getIraacReferrals());
-    setSelectedId(loaded[0]?.id || "");
+    const requestedMember = new URLSearchParams(window.location.search).get("member");
+    setSelectedId(loaded.find(member => member.id === requestedMember)?.id || loaded[0]?.id || "");
   }, []);
 
   const filtered = useMemo(() => {
@@ -88,7 +89,7 @@ export default function AdminMembersPage() {
 
   return <div className="admin-page-content crm-page crm-inbox-page">
     <header className="crm-inbox-header">
-      <div><p className="admin-kicker">IRAAC community support</p><h1>Chat</h1><p>One inbox for Moblink app messages, Messenger AI chats, AI-call transcripts and direct staff replies.</p></div>
+      <div><p className="admin-kicker">IRAAC community support</p><h1>People &amp; conversations</h1><p>Review the story so far and plan the next step. All conversations here are demonstrations.</p></div>
       <div className="crm-inbox-summary"><span><b>{members.length}</b> people</span><span><b>{dueCount}</b> due</span><span><b>{members.filter((member) => member.supportLevel === "urgent" || member.supportLevel === "high").length}</b> priority</span></div>
     </header>
 
@@ -137,7 +138,7 @@ export default function AdminMembersPage() {
 
           <div className="crm-composer">
             <div className="crm-channel-row"><select aria-label="Reply channel" value={channel} onChange={(event) => setChannel(event.target.value as MemberContactMethod)}><option value="in_app">Moblink app</option><option value="sms">SMS</option><option value="email">Email</option></select><span>{selected.consentToContact ? "Contact permission recorded" : "No contact permission"}</span></div>
-            <div className="crm-reply-row"><textarea rows={2} value={outboundMessage} onChange={(event) => setOutboundMessage(event.target.value)} placeholder={`Reply to ${selected.name.replace(" (demo)", "")}…`} /><button type="button" disabled={!selected.consentToContact || !outboundMessage.trim()} onClick={handleMessage}>Send demo reply</button></div>
+            <div className="crm-reply-row"><textarea rows={2} value={outboundMessage} onChange={(event) => setOutboundMessage(event.target.value)} aria-label={`Demo reply to ${selected.name.replace(" (demo)", "")}`} placeholder={`Reply to ${selected.name.replace(" (demo)", "")}…`} /><button type="button" disabled={!selected.consentToContact || !outboundMessage.trim()} onClick={handleMessage}>Send demo reply</button></div>
           </div>
         </> : <div className="admin-empty"><p>No people match these filters.</p></div>}
       </section>
