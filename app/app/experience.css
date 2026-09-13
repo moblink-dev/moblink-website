@@ -233,3 +233,64 @@
 .map-search-shell .map-mobile-sheet-item:focus-visible { outline:2px solid #21644d; outline-offset:-2px; border-radius:8px; }
 
 .map-search-shell .map-mobile-page { background:#f4f7f1; }
+
+/* One viewport frame and navigation geometry across the community app. */
+.experience-preferences { display:contents; }
+.app-page { height:100dvh; overflow:hidden; padding:0; }
+.app-page .phone-shell { height:100dvh; min-height:0; overflow-y:auto; overscroll-behavior-y:contain; }
+.app-page .phone-shell .bottom-nav { position:fixed; left:50%; right:auto; bottom:0; transform:translateX(-50%); width:min(440px,100%); height:calc(72px + env(safe-area-inset-bottom)); margin:0; padding:7px 12px calc(8px + env(safe-area-inset-bottom)); z-index:50; border-radius:0; }
+.app-page .phone-shell .bottom-nav-icon { width:48px; display:grid; place-items:center; }
+.app-page .phone-shell .bottom-nav-item { transition:color .15s, background-color .15s; }
+.app-page .phone-shell.mobile-chat-shell { overflow:hidden; padding-bottom:calc(72px + env(safe-area-inset-bottom)); }
+.app-page .phone-shell.map-search-shell { overflow:hidden; padding:0 0 calc(72px + env(safe-area-inset-bottom)); }
+@media(min-width:560px) {
+  .app-page { padding:24px 0; }
+  .app-page .phone-shell { height:calc(100dvh - 48px); min-height:0; }
+  .app-page .phone-shell .bottom-nav { bottom:24px; border-radius:0 0 28px 28px; }
+}
+.account-heading { margin:4px 0 24px; }
+.account-heading > p { margin:0 0 8px; font-size:11px; text-transform:uppercase; letter-spacing:1.2px; color:#667d6e; font-weight:700; }
+.account-heading h1 { margin:0 0 7px; font-size:30px; letter-spacing:-1px; line-height:1.2; }
+.account-heading > span { font-size:13px; color:#6d7c73; }
+.account-identity { display:flex; align-items:center; gap:16px; padding:19px; background:#edf4ed; border:1px solid #dde9dc; border-radius:18px; }
+.account-avatar { display:grid; place-items:center; width:62px; height:62px; border-radius:50%; flex-shrink:0; background:#245a46; color:white; font-size:25px; font-weight:700; }
+.account-identity h2 { margin:0 0 4px; font-size:22px; letter-spacing:-.5px; }
+.account-identity p { font-size:12px; margin:0 0 8px; color:#597061; }
+.account-demo-badge { display:inline-block; padding:3px 8px; font-size:10px; color:#336047; background:#dfeadd; border-radius:20px; font-weight:650; }
+.app-page .account-section { padding:0; margin:26px 0; scroll-margin-top:20px; }
+.account-section h2 { font-size:12px; text-transform:uppercase; letter-spacing:.7px; color:#607367; margin:0 0 10px 3px; }
+.account-group { border:1px solid #e0e7df; border-radius:16px; background:#fff; overflow:hidden; }
+.account-row, .account-disclosure summary, .account-toggle { display:flex; align-items:center; gap:12px; min-height:70px; padding:15px; color:#253b2e; text-decoration:none; border-bottom:1px solid #edf0e9; }
+.account-group > :last-child { border-bottom:0; }
+.account-row > span:first-child:not(.account-row-icon), .account-row > span:nth-last-child(2), .account-disclosure summary > span:first-child, .account-toggle > span { flex:1; min-width:0; }
+.account-row strong, .account-disclosure strong, .account-toggle strong { display:block; font-size:14px; font-weight:650; }
+.account-row small, .account-disclosure small, .account-toggle small { display:block; font-size:12px; color:#708075; line-height:1.5; margin-top:3px; }
+.account-row > span:last-child { color:#75927e; }
+.account-row-icon { width:34px; height:34px; flex-shrink:0; display:grid; place-items:center; background:#f0f5ee; border-radius:10px; color:#38644a; font-size:17px; }
+.account-row:hover, .account-disclosure summary:hover { background:#f6f9f4; }
+.account-disclosure summary { cursor:pointer; list-style:none; }
+.account-disclosure summary::-webkit-details-marker { display:none; }
+.account-disclosure[open] summary { background:#f6f9f4; }
+.account-disclosure p { margin:0; padding:14px 16px; font-size:13px; line-height:1.6; color:#5e7264; }
+.account-disclosure dl { display:grid; grid-template-columns:85px 1fr; gap:10px; padding:14px 16px 0; margin:0; font-size:13px; }
+.account-disclosure dt { color:#6c7e71; }
+.account-disclosure dd { margin:0; }
+.account-help { padding:18px; border-radius:15px; background:#f4f6ef; }
+.account-help strong { font-size:14px; }
+.account-help p { font-size:12px; line-height:1.55; color:#6a7d6e; margin:6px 0; }
+.account-help a { display:inline-flex; align-items:center; gap:16px; min-height:40px; color:#256047; font-size:13px; font-weight:700; text-decoration:none; }
+.account-footnote { font-size:11px; line-height:1.65; color:#7b887f; margin:20px 8px 0; }
+.account-back { display:inline-flex; align-items:center; min-height:44px; color:#256047; font-size:14px; text-decoration:none; margin-bottom:12px; }
+.account-toggle { cursor:pointer; }
+.account-toggle input { appearance:none; flex-shrink:0; width:42px; height:26px; background:#cbd5cb; border:2px solid transparent; border-radius:20px; position:relative; cursor:pointer; }
+.account-toggle input::after { content:""; position:absolute; top:2px; left:2px; width:18px; height:18px; background:white; border-radius:50%; box-shadow:0 1px 3px #0002; }
+.account-toggle input:checked { background:#256047; }
+.account-toggle input:checked::after { left:18px; }
+.account-save-status { margin:0; padding:12px 15px; font-size:11px; line-height:1.5; color:#637b69; background:#f6f9f4; }
+.experience-preferences[data-larger-text=true] .app-page :is(.account-row strong,.account-toggle strong,.account-disclosure strong) { font-size:16px; }
+.experience-preferences[data-larger-text=true] .app-page :is(.account-row small,.account-toggle small,.account-disclosure small,.account-disclosure p,.account-help p,.map-result-summary,.service-card-summary,.service-card-description) { font-size:15px; }
+.experience-preferences[data-larger-text=true] .app-page :is(.mobile-message p,.help-bot-msg-text p,.map-mobile-sheet-desc) { font-size:17px; }
+.experience-preferences[data-reduce-motion=true] .app-page *, .experience-preferences[data-reduce-motion=true] .app-page *::before, .experience-preferences[data-reduce-motion=true] .app-page *::after { animation:none !important; transition:none !important; scroll-behavior:auto !important; }
+.app-page .account-toggle input { min-height:26px; max-height:26px; padding:0; margin:0; }
+.account-toggle small { font-weight:400; }
+.app-page .phone-shell { scrollbar-width:thin; scrollbar-color:#c7d2c6 transparent; }
