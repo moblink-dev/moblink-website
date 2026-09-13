@@ -24,9 +24,15 @@ export default function ServiceList({ services, title, initialSearch = "" }: Ser
     }
 
     if (search.trim()) {
-      const q = search.toLowerCase();
+      const q = search.trim().toLowerCase();
+      if (q === "local") return result.filter(s => !s.isNational);
+      if (q === "national") return result.filter(s => s.isNational);
+      if (q === "free") return result.filter(s => s.isFree);
+      if (q === "aboriginal") return result.filter(s => s.isAboriginalLed);
       result = result.filter(
         (s) =>
+          s.postcode.includes(q) ||
+          s.category.toLowerCase().includes(q) ||
           s.name.toLowerCase().includes(q) ||
           s.description.toLowerCase().includes(q) ||
           s.subcategory.toLowerCase().includes(q) ||
@@ -43,7 +49,7 @@ export default function ServiceList({ services, title, initialSearch = "" }: Ser
       <div className="service-list-search">
         <input
           type="search"
-          placeholder="Search services by name, keyword, or suburb..."
+          placeholder="Try housing, Nowra or a postcode"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           className="service-list-input"
@@ -51,11 +57,10 @@ export default function ServiceList({ services, title, initialSearch = "" }: Ser
         />
       </div>
 
-      <div className="service-list-categories" role="tablist" aria-label="Filter by category">
+      <div className="service-list-categories" role="group" aria-label="Filter by category">
         <button
           type="button"
-          role="tab"
-          aria-selected={activeCategory === "all"}
+          aria-pressed={activeCategory === "all"}
           className={`service-list-cat-btn ${activeCategory === "all" ? "active" : ""}`}
           onClick={() => setActiveCategory("all")}
         >
@@ -64,8 +69,7 @@ export default function ServiceList({ services, title, initialSearch = "" }: Ser
         {serviceCategories.map((cat) => (
           <button
             type="button"
-            role="tab"
-            aria-selected={activeCategory === cat}
+              aria-pressed={activeCategory === cat}
             className={`service-list-cat-btn ${activeCategory === cat ? "active" : ""}`}
             onClick={() => setActiveCategory(cat)}
             key={cat}
@@ -81,13 +85,8 @@ export default function ServiceList({ services, title, initialSearch = "" }: Ser
         {filtered.length === 0 ? (
           <div className="service-list-empty">
             <p>No services found matching your search.</p>
-            <p className="service-list-empty-hint">
-              Try a different category or search term, or check the{" "}
-              <a href="tel:139276" className="crisis-link-text">
-                13YARN
-              </a>{" "}
-              crisis line for immediate support.
-            </p>
+            <p className="service-list-empty-hint">Try another word or a nearby suburb.</p>
+            <button type="button" className="service-card-button" onClick={() => { setSearch(""); setActiveCategory("all"); }}>Clear filters</button>
           </div>
         ) : (
           <>

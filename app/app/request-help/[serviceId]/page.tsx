@@ -5,6 +5,7 @@ import { useRouter, useParams } from "next/navigation";
 import { services } from "../../../data";
 import { createReferral, saveReferral, needCategories, type PreferredContact } from "../../../../lib/referrals";
 import BottomNav from "../../../../components/app/BottomNav";
+import { useProviderServices } from "../../../../lib/provider-services";
 
 export default function RequestHelpPage() {
   const router = useRouter();
@@ -12,6 +13,8 @@ export default function RequestHelpPage() {
   const serviceId = params?.serviceId as string;
   const [submitted, setSubmitted] = useState(false);
   const [createdReferralId, setCreatedReferralId] = useState("");
+  const [error, setError] = useState("");
+  const catalogue = useProviderServices(services);
   const [form, setForm] = useState({
     requesterName: "",
     requesterPhone: "",
@@ -29,7 +32,8 @@ export default function RequestHelpPage() {
 
   useEffect(() => {
     if (serviceId) {
-      const found = services.find((s) => s.id === serviceId);
+      const found = catalogue.find((s) => s.id === serviceId);
+      setService(found ?? null);
       if (found) {
         setService(found);
         setForm((f) => ({
@@ -39,11 +43,11 @@ export default function RequestHelpPage() {
         }));
       }
     }
-  }, [serviceId]);
+  }, [serviceId, catalogue]);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    if (!form.consentToFollowUp) return;
+    if (!form.consentToFollowUp || !service) return;
     const referral = createReferral({
       serviceId: form.serviceId,
       serviceName: form.serviceName,
@@ -58,9 +62,13 @@ export default function RequestHelpPage() {
       source: "app",
       preferredContact: form.preferredContact,
     });
-    saveReferral(referral);
-    setCreatedReferralId(referral.id);
-    setSubmitted(true);
+    try {
+      saveReferral(referral);
+      setCreatedReferralId(referral.id);
+      setSubmitted(true);
+    } catch {
+      setError("Your browser couldn’t save this request. Please try again; nothing has been sent to the provider.");
+    }
   };
 
   if (submitted) {
@@ -69,14 +77,14 @@ export default function RequestHelpPage() {
         <div className="phone-shell">
           <div className="request-confirmed">
             <div className="request-confirmed-icon">✓</div>
-            <h1>Request submitted</h1>
-            <p>Your request has been shared with {service?.name || "the selected service"}. You can track it and keep the conversation going in Moblink.</p>
+            <h1>Demo request saved</h1>
+            <p>Your request for {service?.name || "the selected service"} is saved in this browser. Open the conversation to review your next step. The provider has not been contacted.</p>
             <p className="request-confirmed-detail">
               Reference: <strong>{createdReferralId.slice(0, 12)}</strong>
             </p>
             <div className="request-confirmed-actions">
-              <button type="button" className="service-card-button" onClick={() => router.push("/app/")}>
-                Back to home
+              <button type="button" className="service-card-button" onClick={() => router.push(`/app/connected/${createdReferralId}`)}>
+                Open conversation
               </button>
               <button
                 type="button"
@@ -117,7 +125,8 @@ export default function RequestHelpPage() {
         )}
 
 
-        <form onSubmit={handleSubmit} className="request-form">
+        {!service ? <p role="status">This service is not available. <a href="/app/search">Explore other support</a>.</p> : <form onSubmit={handleSubmit} className="request-form">
+          {error && <p role="alert">{error}</p>}
           <div className="admin-banner admin-banner-soft">
             <div>
               <strong>Prototype: use fictional details only.</strong>
@@ -227,7 +236,7 @@ export default function RequestHelpPage() {
           <button type="submit" className="service-card-button request-form-submit" disabled={!form.consentToFollowUp}>
             Submit request
           </button>
-        </form>
+        </form>}
 
         <BottomNav current="/app/search" />
       </div>

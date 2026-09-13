@@ -1,0 +1,522 @@
+[
+  {
+    "id": "iraac-youthscape",
+    "src": "/images/services/iraac-youthscape.webp",
+    "sceneBrief": "A young Aboriginal adult and a supportive adviser talking at a timber table in a bright community office, natural light and a calm contemporary setting."
+  },
+  {
+    "id": "nsw-housing-nowra",
+    "src": "/images/services/nsw-housing-nowra.webp",
+    "sceneBrief": "a housing adviser and an adult reviewing a rental application at a sunny desk, keys in foreground"
+  },
+  {
+    "id": "shoalhaven-aboriginal-housing",
+    "src": "/images/services/shoalhaven-aboriginal-housing.webp",
+    "sceneBrief": "an Aboriginal Australian housing support worker and an Aboriginal couple talking on a sunny modest home veranda"
+  },
+  {
+    "id": "south-coast-medical",
+    "src": "/images/services/south-coast-medical.webp",
+    "sceneBrief": "an Aboriginal Australian GP having a friendly consultation with an adult patient in a bright modern clinic"
+  },
+  {
+    "id": "nowra-baby-kids",
+    "src": "/images/services/nowra-baby-kids.webp",
+    "sceneBrief": "an Aboriginal mother and toddler meeting a friendly child health nurse in a welcoming family room"
+  },
+  {
+    "id": "shoalhaven-aboriginal-pension",
+    "src": "/images/services/shoalhaven-aboriginal-pension.webp",
+    "sceneBrief": "an Aboriginal Australian elder and a patient benefits adviser working through a blank paper form in a light office"
+  },
+  {
+    "id": "nowra-aboriginal-art",
+    "src": "/images/services/nowra-aboriginal-art.webp",
+    "sceneBrief": "Aboriginal Australian adult artists at a sunlit studio table working with clay and plain natural fibres, no cultural motifs or sacred artwork"
+  },
+  {
+    "id": "waminda",
+    "src": "/images/services/waminda.webp",
+    "sceneBrief": "an Aboriginal Australian woman chatting with a female health worker in a garden courtyard"
+  },
+  {
+    "id": "nowra-women-group",
+    "src": "/images/services/nowra-women-group.webp",
+    "sceneBrief": "four Aboriginal Australian women of different adult ages yarning over tea on a light filled community veranda"
+  },
+  {
+    "id": "iraac-mcc",
+    "src": "/images/services/iraac-mcc.webp",
+    "sceneBrief": "three Aboriginal Australian community organisation colleagues collaboratively planning at a timber office table with plain notebooks"
+  },
+  {
+    "id": "iraac-the-crew",
+    "src": "/images/services/iraac-the-crew.webp",
+    "sceneBrief": "an Aboriginal Australian young adult learning carpentry with an older mentor in an airy workshop wearing appropriate safety glasses"
+  },
+  {
+    "id": "iraac-darc",
+    "src": "/images/services/iraac-darc.webp",
+    "sceneBrief": "an Aboriginal Australian family and community worker sharing a practical planning conversation in a community centre lounge"
+  },
+  {
+    "id": "baiame-aboriginal-cultural-tours",
+    "src": "/images/services/baiame-aboriginal-cultural-tours.webp",
+    "sceneBrief": "a small adult walking group with an Aboriginal Australian guide on a Blue Mountains bush trail, no sacred sites or symbols"
+  },
+  {
+    "id": "ngarigo-cultural-connection",
+    "src": "/images/services/ngarigo-cultural-connection.webp",
+    "sceneBrief": "an Aboriginal Australian elder and two young adults sharing conversation on a eucalyptus shaded coastal bush walk"
+  },
+  {
+    "id": "shoalhaven-aboriginal-employment",
+    "src": "/images/services/shoalhaven-aboriginal-employment.webp",
+    "sceneBrief": "an Aboriginal Australian career adviser reviewing a resume on a laptop with a young adult in a welcoming office"
+  },
+  {
+    "id": "mission-australia-nowra",
+    "src": "/images/services/mission-australia-nowra.webp",
+    "sceneBrief": "a friendly housing support worker welcoming an adult at a light community reception desk"
+  },
+  {
+    "id": "headspace-nowra",
+    "src": "/images/services/headspace-nowra.webp",
+    "sceneBrief": "a young adult and counsellor in a calming sunlit room with a sage sofa and plants, equal relaxed conversation"
+  },
+  {
+    "id": "centrelink-nowra",
+    "src": "/images/services/centrelink-nowra.webp",
+    "sceneBrief": "a friendly adviser helping an adult understand a government form at a clean bright service centre desk"
+  },
+  {
+    "id": "nurse-on-call",
+    "src": "/images/services/nurse-on-call.webp",
+    "sceneBrief": "a registered nurse wearing a headset in a quiet bright Australian telehealth office"
+  },
+  {
+    "id": "salvation-army-nowra",
+    "src": "/images/services/salvation-army-nowra.webp",
+    "sceneBrief": "a community volunteer offering a grocery box of fresh produce to a smiling adult at a neighbourhood pantry"
+  },
+  {
+    "id": "uniting-nowra",
+    "src": "/images/services/uniting-nowra.webp",
+    "sceneBrief": "a parent and family counsellor having a relaxed conversation with a child playing nearby in a welcoming room"
+  },
+  {
+    "id": "als-nowra",
+    "src": "/images/services/als-nowra.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Aboriginal Legal Service Nowra. Category: Legal. Support offered: Criminal law, care and protection, family law, and referral pathways for Aboriginal and Torres Strait Islander people across NSW and the ACT.. Show a specific everyday moment illustrating this support. Include Aboriginal Australian adults in contemporary everyday clothing, portrayed with agency and dignity. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "wollongong-als",
+    "src": "/images/services/wollongong-als.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Aboriginal Legal Service Wollongong. Category: Legal. Support offered: Criminal law, care and protection, family law, and youth justice for Aboriginal and Torres Strait Islander people in the Illawarra region.. Show a specific everyday moment illustrating this support. Include Aboriginal Australian adults in contemporary everyday clothing, portrayed with agency and dignity. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "illawarra-youth-hub",
+    "src": "/images/services/illawarra-youth-hub.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Illawarra Aboriginal Youth Hub. Category: Youth. Support offered: Cultural connection, mentoring, education support, and recreational programs for Aboriginal and Torres Strait Islander young people.. Show a specific everyday moment illustrating this support. Include Aboriginal Australian adults in contemporary everyday clothing, portrayed with agency and dignity. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "13yarn",
+    "src": "/images/services/13yarn.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: 13YARN. Category: Crisis. Support offered: Aboriginal and Torres Strait Islander crisis support line. Talk with a trained Aboriginal or Torres Strait Islander crisis supporter. Use 000 if in immediate danger.. Show a specific everyday moment illustrating this support. Include Aboriginal Australian adults in contemporary everyday clothing, portrayed with agency and dignity. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "south-coast-outreach",
+    "src": "/images/services/south-coast-outreach.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: South Coast Outreach Service. Category: Addiction. Support offered: Free and confidential alcohol and drug counselling, withdrawal support, and referral pathways for the Shoalhaven region.. Show a specific everyday moment illustrating this support. Use a diverse Australian community. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "nowra-community-centre",
+    "src": "/images/services/nowra-community-centre.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Nowra Community Centre. Category: Family. Support offered: Community hub offering activities, support groups, information, and referral pathways for local families and individuals.. Show a specific everyday moment illustrating this support. Use a diverse Australian community. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "tafe-nowra",
+    "src": "/images/services/tafe-nowra.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: TAFE NSW Nowra. Category: Education. Support offered: Vocational training, certificate courses, and pathway programs. Aboriginal student support and cultural safety programs available.. Show a specific everyday moment illustrating this support. Use a diverse Australian community. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "lifeline",
+    "src": "/images/services/lifeline.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Lifeline. Category: Crisis. Support offered: Crisis support and suicide prevention services. Phone, text and online chat available. Aboriginal and Torres Strait Islander crisis supporters available.. Show a specific everyday moment illustrating this support. Use a diverse Australian community. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "gudjagang",
+    "src": "/images/services/gudjagang.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Gudjagang Ngara Li-Dhi Aboriginal Corporation. Category: Culture. Support offered: Aboriginal community organisation providing cultural programs, aged care, youth services, and community development in the Shoalhaven.. Show a specific everyday moment illustrating this support. Include Aboriginal Australian adults in contemporary everyday clothing, portrayed with agency and dignity. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "1800respect",
+    "src": "/images/services/1800respect.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: 1800RESPECT. Category: Crisis. Support offered: National sexual assault, domestic and family violence counselling service. Phone and online chat available. Aboriginal and Torres Strait Islander counsellors available.. Show a specific everyday moment illustrating this support. Use a diverse Australian community. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "ndis-nowra",
+    "src": "/images/services/ndis-nowra.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: NDIS Nowra. Category: Disability. Support offered: NDIS access, planning, and support coordination. Aboriginal and Torres Strait Islander community engagement officers available.. Show a specific everyday moment illustrating this support. Use a diverse Australian community. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "ulladulla-aboriginal-medical",
+    "src": "/images/services/ulladulla-aboriginal-medical.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Ulladulla Aboriginal Medical Service. Category: Health. Support offered: Aboriginal community-controlled health services including GP, chronic care, and health checks for Aboriginal and Torres Strait Islander people.. Show a specific everyday moment illustrating this support. Include Aboriginal Australian adults in contemporary everyday clothing, portrayed with agency and dignity. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "ulladulla-neighbourhood-centre",
+    "src": "/images/services/ulladulla-neighbourhood-centre.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Ulladulla Neighbourhood Centre. Category: Financial. Support offered: Emergency relief, food assistance, financial counselling, and referral pathways for people in need in the Ulladulla and Milton area.. Show a specific everyday moment illustrating this support. Use a diverse Australian community. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "milton-community-centre",
+    "src": "/images/services/milton-community-centre.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Milton Community Centre. Category: Culture. Support offered: Aboriginal community programs, cultural activities, elders support, and community connection on the South Coast.. Show a specific everyday moment illustrating this support. Include Aboriginal Australian adults in contemporary everyday clothing, portrayed with agency and dignity. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "port-kembla-community-centre",
+    "src": "/images/services/port-kembla-community-centre.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Port Kembla Community Centre. Category: Family. Support offered: Community hub providing family support, activities, information services, and referral pathways for the Port Kembla and surrounding areas.. Show a specific everyday moment illustrating this support. Use a diverse Australian community. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "ulladulla-community-centre",
+    "src": "/images/services/ulladulla-community-centre.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Ulladulla Community Centre. Category: Family. Support offered: Community hub offering support groups, activities, information, and referral pathways for local families and individuals on the South Coast.. Show a specific everyday moment illustrating this support. Use a diverse Australian community. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "port-kembla-hospital",
+    "src": "/images/services/port-kembla-hospital.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Port Kembla Hospital. Category: Health. Support offered: Public hospital with emergency department, maternity, mental health, and outpatient services. Aboriginal Health Liaison Officer available.. Show a specific everyday moment illustrating this support. Use a diverse Australian community. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "port-kembla-legal",
+    "src": "/images/services/port-kembla-legal.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Port Kembla Legal Centre. Category: Legal. Support offered: Free community legal advice, tenancy assistance, and referrals for people in the Illawarra region. No appointment necessary for initial advice.. Show a specific everyday moment illustrating this support. Use a diverse Australian community. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "warrawong-aboriginal-health",
+    "src": "/images/services/warrawong-aboriginal-health.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Warrawong Aboriginal Health Service. Category: Health. Support offered: Aboriginal community-controlled health service providing GP, chronic care, mental health, and family wellbeing programs for the Illawarra.. Show a specific everyday moment illustrating this support. Include Aboriginal Australian adults in contemporary everyday clothing, portrayed with agency and dignity. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "catholiccare-illawarra",
+    "src": "/images/services/catholiccare-illawarra.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: CatholicCare Illawarra. Category: Family. Support offered: Counselling, family support, foster care, and mental health services for individuals and families across the Illawarra region.. Show a specific everyday moment illustrating this support. Use a diverse Australian community. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "kiama-community-health",
+    "src": "/images/services/kiama-community-health.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Kiama Community Health Centre. Category: Health. Support offered: Community health services including nursing, allied health, mental health, and aged care support for the Kiama and surrounding areas.. Show a specific everyday moment illustrating this support. Use a diverse Australian community. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "bomaderry-community-centre",
+    "src": "/images/services/bomaderry-community-centre.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Bomaderry Community Centre. Category: Youth. Support offered: Youth programs, community activities, and support services for the Bomaderry and Nowra area. After-school programs and community events.. Show a specific everyday moment illustrating this support. Use a diverse Australian community. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "berry-community-health",
+    "src": "/images/services/berry-community-health.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Berry Community Health Centre. Category: Health. Support offered: Community health services for the Berry and surrounding rural areas including nursing, aged care, and allied health services.. Show a specific everyday moment illustrating this support. Use a diverse Australian community. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "shelharbour-aboriginal-health",
+    "src": "/images/services/shelharbour-aboriginal-health.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Shellharbour Aboriginal Health Service. Category: Health. Support offered: Aboriginal community-controlled health service providing GP, chronic disease management, and wellbeing programs for the Shellharbour region.. Show a specific everyday moment illustrating this support. Include Aboriginal Australian adults in contemporary everyday clothing, portrayed with agency and dignity. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "sydney-aboriginal-dance",
+    "src": "/images/services/sydney-aboriginal-dance.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Sydney Aboriginal Dance Theatre. Category: Culture. Support offered: Aboriginal dance and performing arts company offering classes, performances, and cultural education programs for all ages in Sydney.. Show a specific everyday moment illustrating this support. Include Aboriginal Australian adults in contemporary everyday clothing, portrayed with agency and dignity. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "yuin-cultural-centre",
+    "src": "/images/services/yuin-cultural-centre.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Yuin Cultural Centre. Category: Culture. Support offered: Aboriginal art gallery, cultural workshops, and community gathering space celebrating Yuin Nation culture, art, and storytelling.. Show a specific everyday moment illustrating this support. Include Aboriginal Australian adults in contemporary everyday clothing, portrayed with agency and dignity. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "bush-tucker-walk",
+    "src": "/images/services/bush-tucker-walk.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Bush Tucker and Cultural Walk — Nowra. Category: Culture. Support offered: Guided bush tucker and cultural walking tour led by local Aboriginal elders. Learn about traditional food, medicine plants, and cultural stories of the Shoalhaven.. Show a specific everyday moment illustrating this support. Include Aboriginal Australian adults in contemporary everyday clothing, portrayed with agency and dignity. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "husskisson-community-centre",
+    "src": "/images/services/husskisson-community-centre.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Huskisson Community Centre. Category: Family. Support offered: Community hub providing family support, information services, and activities for the Jervis Bay and St Georges Basin community.. Show a specific everyday moment illustrating this support. Use a diverse Australian community. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "redfern-aboriginal-medical",
+    "src": "/images/services/redfern-aboriginal-medical.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Aboriginal Medical Service Redfern. Category: Health. Support offered: Australia's first Aboriginal community-controlled health service. Comprehensive medical, dental, and wellbeing services for Aboriginal and Torres Strait Islander people.. Show a specific everyday moment illustrating this support. Include Aboriginal Australian adults in contemporary everyday clothing, portrayed with agency and dignity. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "barani-barrabugu",
+    "src": "/images/services/barani-barrabugu.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Barani Barrabugu — Aboriginal Cultural Tours Sydney. Category: Culture. Support offered: Aboriginal-led walking tours of Sydney's historic sites, sharing Indigenous history, culture, and perspectives on Gadigal Country.. Show a specific everyday moment illustrating this support. Include Aboriginal Australian adults in contemporary everyday clothing, portrayed with agency and dignity. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "mount-druitt-aboriginal-health",
+    "src": "/images/services/mount-druitt-aboriginal-health.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Mount Druitt Aboriginal Health Service. Category: Health. Support offered: Aboriginal community-controlled health service serving Western Sydney. GP, chronic care, mental health, and family support programs.. Show a specific everyday moment illustrating this support. Include Aboriginal Australian adults in contemporary everyday clothing, portrayed with agency and dignity. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "koori-radio",
+    "src": "/images/services/koori-radio.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Koori Radio 93.7FM. Category: Culture. Support offered: Sydney's Aboriginal and Torres Strait Islander radio station. Music, news, talk, and cultural programming from a Indigenous perspective.. Show a specific everyday moment illustrating this support. Include Aboriginal Australian adults in contemporary everyday clothing, portrayed with agency and dignity. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "aboriginal-housing-office",
+    "src": "/images/services/aboriginal-housing-office.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Aboriginal Housing Office NSW. Category: Housing. Support offered: NSW Government agency providing housing assistance and rental properties specifically for Aboriginal and Torres Strait Islander people across NSW.. Show a specific everyday moment illustrating this support. Include Aboriginal Australian adults in contemporary everyday clothing, portrayed with agency and dignity. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "sydney-aboriginal-elders",
+    "src": "/images/services/sydney-aboriginal-elders.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Sydney Aboriginal Elders Group. Category: Elderly. Support offered: Social support, activities, and cultural connection programs for Aboriginal and Torres Strait Islander elders in the Sydney area.. Show a specific everyday moment illustrating this support. Include Aboriginal Australian adults in contemporary everyday clothing, portrayed with agency and dignity. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "gandangara-aboriginal-corp",
+    "src": "/images/services/gandangara-aboriginal-corp.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Gandangara Aboriginal Corporation. Category: Youth. Support offered: Aboriginal community organisation providing youth programs, employment services, cultural activities, and community development across South Western Sydney.. Show a specific everyday moment illustrating this support. Include Aboriginal Australian adults in contemporary everyday clothing, portrayed with agency and dignity. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "aboriginal-legal-service-sydney",
+    "src": "/images/services/aboriginal-legal-service-sydney.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Aboriginal Legal Service Sydney. Category: Legal. Support offered: Free legal advice and representation for Aboriginal and Torres Strait Islander people across NSW. Criminal, family, civil, and child protection law.. Show a specific everyday moment illustrating this support. Include Aboriginal Australian adults in contemporary everyday clothing, portrayed with agency and dignity. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "wooloowin-aboriginal-youth",
+    "src": "/images/services/wooloowin-aboriginal-youth.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Wooloowin Aboriginal Youth Program. Category: Youth. Support offered: After-school and weekend program for Aboriginal youth. Sports, art, cultural activities, mentoring, and homework help in a safe, supportive environment.. Show a specific everyday moment illustrating this support. Include Aboriginal Australian adults in contemporary everyday clothing, portrayed with agency and dignity. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "dharawal-bush-regeneration",
+    "src": "/images/services/dharawal-bush-regeneration.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Dharawal Bush Regeneration and Culture. Category: Employment. Support offered: Aboriginal-led bush regeneration and land management program. Training and employment opportunities in conservation, traditional land management, and cultural burning.. Show a specific everyday moment illustrating this support. Include Aboriginal Australian adults in contemporary everyday clothing, portrayed with agency and dignity. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "saltwater-aboriginal-tours",
+    "src": "/images/services/saltwater-aboriginal-tours.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Saltwater Aboriginal Tours — Jervis Bay. Category: Culture. Support offered: Aboriginal-guided kayak and walking tours of Jervis Bay. Learn about Yuin sea Country, traditional fishing, shell middens, and cultural stories.. Show a specific everyday moment illustrating this support. Include Aboriginal Australian adults in contemporary everyday clothing, portrayed with agency and dignity. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "centrelink-multilingual",
+    "src": "/images/services/centrelink-multilingual.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Centrelink Multilingual Service. Category: Centrelink. Support offered: Centrelink multilingual phone service. Information about payments and services in your language. Aboriginal and Torres Strait Islander staff available.. Show a specific everyday moment illustrating this support. Use a diverse Australian community. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "ndis-national",
+    "src": "/images/services/ndis-national.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: NDIS National Disability Insurance Scheme. Category: Disability. Support offered: National Disability Insurance Scheme. Support for people with permanent and significant disability. Aboriginal and Torres Strait Islander engagement officers available.. Show a specific everyday moment illustrating this support. Use a diverse Australian community. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "medicare-australia",
+    "src": "/images/services/medicare-australia.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Medicare Australia. Category: Health. Support offered: Australia's national health insurance scheme. Medicare covers GP visits, hospital care, and prescription medicines. Bulk billing available for Aboriginal health services.. Show a specific everyday moment illustrating this support. Use a diverse Australian community. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "myagedcare",
+    "src": "/images/services/myagedcare.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: My Aged Care. Category: Elderly. Support offered: National aged care information and referral service. Help finding and accessing aged care services including home care, residential care, and Aboriginal-specific aged care.. Show a specific everyday moment illustrating this support. Use a diverse Australian community. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "child-support",
+    "src": "/images/services/child-support.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Services Australia — Child Support. Category: Family. Support offered: National child support service. Help with child support assessments, payments, and family assistance. Aboriginal and Torres Strait Islander Liaison Officers available.. Show a specific everyday moment illustrating this support. Use a diverse Australian community. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "fair-work-ombudsman",
+    "src": "/images/services/fair-work-ombudsman.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Fair Work Ombudsman. Category: Employment. Support offered: National workplace rights and entitlements information. Help with wages, conditions, unfair dismissal, and workplace disputes. Free interpreter service available.. Show a specific everyday moment illustrating this support. Use a diverse Australian community. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "national-emergency-management",
+    "src": "/images/services/national-emergency-management.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: National Emergency Management Australia. Category: Crisis. Support offered: National emergency management and disaster recovery support. Help with bushfire, flood, and storm recovery. Financial assistance and community support programs available.. Show a specific everyday moment illustrating this support. Use a diverse Australian community. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "indigenous-literacy-foundation",
+    "src": "/images/services/indigenous-literacy-foundation.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Indigenous Literacy Foundation. Category: Education. Support offered: National charity improving literacy for Aboriginal and Torres Strait Islander children. Book supply, reading programs, and community literacy initiatives across Australia.. Show a specific everyday moment illustrating this support. Include Aboriginal Australian adults in contemporary everyday clothing, portrayed with agency and dignity. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "ianthorpe-youth-centre",
+    "src": "/images/services/ianthorpe-youth-centre.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Ian Thorpe Youth Centre. Category: Youth. Support offered: National youth program supporting Aboriginal and Torres Strait Islander young people through sport, education, and leadership development.. Show a specific everyday moment illustrating this support. Include Aboriginal Australian adults in contemporary everyday clothing, portrayed with agency and dignity. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "puggy-hunter-memorial",
+    "src": "/images/services/puggy-hunter-memorial.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Puggy Hunter Memorial Scholarship. Category: Education. Support offered: National scholarship program supporting Aboriginal and Torres Strait Islander students studying health-related disciplines. Financial support for study at universities across Australia.. Show a specific everyday moment illustrating this support. Include Aboriginal Australian adults in contemporary everyday clothing, portrayed with agency and dignity. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "aboriginal-tobacco-campaign",
+    "src": "/images/services/aboriginal-tobacco-campaign.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Aboriginal Tobacco Control Campaign. Category: Health. Support offered: National quit smoking program specifically designed for Aboriginal and Torres Strait Islander people. Culturally appropriate support, resources, and counselling.. Show a specific everyday moment illustrating this support. Include Aboriginal Australian adults in contemporary everyday clothing, portrayed with agency and dignity. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "sydney-childrens-hospital",
+    "src": "/images/services/sydney-childrens-hospital.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Sydney Children's Hospital. Category: Health. Support offered: Major paediatric hospital with emergency department, specialist clinics, and Aboriginal Health Liaison Officers. Comprehensive care for children and young people.. Show a specific everyday moment illustrating this support. Use a diverse Australian community. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "nsw-aboriginal-womens-health",
+    "src": "/images/services/nsw-aboriginal-womens-health.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: NSW Aboriginal Women's Health Program. Category: Health. Support offered: NSW-wide health program for Aboriginal women. Breast screening, cervical screening, maternal health, and wellbeing programs delivered through local Aboriginal health services.. Show a specific everyday moment illustrating this support. Include Aboriginal Australian adults in contemporary everyday clothing, portrayed with agency and dignity. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "royal-prince-alfred",
+    "src": "/images/services/royal-prince-alfred.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Royal Prince Alfred Hospital. Category: Health. Support offered: Major teaching hospital with emergency, maternity, mental health, and specialist services. Aboriginal Health Unit provides cultural support for patients and families.. Show a specific everyday moment illustrating this support. Use a diverse Australian community. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "sydney-legal-aid",
+    "src": "/images/services/sydney-legal-aid.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Legal Aid NSW — Sydney Office. Category: Legal. Support offered: Free legal advice and representation for criminal, family, and civil matters. Aboriginal services team provides culturally safe legal support.. Show a specific everyday moment illustrating this support. Use a diverse Australian community. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "sydney-community-centre",
+    "src": "/images/services/sydney-community-centre.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Sydney Community Centre. Category: Family. Support offered: Community hub providing family support, counselling, information services, and referral pathways for Sydney's inner-city community.. Show a specific everyday moment illustrating this support. Use a diverse Australian community. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "sydney-employment-services",
+    "src": "/images/services/sydney-employment-services.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Sydney Employment Services. Category: Employment. Support offered: Employment services, job matching, and training programs for job seekers. Aboriginal employment consultants available for culturally appropriate support.. Show a specific everyday moment illustrating this support. Use a diverse Australian community. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "sydney-mental-health",
+    "src": "/images/services/sydney-mental-health.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Sydney Mental Health Line. Category: Mental Health. Support offered: NSW Mental Health Line. Free mental health crisis support, advice, and referral. Connect with a mental health professional for immediate support.. Show a specific everyday moment illustrating this support. Use a diverse Australian community. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "st-vincents-sydney",
+    "src": "/images/services/st-vincents-sydney.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: St Vincent's Hospital Sydney. Category: Health. Support offered: Major public hospital with emergency, mental health, drug and alcohol, and community health services. Aboriginal Health Unit provides cultural support.. Show a specific everyday moment illustrating this support. Use a diverse Australian community. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "salvation-army-sydney",
+    "src": "/images/services/salvation-army-sydney.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Salvation Army Sydney — Doorways. Category: Financial. Support offered: Emergency relief, food parcels, financial counselling, and material assistance for people in need in the Sydney CBD and surrounding areas.. Show a specific everyday moment illustrating this support. Use a diverse Australian community. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "mission-australia-sydney",
+    "src": "/images/services/mission-australia-sydney.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Mission Australia Sydney. Category: Housing. Support offered: Homelessness support, housing assistance, and financial counselling for people in the Sydney area. Aboriginal specific programs available.. Show a specific everyday moment illustrating this support. Use a diverse Australian community. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "sydney-rape-crisis",
+    "src": "/images/services/sydney-rape-crisis.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Sydney Rape Crisis Centre. Category: Crisis. Support offered: 24/7 crisis counselling and support for sexual assault survivors. Aboriginal and Torres Strait Islander counsellors available. Free and confidential.. Show a specific everyday moment illustrating this support. Use a diverse Australian community. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "sydney-youth-homeless",
+    "src": "/images/services/sydney-youth-homeless.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Sydney Youth Homelessness Service. Category: Housing. Support offered: Crisis accommodation, housing support, and case management for young people experiencing homelessness in Sydney. Aboriginal youth workers available.. Show a specific everyday moment illustrating this support. Use a diverse Australian community. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "sydney-addiction-services",
+    "src": "/images/services/sydney-addiction-services.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Sydney Addiction Treatment Services. Category: Addiction. Support offered: Alcohol and drug treatment services including withdrawal management, counselling, and rehabilitation programs. Aboriginal-specific programs available.. Show a specific everyday moment illustrating this support. Use a diverse Australian community. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "sydney-homeless-health",
+    "src": "/images/services/sydney-homeless-health.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Sydney Homeless Health Service. Category: Health. Support offered: Health services specifically for people experiencing homelessness. GP, mental health, drug and alcohol support, and referral pathways.. Show a specific everyday moment illustrating this support. Use a diverse Australian community. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "sydney-family-counselling",
+    "src": "/images/services/sydney-family-counselling.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Sydney Family Counselling Service. Category: Family. Support offered: Free and low-cost family counselling, relationship support, and parenting programs for Sydney families. Aboriginal counsellors available.. Show a specific everyday moment illustrating this support. Use a diverse Australian community. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "sydney-job-finder",
+    "src": "/images/services/sydney-job-finder.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Sydney Job Finder Aboriginal Employment. Category: Employment. Support offered: Aboriginal-specific employment service connecting job seekers with employers committed to Indigenous employment. Training, mentoring, and career support.. Show a specific everyday moment illustrating this support. Include Aboriginal Australian adults in contemporary everyday clothing, portrayed with agency and dignity. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "western-sydney-community-health",
+    "src": "/images/services/western-sydney-community-health.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Western Sydney Community Health Centre. Category: Health. Support offered: Community health services for Western Sydney including nursing, allied health, aged care, and Aboriginal health programs.. Show a specific everyday moment illustrating this support. Use a diverse Australian community. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "parramatta-legal-centre",
+    "src": "/images/services/parramatta-legal-centre.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Parramatta Community Legal Centre. Category: Legal. Support offered: Free community legal advice, tenancy assistance, and referrals for people in Western Sydney. Aboriginal advice sessions available weekly.. Show a specific everyday moment illustrating this support. Use a diverse Australian community. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "goulburn-community-health",
+    "src": "/images/services/goulburn-community-health.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Goulburn Community Health Centre. Category: Health. Support offered: Community health services for the Goulburn and Southern Tablelands region. Nursing, allied health, and Aboriginal health programs.. Show a specific everyday moment illustrating this support. Use a diverse Australian community. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "bondi-community-centre",
+    "src": "/images/services/bondi-community-centre.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Bondi Community Centre. Category: Family. Support offered: Community hub for the Eastern Suburbs offering family support, activities, seniors programs, and community information services.. Show a specific everyday moment illustrating this support. Use a diverse Australian community. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "campbelltown-aboriginal-health",
+    "src": "/images/services/campbelltown-aboriginal-health.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Campbelltown Aboriginal Health Service. Category: Health. Support offered: Aboriginal community-controlled health service serving the Macarthur region. GP, chronic care, and family wellbeing programs.. Show a specific everyday moment illustrating this support. Include Aboriginal Australian adults in contemporary everyday clothing, portrayed with agency and dignity. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "cronulla-community-health",
+    "src": "/images/services/cronulla-community-health.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Cronulla Community Health Centre. Category: Health. Support offered: Community health services for the Sutherland Shire including nursing, mental health, and Aboriginal health programs.. Show a specific everyday moment illustrating this support. Use a diverse Australian community. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "batemans-bay-community-health",
+    "src": "/images/services/batemans-bay-community-health.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Batemans Bay Community Health. Category: Health. Support offered: Community health services for the Batemans Bay and Eurobodalla region. Aboriginal health workers available for culturally appropriate care.. Show a specific everyday moment illustrating this support. Use a diverse Australian community. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "moruya-aboriginal-community",
+    "src": "/images/services/moruya-aboriginal-community.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Moruya Aboriginal Community Centre. Category: Culture. Support offered: Aboriginal community centre on the Far South Coast. Cultural activities, elders programs, youth support, and community events.. Show a specific everyday moment illustrating this support. Include Aboriginal Australian adults in contemporary everyday clothing, portrayed with agency and dignity. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "cooma-community-health",
+    "src": "/images/services/cooma-community-health.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Cooma Community Health Centre. Category: Health. Support offered: Community health services for the Snowy Mountains region. Aboriginal health programs, nursing, and allied health services.. Show a specific everyday moment illustrating this support. Use a diverse Australian community. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "kiama-aboriginal-elders",
+    "src": "/images/services/kiama-aboriginal-elders.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Kiama Aboriginal Elders Group. Category: Elderly. Support offered: Social group and support network for Aboriginal elders in the Kiama area. Cultural activities, outings, and community connection.. Show a specific everyday moment illustrating this support. Include Aboriginal Australian adults in contemporary everyday clothing, portrayed with agency and dignity. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "nowra-men-group",
+    "src": "/images/services/nowra-men-group.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Nowra Aboriginal Men's Group. Category: Health. Support offered: Aboriginal men's health and wellbeing group. Health checks, yarning circle, cultural activities, and social support for Aboriginal men in the Shoalhaven.. Show a specific everyday moment illustrating this support. Include Aboriginal Australian adults in contemporary everyday clothing, portrayed with agency and dignity. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "south-coast-aboriginal-youth",
+    "src": "/images/services/south-coast-aboriginal-youth.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: South Coast Aboriginal Youth Leadership. Category: Youth. Support offered: Aboriginal youth leadership program for the South Coast. Mentoring, cultural connection, public speaking, and community project development.. Show a specific everyday moment illustrating this support. Include Aboriginal Australian adults in contemporary everyday clothing, portrayed with agency and dignity. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "south-coast-aboriginal-legal",
+    "src": "/images/services/south-coast-aboriginal-legal.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: South Coast Aboriginal Legal Support. Category: Legal. Support offered: Free legal advice walk-in clinic for Aboriginal and Torres Strait Islander people. Wednesday sessions at the ALS Nowra office — no appointment needed.. Show a specific everyday moment illustrating this support. Include Aboriginal Australian adults in contemporary everyday clothing, portrayed with agency and dignity. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "shoalhaven-aboriginal-youth-hub",
+    "src": "/images/services/shoalhaven-aboriginal-youth-hub.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Shoalhaven Aboriginal Youth Drop-in. Category: Youth. Support offered: Safe after-school drop-in space for Aboriginal young people. Gaming, art, music, homework help, and cultural activities in a friendly environment.. Show a specific everyday moment illustrating this support. Include Aboriginal Australian adults in contemporary everyday clothing, portrayed with agency and dignity. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "south-coast-aboriginal-fam",
+    "src": "/images/services/south-coast-aboriginal-fam.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: South Coast Aboriginal Family Support. Category: Family. Support offered: Aboriginal family support service for the South Coast. Parenting programs, family counselling, and practical support for Aboriginal families.. Show a specific everyday moment illustrating this support. Include Aboriginal Australian adults in contemporary everyday clothing, portrayed with agency and dignity. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "jervis-bay-aboriginal-health",
+    "src": "/images/services/jervis-bay-aboriginal-health.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Jervis Bay Aboriginal Health Program. Category: Health. Support offered: Mobile Aboriginal health outreach service for the Jervis Bay region. Health checks, chronic care, and wellbeing support for Aboriginal community members.. Show a specific everyday moment illustrating this support. Include Aboriginal Australian adults in contemporary everyday clothing, portrayed with agency and dignity. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  },
+  {
+    "id": "culburra-aboriginal-health",
+    "src": "/images/services/culburra-aboriginal-health.webp",
+    "prompt": "Use case: photorealistic-natural. Generate ONE distinct landscape 4:3 editorial photograph for MobLink's Australian service directory. Service to illustrate: Culburra Aboriginal Health Outreach. Category: Health. Support offered: Mobile Aboriginal health outreach for the Culburra Beach area. Health checks, chronic disease management, and connection to local services.. Show a specific everyday moment illustrating this support. Include Aboriginal Australian adults in contemporary everyday clothing, portrayed with agency and dignity. Fictional illustrative people, no actual provider premises or staff. Natural light, calm warm neutrals, eucalyptus green accents, relaxed human connection, inviting contemporary community setting, high-end editorial photography. Clearly legible subjects at small thumbnail size. No logos, lettering, watermarks, ceremonial dress, sacred sites, Indigenous patterns or identifiable cultural artworks. For crisis services show a calm supportive conversation, never distress or danger. Do not render UI or a collage."
+  }
+]

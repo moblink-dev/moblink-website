@@ -49,7 +49,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
         {nearby.length > 0 && (
           <section className="app-section">
             <div className="section-row">
-              <h2 className="app-section-title">Other services nearby</h2>
+              <h2 className="app-section-title">More support to explore</h2>
             </div>
             <div className="service-rail">
               {nearby.map((s) => (
