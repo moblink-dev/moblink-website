@@ -21,3 +21,7 @@ Reviewed sequentially in the main task, as required by the supplied AGENTS instr
 Ready for a design preview. The directory assistant is deterministic and runs locally; it is not a connected language-model service. Referrals, adviser messages and example profiles remain browser demonstrations. No live provider contact, SMS, booking, authentication or shared-account messaging was added. Existing catalogue coverage and contact information require a separate provider audit before operational use. Physical iOS/Android keyboard behaviour and real-device accessibility testing remain release checks for a live service.
 
 The hosted preview URL and its final browser verification belong in the pull request delivery record.
+
+## Groupon-style card follow-up
+
+The follow-up adds descriptions, location, approximate kilometres from Nowra, cost and an explicit unrated state to service cards. Search uses two photo columns. Reviewed the distance calculation, national-listing exclusion, long text, result-count layout and mobile widths. All 42 tests pass, including distance tests; the production build passes. Ratings are not fabricated, and distance is not presented as device location or driving distance. The user explicitly authorised publishing the complete redesign to the production website.

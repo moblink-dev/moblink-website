@@ -17,6 +17,8 @@ The image manifest records all 104 public asset paths: the first 21 entries reta
 
 ## Research references
 
+[Groupon's listings](https://www.groupon.ae/) and the supplied screenshot informed the follow-up card layout: image, service name, short description, location, approximate distance, rating availability and cost. Distances use the existing directory coordinates and Nowra centre; they are labelled estimates, not device or road distances. The directory has no verified public rating data, so cards show “Not yet rated” rather than invented scores. Search uses a compact two-column photo grid.
+
 [Airbnb's 2025 app and service presentation](https://news.airbnb.com/product-releases/airbnb-2025-summer-release) informed the photo cards and separation between discovery, details and messages. [Bark's customer journey](https://www.bark.com/en/gb/how-it-works/customers/) informed the prominent need-based search and clear route from a service to contact. [WhatsApp's chat presentation](https://faq.whatsapp.com/6298875896807790/?cms_platform=web) informed the restrained bubble palette and conversation-first screen. These are design adaptations, not claims of feature parity.
 
 The existing 13YARN crisis contact was checked against [13YARN's official site](https://www.13yarn.org.au/). General catalogue entries were not re-audited as part of this visual and interaction redesign.

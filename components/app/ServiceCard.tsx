@@ -3,6 +3,7 @@
 import { type Service } from "../../app/data";
 import Link from "next/link";
 import { serviceImage } from "../../lib/service-images";
+import { serviceDistanceLabel } from "../../lib/service-distance";
 
 export default function ServiceCard({ service, showFull = false }: { service: Service; showFull?: boolean }) {
   const callablePhone = /\d/.test(service.phone);
@@ -12,7 +13,11 @@ export default function ServiceCard({ service, showFull = false }: { service: Se
       <div className="service-result-body">
         <span className="service-result-category">{service.category}{service.isAboriginalLed ? " · Aboriginal-led" : ""}</span>
         <h3><Link href={`/app/service/${service.id}`}>{service.name}</Link></h3>
-        <p>{service.suburb}{service.isFree ? " · Free support" : ""}</p>
+        <p className="service-card-summary">{service.description}</p>
+        <p>{service.suburb}</p>
+        <p className="service-card-proximity">{serviceDistanceLabel(service)}</p>
+        <p className="service-card-rating"><span aria-hidden="true">☆</span> Not yet rated</p>
+        <span className="service-card-cost">{service.isFree ? "Free support" : "Check costs with service"}</span>
         <div className="service-result-actions"><Link href={`/app/service/${service.id}`}>Details</Link><Link href={`/app/request-help/${service.id}`}>Request help ↗</Link></div>
       </div>
     </article>;
@@ -31,12 +36,13 @@ export default function ServiceCard({ service, showFull = false }: { service: Se
       <h1 className="service-card-name">{service.name}</h1>
 
       <div className="service-card-meta">
-        <span className="service-card-distance">{service.distance}</span>
+        <span className="service-card-distance">{serviceDistanceLabel(service)}</span>
         {service.isCrisis && <span className="service-card-alert">Available 24/7</span>}
         {service.isFree && !service.isCrisis && <span className="service-card-free">Free</span>}
       </div>
 
       <p className="service-card-description">{service.description}</p>
+      <p className="service-card-rating"><span aria-hidden="true">☆</span> Not yet rated</p>
 
       <div className="service-card-tags">
         {service.tags.map((tag) => (

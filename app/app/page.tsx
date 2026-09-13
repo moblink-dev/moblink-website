@@ -3,28 +3,15 @@
 import Link from "next/link";
 import { useState } from "react";
 import { serviceImage } from "../../lib/service-images";
+import { distanceFromNowra, serviceDistanceLabel } from "../../lib/service-distance";
 import { services } from "../data";
 import BottomNav from "../../components/app/BottomNav";
 import { useProviderServices } from "../../lib/provider-services";
 
-// Nowra center point for distance calculations
-const NOWRA_LAT = -34.882;
-const NOWRA_LNG = 150.600;
-
-function haversineKm(lat1: number, lng1: number, lat2: number, lng2: number): number {
-  const R = 6371;
-  const dLat = ((lat2 - lat1) * Math.PI) / 180;
-  const dLng = ((lng2 - lng1) * Math.PI) / 180;
-  const a =
-    Math.sin(dLat / 2) ** 2 +
-    Math.cos((lat1 * Math.PI) / 180) * Math.cos((lat2 * Math.PI) / 180) * Math.sin(dLng / 2) ** 2;
-  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-}
-
 function sortByDistance(servicesList: typeof services) {
   return [...servicesList].sort((a, b) => {
-    const da = a.isNational ? 99999 : haversineKm(NOWRA_LAT, NOWRA_LNG, a.lat, a.lng);
-    const db = b.isNational ? 99999 : haversineKm(NOWRA_LAT, NOWRA_LNG, b.lat, b.lng);
+    const da = a.isNational ? Infinity : distanceFromNowra(a);
+    const db = b.isNational ? Infinity : distanceFromNowra(b);
     return da - db;
   });
 }
@@ -38,8 +25,11 @@ function ServiceRailCard({ service }: { service: typeof services[0] }) {
       </div>
       <div className="rail-card-body">
         <h3 className="rail-card-name">{service.name}</h3>
-        <div className="rail-card-meta"><span>{service.isNational ? "Phone / national listing" : service.suburb} {service.isFree ? " · Free" : ""}</span></div>
-        <span className="rail-card-cat">{service.category} support</span>
+        <p className="service-card-summary">{service.description}</p>
+        <div className="rail-card-meta"><span>{service.suburb}</span></div>
+        <p className="service-card-proximity">{serviceDistanceLabel(service)}</p>
+        <p className="service-card-rating"><span aria-hidden="true">☆</span> Not yet rated</p>
+        <span className="service-card-cost">{service.isFree ? "Free support" : "Check costs with service"}</span>
       </div>
     </Link>
   );
@@ -112,7 +102,7 @@ export default function MoblinkHome() {
           </div>
         </div>
 
-        <p className="illustration-note">Images are AI-generated illustrations of support, not actual staff or premises. Check each service for eligibility and availability.</p>
+        <p className="illustration-note">Images are AI-generated illustrations of support, not actual staff or premises. Distances are approximate straight-line estimates from Nowra using directory map locations, not travel distances. Public ratings are not available yet. Check each service for eligibility and availability.</p>
 
         <BottomNav current="/app/" />
       </div>
