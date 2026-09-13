@@ -12,7 +12,7 @@ export default function ProfilePage() {
       <div className="phone-shell phone-shell-compact">
         <header className="app-top app-top-compact">
           <div>
-            <p className="app-kicker">Your Moblink account</p>
+            <p className="app-kicker">Your demo space</p>
             <h1>Profile</h1>
           </div>
           <Link href="/app/settings" className="profile-settings-btn" aria-label="Settings">
@@ -26,11 +26,11 @@ export default function ProfilePage() {
             <div className="profile-avatar profile-avatar-jayden"><span>J</span></div>
             <h2 className="profile-name">Jayden</h2>
             <p className="profile-desc">04•• ••• 214 · Wollongong 2500</p>
-            <div className="profile-status-row"><span>Active member</span><span>SMS &amp; app</span></div>
+            <div className="profile-status-row"><span>Demo member</span><span>SMS &amp; app</span></div>
             <div className="profile-actions">
-              <Link href="/app/settings" className="service-card-button">Edit my details</Link>
+              <Link href="/app/settings" className="service-card-button">View preferences</Link>
             </div>
-            <p className="profile-note">Your contact permission is recorded. You control how organisations contact you.</p>
+            <p className="profile-note">An example profile for exploring MobLink. No live calls or messages are scheduled.</p>
           </div>
         </section>
 
@@ -43,7 +43,7 @@ export default function ProfilePage() {
               <span className="compact-card-emoji" aria-hidden="true">🤝</span>
               <div className="compact-card-body">
                 <strong className="compact-card-name">IRAAC YouthScape</strong>
-                <span className="compact-card-meta">Youth legal support · awaiting review</span>
+                <span className="compact-card-meta">Youth support · demo conversation</span>
               </div>
             </Link>
             <Link href="/app/messages" className="compact-card">
@@ -67,7 +67,7 @@ export default function ProfilePage() {
                 <span className="compact-card-meta">Tell IRAAC how support is going</span>
               </div>
             </Link>
-            <div className="compact-card profile-next-checkin"><span className="compact-card-emoji">📅</span><div className="compact-card-body"><strong className="compact-card-name">Next check-in</strong><span className="compact-card-meta">15 September · Moblink AI call</span></div></div>
+            <div className="compact-card profile-next-checkin"><span className="compact-card-emoji">📅</span><div className="compact-card-body"><strong className="compact-card-name">Example check-in</strong><span className="compact-card-meta">Have your say about local support</span></div></div>
           </div>
         </section>
 

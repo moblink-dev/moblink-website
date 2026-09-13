@@ -123,7 +123,9 @@ export function createReferral(data: ReferralInput): Referral {
         sender: "moblink",
         senderName: "Moblink",
         body: data.consentToFollowUp
-          ? `Your request has been shared with ${data.serviceName}. You can keep the conversation here.`
+          ? (data.source === "hotline"
+            ? `Your request has been shared with ${data.serviceName}. You can keep the conversation here.`
+            : `Your demo request for ${data.serviceName} is saved in this browser. The provider has not been contacted.`)
           : `This request is saved on this device and has not been shared with ${data.serviceName}.`,
         createdAt: now,
       },

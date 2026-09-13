@@ -1,6 +1,8 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
+import { serviceImage } from "../../lib/service-images";
 import { services } from "../data";
 import BottomNav from "../../components/app/BottomNav";
 import { useProviderServices } from "../../lib/provider-services";
@@ -27,45 +29,17 @@ function sortByDistance(servicesList: typeof services) {
   });
 }
 
-function distanceFromNowra(lat: number, lng: number): string {
-  if (lat === -33.868 && lng === 151.209) return "National";
-  const km = haversineKm(NOWRA_LAT, NOWRA_LNG, lat, lng);
-  if (km < 1) return `${Math.round(km * 1000)} m`;
-  return `${km.toFixed(0)} km`;
-}
-
-// Color palette for card images
-const cardColors = [
-  "from-emerald-700 to-teal-600",
-  "from-amber-700 to-orange-600",
-  "from-blue-700 to-indigo-600",
-  "from-rose-700 to-pink-600",
-  "from-violet-700 to-purple-600",
-  "from-cyan-700 to-sky-600",
-  "from-lime-700 to-green-600",
-  "from-red-700 to-rose-600",
-];
-
-function getCardColor(index: number) {
-  return cardColors[index % cardColors.length];
-}
-
-function ServiceRailCard({ service, index }: { service: typeof services[0]; index: number }) {
+function ServiceRailCard({ service }: { service: typeof services[0] }) {
   return (
     <Link href={`/app/service/${service.id}`} className="rail-card">
-      <div className={`rail-card-img service-art-${index % 4} ${getCardColor(index)}`}>
-        <span className="rail-card-emoji" aria-hidden="true">
-          {service.isAboriginalLed ? "🪶" : service.isCrisis ? "🚨" : service.isFree ? "🎯" : "📍"}
-        </span>
+      <div className="rail-card-img">
+        <img src={serviceImage(service)} alt="" width="336" height="270" loading="lazy" />
+        {service.isAboriginalLed && <span className="photo-badge">Aboriginal-led</span>}
       </div>
       <div className="rail-card-body">
         <h3 className="rail-card-name">{service.name}</h3>
-        <div className="rail-card-meta">
-          <span className="rail-card-dist">{distanceFromNowra(service.lat, service.lng)}</span>
-          {service.isFree && <span className="rail-card-free">Free</span>}
-          {service.isAboriginalLed && <span className="rail-card-ac">Aboriginal-led</span>}
-        </div>
-        <span className="rail-card-cat">{service.subcategory}</span>
+        <div className="rail-card-meta"><span>{service.isNational ? "Phone / national listing" : service.suburb} {service.isFree ? " · Free" : ""}</span></div>
+        <span className="rail-card-cat">{service.category} support</span>
       </div>
     </Link>
   );
@@ -80,8 +54,8 @@ function ServiceRail({ title, services: items, link }: { title: string; services
         {link && <Link href={link} className="section-link">See all</Link>}
       </div>
       <div className="rail-scroll">
-        {items.map((s, i) => (
-          <ServiceRailCard service={s} index={i} key={s.id} />
+        {items.map((s) => (
+          <ServiceRailCard service={s} key={s.id} />
         ))}
       </div>
     </section>
@@ -90,10 +64,13 @@ function ServiceRail({ title, services: items, link }: { title: string; services
 
 export default function MoblinkHome() {
   const effectiveServices = useProviderServices(services);
+  const [topic, setTopic] = useState("All support");
+  const filtered = topic === "All support" ? [] : effectiveServices.filter(s => s.category === topic);
   // Recommended for you — top local services, sorted by distance, non-crisis
-  const recommended = sortByDistance(
+  const nearby = sortByDistance(
     effectiveServices.filter((s) => !s.isNational && !s.isCrisis && s.suburb !== "National")
-  ).slice(0, 8);
+  );
+  const recommended = nearby.filter((service, index, items) => items.findIndex(item => item.category === service.category) === index).slice(0, 8);
 
   // Newly added — services with createdAt >= 2026-08-05
   const newlyAdded = effectiveServices
@@ -104,27 +81,25 @@ export default function MoblinkHome() {
   // National support
   const national = effectiveServices.filter((s) => s.isNational && !s.isCrisis).slice(0, 6);
 
-  // Closest to me — sorted by distance from Nowra, non-national, non-crisis
-  const closest = sortByDistance(
-    effectiveServices.filter((s) => !s.isNational && !s.isCrisis)
-  ).slice(0, 6);
-
   // Aboriginal specific — all Aboriginal-led services, sorted by distance
   const aboriginal = sortByDistance(
-    effectiveServices.filter((s) => s.isAboriginalLed && !s.isNational)
+    effectiveServices.filter((s) => s.isAboriginalLed && !s.isNational && ["Culture", "Youth"].includes(s.category))
   ).slice(0, 8);
 
   return (
     <main className="app-page">
       <div className="phone-shell phone-shell-compact">
-        <header className="app-top app-top-compact">
-          <div>
-            <p className="app-kicker">Support that fits your situation</p>
-            <h1>Help near Nowra</h1>
-          </div>
-        </header>
-
-        <Link href="/app/search" className="location-search-card"><span>📍</span><div><strong>Nowra 2541</strong><small>Using your current area · change</small></div><b>⌕</b></Link>
+        <header className="browse-head"><Link className="browse-brand" href="/app/">moblink<span aria-hidden="true">.</span></Link><span className="browse-area">Nowra &amp; South Coast</span></header>
+        <div className="browse-intro"><h1>A little help.<br />A world of possibility.</h1><p>Find support, connection and your next step.</p></div>
+        <Link href="/app/search" className="browse-search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="10" r="6"/><path d="m15 15 5 5"/></svg><span>What can we help you find?</span></Link>
+        <div className="browse-topics" aria-label="Filter services">{["All support", "Health", "Housing", "Youth", "Culture", "Family", "Legal", "Employment"].map(item => <button type="button" key={item} aria-pressed={topic === item} onClick={() => setTopic(item)}>{item}</button>)}</div>
+        {topic !== "All support" ? <ServiceRail title={`${topic} support`} services={filtered} link={`/app/search?q=${encodeURIComponent(topic)}`} /> : <>
+        <ServiceRail title="Support close to home" services={recommended} link="/app/search?q=local" />
+        <Link href="/app/messages?assistant=1" className="browse-assistant"><span className="assistant-mark" aria-hidden="true">✳</span><span><strong>Not sure where to start?</strong><small>Have a chat with MobLink. We’ll help.</small></span><b aria-hidden="true">↗</b></Link>
+        <ServiceRail title="Culture & connection" services={aboriginal} link="/app/search?q=culture" />
+        <ServiceRail title="Discover something new" services={newlyAdded} link="/app/search" />
+        <ServiceRail title="Support over the phone" services={national} link="/app/search?q=national" />
+        </>}
 
         {/* Compact crisis strip */}
         <div className="crisis-mini">
@@ -137,11 +112,7 @@ export default function MoblinkHome() {
           </div>
         </div>
 
-        <ServiceRail title="Best matches nearby" services={recommended} link="/app/search" />
-        <ServiceRail title="Newly added" services={newlyAdded} link="/app/search" />
-        <ServiceRail title="Closest to me" services={closest} link="/app/search" />
-        <ServiceRail title="Aboriginal specific" services={aboriginal} link="/app/search" />
-        <ServiceRail title="National support" services={national} link="/app/search" />
+        <p className="illustration-note">Images are AI-generated illustrations of support, not actual staff or premises. Check each service for eligibility and availability.</p>
 
         <BottomNav current="/app/" />
       </div>

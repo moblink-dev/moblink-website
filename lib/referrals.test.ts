@@ -68,6 +68,12 @@ test("does not describe a non-consented referral as shared", () => {
   assert.match(referral.conversation[0]?.body ?? "", /has not been shared/);
 });
 
+test("an app request does not claim to have contacted a provider", () => {
+  const referral = createReferral({ ...makeReferral(), conversation: undefined, source: "app" });
+  assert.match(referral.conversation[0].body, /provider has not been contacted/);
+  assert.doesNotMatch(referral.conversation[0].body, /has been shared/);
+});
+
 test("updates status, notes, and the connected conversation", () => {
   const referral = makeReferral();
   saveReferral(referral);

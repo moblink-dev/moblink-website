@@ -1,0 +1,147 @@
+/* Community app: quiet surfaces, compact browsing and a fixed-height conversation. */
+.app-page { --app-canvas: #fff; --app-ink: #20312d; --app-muted: #6d7773; --app-line: #e5eae6; --app-green: #176958; --app-green-soft: #eaf3ed; background: #edf1ed; }
+.app-page .phone-shell.phone-shell-compact { background: #fff; padding: 22px 20px 100px; }
+.app-page .phone-shell .app-top h1, .app-page .mobile-page-head h1 { font-size: 32px; line-height: 1.12; letter-spacing: -1.2px; }
+.app-page .phone-shell .app-kicker, .app-page .mobile-page-head p { color: #61756b; font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; }
+.app-page .phone-shell .bottom-nav { border-radius: 0; border: 0; border-top: 1px solid #e5eae6; bottom: 0; width: min(440px, 100%); padding: 7px 12px max(8px, env(safe-area-inset-bottom)); box-shadow: none; background: rgba(255,255,255,.97); }
+.app-page .phone-shell .bottom-nav-item { min-height: 49px; border-radius: 12px; font-size: 11px; }
+.app-page .phone-shell .bottom-nav-active { background: transparent; color: #176958; }
+.app-page .phone-shell .bottom-nav-active .bottom-nav-icon { width: 48px; border-radius: 20px; background: #eaf3ed; }
+.app-page .phone-shell a:focus-visible, .app-page .phone-shell button:focus-visible, .app-page .phone-shell input:focus-visible, .app-page .phone-shell textarea:focus-visible { outline: 3px solid #519881; outline-offset: 3px; }
+.app-page .browse-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.browse-brand { color: #176958; font-size: 20px; font-weight: 850; letter-spacing: -.8px; text-decoration: none; }
+.browse-area { color: #68786e; font-size: 12px; }
+.app-page .browse-intro { margin-bottom: 18px; }
+.app-page .browse-intro h1 { margin: 0 0 6px; font-size: 32px; line-height: 1.12; letter-spacing: -1.2px; }
+.app-page .browse-intro p { margin: 0; color: #68786e; font-size: 14px; line-height: 1.5; }
+.app-page .browse-search { display: flex; gap: 12px; align-items: center; min-height: 52px; border: 1px solid #dbe3dd; border-radius: 30px; padding: 0 18px; color: #374a40; box-shadow: 0 3px 10px #20312d08; text-decoration: none; font-size: 14px; }
+.browse-search svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; }
+.app-page .browse-topics { display: flex; overflow-x: auto; gap: 8px; padding: 16px 0; scrollbar-width: none; }
+.app-page .browse-topics button { flex-shrink: 0; border: 1px solid #e1e7e1; border-radius: 24px; background: white; color: #57635b; min-height: 40px; padding: 0 15px; font: inherit; font-size: 12px; cursor: pointer; }
+.app-page .browse-topics button[aria-pressed="true"] { background: #203e33; color: #fff; border-color: #203e33; }
+.app-page .phone-shell .app-section { margin-bottom: 22px; }
+.app-page .phone-shell .section-row { margin-bottom: 11px; }
+.app-page .phone-shell .app-section-title { font-size: 18px; letter-spacing: -.45px; }
+.app-page .phone-shell .section-link { font-size: 12px; min-height: 32px; display: inline-flex; align-items: center; }
+.app-page .phone-shell .rail-scroll { display: flex; gap: 12px; margin-right: -20px; padding: 0 20px 4px 0; scroll-snap-type: x proximity; scrollbar-width: none; }
+.app-page .phone-shell .rail-card { flex: 0 0 168px; width: 168px; border: 0; border-radius: 0; background: transparent; box-shadow: none; overflow: visible; }
+.app-page .phone-shell .rail-card-img { position: relative; height: 135px; min-height: 0; border-radius: 15px; overflow: hidden; background: #eaf0e9; }
+.app-page .rail-card-img::before, .app-page .rail-card-img::after { display: none; }
+.app-page .rail-card-img img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .25s ease; }
+.app-page .rail-card:hover img { transform: scale(1.035); }
+.app-page .photo-badge { position: absolute; top: 8px; left: 8px; padding: 4px 8px; border-radius: 20px; background: #fffffff2; color: #244335; font-size: 9px; font-weight: 750; }
+.app-page .phone-shell .rail-card-body { padding: 9px 0 0; }
+.app-page .phone-shell .rail-card-name { margin: 0 0 4px; font-size: 13px; font-weight: 750; line-height: 1.35; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; min-height: 35px; }
+.app-page .phone-shell .rail-card-meta { margin: 0; gap: 4px; font-size: 11px; color: #6d7773; }
+.app-page .phone-shell .rail-card-cat { margin-top: 3px; font-size: 11px; line-height: 1.35; color: #6d7773; }
+.app-page .browse-assistant { margin: 2px 0 22px; padding: 14px; border-radius: 16px; display: flex; align-items: center; gap: 12px; background: #edf4ee; color: #294537; text-decoration: none; }
+.app-page .browse-assistant strong { display: block; font-size: 14px; }
+.app-page .browse-assistant small { display: block; margin-top: 3px; color: #64796a; font-size: 12px; }
+.app-page .browse-assistant > b { margin-left: auto; }
+.app-page .illustration-note { color: #7e8780; font-size: 10px; line-height: 1.5; }
+.app-page .phone-shell .crisis-mini { margin: 0 0 18px; padding: 10px; background: #fff8f5; }
+.app-page .phone-shell .crisis-mini-link { min-height: 36px; }
+.app-page .service-photo { display: block; width: 100%; height: 170px; object-fit: cover; }
+.app-page .phone-shell .service-card { border-color: #e1e7e1; box-shadow: none; }
+.app-page .phone-shell .service-card-description { font-size: 14px; }
+.app-page .phone-shell .service-card-tags { gap: 4px; }
+.app-page .phone-shell .service-card-info { font-size: 12px; }
+.app-page .phone-shell .service-card-name { font-size: 19px; }
+.app-page .phone-shell .mobile-service-search input { font-size: 16px; }
+/* Explicit flex sizing prevents implicit grid rows expanding avatars or mode buttons. */
+.app-page .phone-shell.mobile-chat-shell { display: flex; flex-direction: column; height: 100dvh; min-height: 0; padding: 0 0 calc(72px + env(safe-area-inset-bottom)); overflow: hidden; }
+.app-page .mobile-chat-shell .mobile-chat-back { flex: 0 0 auto; margin: 0; padding: 12px 18px 8px; min-height: 40px; font-size: 13px; font-weight: 650; color: #176958; }
+.app-page .mobile-chat-shell .help-bot, .app-page .mobile-chat-shell .provider-mobile-chat { display: flex; flex: 1 1 0; flex-direction: column; height: auto; min-height: 0; border: 0; border-radius: 0; padding: 0; background: #f3f6f1; box-shadow: none; overflow: hidden; }
+.app-page .mobile-chat-shell .help-bot-header, .app-page .mobile-chat-shell .mobile-conversation-head { flex: 0 0 auto; min-height: 65px; gap: 8px; padding: 8px 16px 12px; background: #fff; border-bottom: 1px solid #e5eae6; }
+.app-page .help-bot-header-info { min-width: 0; gap: 10px; }
+.app-page .help-bot-header-info strong { font-size: 14px; line-height: 1.3; }
+.app-page .help-bot-status { display: block; margin-top: 3px; font-size: 10px; font-weight: 500; color: #708175; }
+.app-page .assistant-mark { display: grid; place-items: center; flex: 0 0 38px; width: 38px; height: 38px; border-radius: 50%; background: #dcebdd; color: #28553d; font-size: 26px; line-height: 1; }
+.app-page .help-bot-human-toggle { flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center; min-height: 40px; border: 1px solid #d7e4d9; border-radius: 22px; padding: 0 10px; background: #f3f8f3; color: #28553d; font-size: 11px; font-weight: 700; }
+.app-page .mobile-chat-shell .help-bot-chat, .app-page .mobile-chat-shell .mobile-message-feed { flex: 1 1 0; min-height: 0; padding: 18px 14px; gap: 12px; overflow-y: auto; overflow-x: hidden; overscroll-behavior: contain; scrollbar-width: thin; }
+.app-page .chat-date-label { align-self: center; color: #7d877e; font-size: 10px; margin: 0 0 10px; }
+.app-page .chat-message-group { display: flex; flex-direction: column; gap: 8px; flex-shrink: 0; }
+.app-page .mobile-chat-shell .help-bot-msg, .app-page .mobile-chat-shell .mobile-message { width: fit-content; max-width: 87%; border: 1px solid #e5eae2; border-radius: 3px 15px 15px; padding: 11px 13px 7px; background: #fff; color: #2b3931; font-size: 14px; line-height: 1.55; box-shadow: 0 1px 2px #293e2c05; overflow-wrap: anywhere; }
+.app-page .mobile-chat-shell .help-bot-msg-user, .app-page .mobile-chat-shell .mobile-message.user { align-self: flex-end; border-color: #dcecd9; border-radius: 15px 3px 15px 15px; background: #e1efdc; color: #213c2b; }
+.app-page .help-bot-msg-text p + p { margin-top: 9px; }
+.app-page .chat-message-time, .app-page .mobile-message time { display: block; text-align: right; color: #7a897c; font-size: 9px; margin: 5px 0 0; }
+.app-page .mobile-chat-shell .mobile-message p { font-size: 14px; line-height: 1.55; }
+.app-page .mobile-message strong { font-size: 11px; color: #42664b; }
+.app-page .chat-suggestions { display: flex; flex-wrap: wrap; gap: 7px; padding: 4px 0; }
+.app-page .chat-suggestions button, .app-page .chat-suggestions a { min-height: 38px; padding: 7px 12px; border-radius: 18px; border: 1px solid #d8e2d6; background: #fff; color: #42634b; font: inherit; font-size: 12px; cursor: pointer; text-decoration: none; }
+.app-page .chat-service-card { display: flex; align-items: center; gap: 10px; max-width: 90%; padding: 8px; border: 1px solid #e1e8de; border-radius: 13px; background: #fff; color: #2d4333; text-decoration: none; }
+.app-page .chat-service-card img { flex: 0 0 60px; width: 60px; height: 60px; object-fit: cover; border-radius: 9px; }
+.app-page .chat-service-card strong { display: block; font-size: 12px; line-height: 1.4; }
+.app-page .chat-service-card small { display: block; margin-top: 3px; font-size: 10px; color: #728174; }
+.app-page .chat-service-card b { display: block; margin-top: 5px; font-size: 10px; color: #176958; }
+.app-page .mobile-chat-shell .help-bot-input-row, .app-page .mobile-chat-shell .mobile-chat-composer { display: flex; flex: 0 0 auto; align-items: flex-end; gap: 8px; border: 0; border-top: 1px solid #e3e9df; border-radius: 0; padding: 10px 12px; background: #f3f6f1; box-shadow: none; }
+.app-page .mobile-chat-shell .help-bot-input, .app-page .mobile-chat-shell .mobile-chat-composer input { flex: 1; min-width: 0; min-height: 44px; max-height: 110px; margin: 0; padding: 11px 15px; border: 1px solid #e3e9df; border-radius: 24px; background: #fff; font: inherit; font-size: 16px; line-height: 22px; resize: none; color: #2d4333; }
+.app-page .mobile-chat-shell .help-bot-send, .app-page .mobile-chat-shell .mobile-chat-composer button { display: grid; place-items: center; flex: 0 0 44px; width: 44px; height: 44px; min-height: 44px; border: 0; border-radius: 50%; padding: 0; background: #176958; color: white; }
+.app-page .help-bot-send svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.app-page .help-bot-send:disabled, .app-page .mobile-chat-composer button:disabled { opacity: .4; }
+.app-page .chat-human-panel { flex-shrink: 0; padding: 15px; border: 1px solid #d4e2d3; border-radius: 14px; background: white; font-size: 13px; line-height: 1.5; }
+.app-page .chat-human-panel p { margin: 7px 0; }
+.app-page .chat-human-panel a, .app-page .chat-human-panel button { display: block; margin-top: 8px; min-height: 35px; border: 0; padding: 7px 0; color: #176958; font: inherit; font-weight: 700; background: transparent; }
+.app-page .mobile-chat-shell .conversation-mode-switch { display: flex; flex: 0 0 auto; gap: 4px; padding: 9px 16px; background: white; border-bottom: 1px solid #e5eae6; }
+.app-page .mobile-chat-shell .conversation-mode-switch button { flex: 1; height: 38px; min-height: 38px; border: 0; border-radius: 9px; padding: 8px; font-size: 11px; font-weight: 650; background: #f4f6f2; color: #697669; }
+.app-page .mobile-chat-shell .conversation-mode-switch button.active { background: #e3efdf; color: #28583e; }
+.app-page .mobile-conversation-head h1 { font-size: 16px; }
+.app-page .mobile-conversation-head p { font-size: 11px; }
+.app-page .provider-demo-note { color: #738171; font-size: 10px; text-align: center; line-height: 1.5; margin: 0 0 6px; }
+.app-page .inbox-shell-redesign .inbox-list-redesign { gap: 0; }
+.app-page .inbox-shell-redesign .inbox-item { border: 0 !important; border-bottom: 1px solid #edf0ea !important; border-radius: 0; padding: 17px 0; background: white !important; box-shadow: none !important; }
+.app-page .inbox-shell-redesign .inbox-welcome { box-shadow: none; background: #edf4ee; color: #294537; border: 0; }
+.app-page .inbox-shell-redesign .inbox-welcome span { color: #64796a; }
+.app-page .inbox-item-preview { white-space: normal; }
+@media (min-width: 560px) {
+  .app-page .phone-shell.mobile-chat-shell { height: calc(100dvh - 48px); min-height: 0; }
+}
+@media (max-width: 360px) {
+  .app-page .help-bot-header-info { gap: 7px; }
+  .app-page .help-bot-header-info strong { font-size: 12px; }
+  .app-page .help-bot-human-toggle { font-size: 10px; padding: 0 8px; }
+  .app-page .phone-shell .rail-card { flex-basis: 150px; width: 150px; }
+}
+
+.app-page .phone-shell .app-section { padding: 0; }
+.app-page .phone-shell .rail-card-body { min-height: 0; }
+.app-page .phone-shell .rail-card-meta { margin-top: 3px; }
+.app-page .service-list-categories { display: flex; overflow-x: auto; flex-wrap: nowrap; scrollbar-width: none; gap: 7px; padding-bottom: 12px; }
+.app-page .service-list-categories button { flex-shrink: 0; min-height: 38px; border-radius: 20px; font-size: 12px; }
+.app-page .phone-shell .service-list-input { min-height: 50px; font-size: 16px; border-radius: 25px; padding: 12px 16px; border: 1px solid #dbe3dd; }
+.app-page .service-list-count { font-size: 12px; color: #6d7773; }
+.app-page .service-list-results { gap: 14px; }
+.app-page .profile-card { border: 1px solid #e5eae6; box-shadow: none; border-radius: 18px; }
+.app-page .phone-shell .compact-card { border: 1px solid #e5eae6; box-shadow: none; border-radius: 14px; padding: 15px; }
+.app-page .phone-shell .compact-card-name { font-size: 14px; }
+.app-page .phone-shell .compact-card-meta { font-size: 12px; }
+.app-page .phone-shell .request-form input, .app-page .phone-shell .request-form textarea, .app-page .phone-shell .request-form select { font-size: 16px; }
+
+.app-page .phone-shell:not(.mobile-chat-shell) { background: #fff; padding: 22px 20px 100px; }
+.app-page .mobile-message p { white-space: pre-line; }
+.app-page .phone-shell .detail-hero { padding: 0; margin-bottom: 24px; }
+.app-page .phone-shell .detail-actions { display: grid; gap: 8px; }
+@media (min-width: 560px) {
+  .app-page .phone-shell .bottom-nav { bottom: 24px; border-radius: 0 0 28px 28px; }
+}
+.app-page .service-result-card { display: grid; grid-template-columns: 104px minmax(0,1fr); gap: 12px; padding: 12px 0; border-bottom: 1px solid #e5eae6; }
+.app-page .service-result-image { display: block; align-self: stretch; min-height: 135px; border-radius: 13px; overflow: hidden; background: #eef2eb; }
+.app-page .service-result-image img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.app-page .service-result-body { display: flex; flex-direction: column; min-width: 0; }
+.app-page .service-result-category { font-size: 10px; color: #5d806a; line-height: 1.4; }
+.app-page .service-result-body h3 { margin: 5px 0; font-size: 15px; line-height: 1.35; letter-spacing: -.2px; }
+.app-page .service-result-body h3 a { color: #293c31; text-decoration: none; }
+.app-page .service-result-body p { margin: 0; font-size: 11px; color: #718074; }
+.app-page .service-result-actions { display: flex; gap: 13px; flex-wrap: wrap; margin-top: auto; padding-top: 4px; }
+.app-page .service-result-actions a { display: inline-flex; align-items: center; min-height: 36px; color: #176958; font-size: 11px; font-weight: 700; text-decoration: none; }
+.app-page .phone-shell .service-card { padding: 0; overflow: hidden; }
+.app-page .service-card-category-label { font-size: 11px; text-transform: none; letter-spacing: 0; color: #64806c; }
+.app-page .service-card-badge { font-size: 10px; font-weight: 650; background: #edf5eb; color: #42684c; }
+.app-page .service-card-emoji { display: none; }
+.app-page .service-card-name { line-height: 1.25; }
+.app-page .service-card-content { padding: 16px; }
+
+.app-page .section-link { white-space: nowrap; }
+
+.app-page .inbox-item-preview { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.app-page .inbox-item-time { flex-shrink: 0; white-space: nowrap; }
