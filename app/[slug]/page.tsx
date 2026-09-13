@@ -23,7 +23,7 @@ export default async function ContentPage({ params }: { params: Promise<{ slug: 
 
   return (
     <SiteShell>
-      <main>
+      <main id="main-content">
         <section className="page-hero" style={{ backgroundImage: `url(${page.image})` }}>
           <div className="container">
             <div className="eyebrow">{page.eyebrow}</div>

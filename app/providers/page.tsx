@@ -16,7 +16,7 @@ const providerSteps = [
 export default function ProvidersPage() {
   return (
     <SiteShell>
-      <main>
+      <main id="main-content">
         <section className="provider-hero">
           <div className="container provider-hero-grid">
             <div className="provider-hero-copy">

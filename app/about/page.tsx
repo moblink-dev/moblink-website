@@ -18,7 +18,7 @@ const principles = [
 export default function AboutPage() {
   return (
     <SiteShell>
-      <main>
+      <main id="main-content">
         <section className="info-hero">
           <div className="container info-hero-grid">
             <div><p className="section-kicker">About Moblink</p><h1>One place to explain what is going on and find the right next step.</h1></div>
