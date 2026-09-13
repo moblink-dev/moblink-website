@@ -18,20 +18,11 @@ const FullMap = dynamic(() => import("../../../components/app/FullMap"), {
   ),
 });
 
-const categoryColorMap: Record<string, string> = {
-  Crisis: "#dc2626", Health: "#059669", Legal: "#2563eb",
-  Housing: "#d97706", Family: "#7c3aed", Youth: "#0891b2",
-  Culture: "#c026d3", Education: "#65a30d", Employment: "#0d9488",
-  Centrelink: "#78716c", Financial: "#ca8a04",
-  "Mental Health": "#4f46e5", Addiction: "#b91c1c",
-  Elderly: "#a21caf", Disability: "#6366f1",
-};
-
 export default function MapPage({ initialSearch = "" }: { initialSearch?: string }) {
   const [search, setSearch] = useState(initialSearch);
   const [activeCategory, setActiveCategory] = useState<string | "all">("all");
   const [selectedService, setSelectedService] = useState<Service | null>(null);
-  const [showSheet, setShowSheet] = useState(false);
+  const [showSheet, setShowSheet] = useState(true);
 
   const filtered = useMemo(() => {
     let result = services.filter((s) => !s.isNational);
@@ -108,13 +99,13 @@ export default function MapPage({ initialSearch = "" }: { initialSearch?: string
         </div>
 
         {/* Count badge */}
-        <button type="button" className="map-mobile-count" onClick={() => { setSelectedService(null); setShowSheet(!showSheet); }}>
+        {!showSheet && <button type="button" className="map-mobile-count" onClick={() => { setSelectedService(null); setShowSheet(!showSheet); }}>
           {filtered.length} services · Show list
-        </button>
+        </button>}
 
         {/* Bottom sheet */}
-        <div className={`map-mobile-sheet ${showSheet ? "open" : ""}`}>
-          <button type="button" aria-label="Close service panel" className="map-mobile-sheet-handle" onClick={handleToggleSheet}>
+        <section aria-label="Service results" className={`map-mobile-sheet ${showSheet ? "open" : ""}`}>
+          <button type="button" aria-label="Hide service list" className="map-mobile-sheet-handle" onClick={handleToggleSheet}>
             <span className="map-mobile-sheet-bar" />
           </button>
 
@@ -125,7 +116,7 @@ export default function MapPage({ initialSearch = "" }: { initialSearch?: string
                   <h3 className="map-mobile-sheet-name">{selectedService.name}</h3>
                   <span className="map-mobile-sheet-sub">{selectedService.subcategory}</span>
                 </div>
-                <button type="button" className="map-mobile-sheet-x" onClick={() => { setSelectedService(null); }}>✕</button>
+                <button type="button" className="map-mobile-sheet-x" onClick={() => { setSelectedService(null); }}>Back to list</button>
               </div>
               <img className="map-service-image" src={serviceImage(selectedService)} alt="" />
               <div className="map-mobile-sheet-info">
@@ -142,16 +133,20 @@ export default function MapPage({ initialSearch = "" }: { initialSearch?: string
           ) : (
             <div className="map-mobile-sheet-body">
               <div className="map-mobile-sheet-top">
-                <h3 className="map-mobile-sheet-name">Services ({filtered.length})</h3>
-                <button type="button" className="map-mobile-sheet-x" onClick={() => setShowSheet(false)}>✕</button>
+                <div><h3 className="map-mobile-sheet-name">Explore services <span>({filtered.length})</span></h3><p className="map-results-hint">Find the right support, at your pace</p></div>
+                <button type="button" className="map-mobile-sheet-x" onClick={() => setShowSheet(false)}>Hide list</button>
               </div>
               <div className="map-mobile-sheet-list">
+                {filtered.length === 0 && <p className="map-location-note">No services match. Try another search or category.</p>}
                 {filtered.map((s) => (
                   <Link href={`/app/service/${s.id}`} className="map-mobile-sheet-item" key={s.id}>
-                    <div className="map-mobile-sheet-dot" style={{ background: categoryColorMap[s.category] || "#666" }} />
+                    <img className="map-result-thumbnail" src={serviceImage(s)} alt="" loading="lazy" />
                     <div className="map-mobile-sheet-item-body">
+                      <span className="map-result-category">{s.category}{s.isAboriginalLed ? " · Aboriginal-led" : ""}</span>
                       <strong>{s.name}</strong>
-                      <span>{serviceDistanceLabel(s)} · {s.suburb}</span>
+                      <p className="map-result-summary">{s.description}</p>
+                      <span className="map-result-distance">{serviceDistanceLabel(s)} · {s.suburb}</span>
+                      <span className="map-result-footer">{s.isFree ? "Free support" : "Contact for costs"}<span>View details →</span></span>
                     </div>
                   </Link>
                 ))}
@@ -159,7 +154,7 @@ export default function MapPage({ initialSearch = "" }: { initialSearch?: string
               </div>
             </div>
           )}
-        </div>
+        </section>
 
         {/* Toggle sheet FAB */}
         <button type="button" className="map-mobile-fab" onClick={handleToggleSheet} aria-label="Toggle list">
