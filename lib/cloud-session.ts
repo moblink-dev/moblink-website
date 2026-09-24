@@ -8,9 +8,14 @@ export function cloudConfigured(): boolean {
 }
 
 export async function ensureCustomerSession(client: SupabaseClient) {
-  const current = await client.auth.getUser();
-  if (current.error) throw current.error;
-  if (current.data.user) return current.data.user;
+  const session = await client.auth.getSession();
+  if (session.error) throw session.error;
+
+  if (session.data.session) {
+    const current = await client.auth.getUser();
+    if (current.error) throw current.error;
+    if (current.data.user) return current.data.user;
+  }
 
   const signed = await client.auth.signInAnonymously();
   if (signed.error || !signed.data.user) {
