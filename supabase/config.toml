@@ -7,18 +7,33 @@ project_id = "iraac-website"
 [api]
 enabled = true
 port = 54321
-schemas = ["public", "extensions", "graphql_public"]
+schemas = ["public", "graphql_public"]
 extra_search_path = ["public", "extensions"]
 max_rows = 1000
 
 [db]
 # PostGIS extension is enabled in the first migration
 
+[storage.vector]
+enabled = false
+
 [auth]
 enabled = true
+site_url = "http://localhost:3000"
+additional_redirect_urls = []
+enable_anonymous_sign_ins = true
 # Phone auth for community user login (Mob Link)
 # Email/password + MFA for staff admin login
 smtp_admin_email = "info@iraac-aco.com"
+
+[auth.email]
+enable_confirmations = true
+max_frequency = "1m"
+otp_length = 8
+
+[auth.mfa.totp]
+enroll_enabled = true
+verify_enabled = true
 
 [auth.external]
 enabled = false

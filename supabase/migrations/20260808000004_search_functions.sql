@@ -4,11 +4,11 @@
 -- Search services within a radius of a point
 -- Returns services ordered by distance, with distance in km
 create or replace function public.nearby_services(
-  lat double precision,
-  lng double precision,
-  radius_m double precision default 50000,
-  filter_cat text default null,
-  search_q text default null
+  p_lat double precision,
+  p_lng double precision,
+  p_radius_m double precision default 50000,
+  p_filter_cat text default null,
+  p_search_q text default null
 )
 returns table (
   id uuid,
@@ -40,7 +40,7 @@ as $$
 declare
   search_point geography;
 begin
-  search_point := st_makepoint(lng, lat)::geography;
+  search_point := st_makepoint(p_lng, p_lat)::geography;
 
   return query
   select
@@ -68,14 +68,14 @@ begin
     s.is_free
   from public.services s
   where s.status = 'published'
-    and st_dwithin(s.location, search_point, radius_m)
-    and (filter_cat is null or s.category::text = filter_cat)
+    and st_dwithin(s.location, search_point, p_radius_m)
+    and (p_filter_cat is null or s.category::text = p_filter_cat)
     and (
-      search_q is null
-      or s.name ilike '%' || search_q || '%'
-      or s.description ilike '%' || search_q || '%'
-      or s.suburb ilike '%' || search_q || '%'
-      or s.tags::text ilike '%' || search_q || '%'
+      p_search_q is null
+      or s.name ilike '%' || p_search_q || '%'
+      or s.description ilike '%' || p_search_q || '%'
+      or s.suburb ilike '%' || p_search_q || '%'
+      or s.tags::text ilike '%' || p_search_q || '%'
     )
   order by st_distance(s.location, search_point) asc;
 end;

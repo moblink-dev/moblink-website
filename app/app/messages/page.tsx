@@ -7,6 +7,7 @@ import HelpBot from "../../../components/app/HelpBot";
 import CentrelinkChat from "../../../components/app/CentrelinkChat";
 import BottomNav from "../../../components/app/BottomNav";
 import { getReferrals, getDemoReferrals } from "../../../lib/referrals";
+import { listCloudReferrals } from "../../../lib/cloud-referrals";
 import { customerConversations, conversationDate } from "../../../lib/customer-conversations";
 
 type Thread = "moblink" | "centrelink" | null;
@@ -20,9 +21,27 @@ function ChatContent() {
   const serviceId = query.get("service") ?? undefined;
   const thread: Thread = query.has("service") || query.has("assistant") ? "moblink" : query.has("centrelink") ? "centrelink" : null;
   const [conversations, setConversations] = useState(() => customerConversations(getDemoReferrals()));
+  const [cloudReferralIds, setCloudReferralIds] = useState<Set<string>>(() => new Set());
 
   useEffect(() => {
-    if (!thread) setConversations(customerConversations(getReferrals()));
+    if (thread) return;
+    let cancelled = false;
+    const local = getReferrals();
+    setConversations(customerConversations(local));
+    void listCloudReferrals()
+      .then((cloud) => {
+        if (cancelled) return;
+        const merged = [...cloud, ...local.filter((item) => !cloud.some((remote) => remote.id === item.id))];
+        setCloudReferralIds(new Set(cloud.map((item) => item.id)));
+        setConversations(customerConversations(merged));
+      })
+      .catch(() => {
+        // Keep the available browser copy; request creation surfaces cloud
+        // failures at the point where the user can act on them.
+      });
+    return () => {
+      cancelled = true;
+    };
   }, [thread]);
 
   if (thread) {
@@ -55,7 +74,7 @@ function ChatContent() {
 
           {conversations.map(conversation => <Link key={conversation.id} href={`/app/connected/${conversation.id}`} className="inbox-item">
             <span className="inbox-item-avatar inbox-iraac-avatar" aria-hidden="true">{conversation.serviceName[0]}</span>
-            <div className="inbox-item-body"><div className="inbox-item-top"><strong className="inbox-item-name">{conversation.serviceName}</strong><span className="inbox-item-time">{conversationDate(conversation.updatedAt)}</span></div><span className="inbox-item-preview">{conversation.conversation.at(-1)?.body || conversation.message || "Your request is ready to review."}</span><span className="inbox-item-badge">Saved on this device</span></div>
+            <div className="inbox-item-body"><div className="inbox-item-top"><strong className="inbox-item-name">{conversation.serviceName}</strong><span className="inbox-item-time">{conversationDate(conversation.updatedAt)}</span></div><span className="inbox-item-preview">{conversation.conversation.at(-1)?.body || conversation.message || "Your request is ready to review."}</span><span className="inbox-item-badge">{cloudReferralIds.has(conversation.id) ? "Saved securely" : "Saved on this device"}</span></div>
           </Link>)}
 
           <Link className="inbox-item" href="/app/messages?centrelink=1">

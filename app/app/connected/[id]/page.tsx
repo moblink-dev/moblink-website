@@ -5,7 +5,8 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import HumanSupport from "../../../../components/app/HumanSupport";
 import BottomNav from "../../../../components/app/BottomNav";
-import { addReferralMessage, getDemoReferrals, getReferralById, type Referral } from "../../../../lib/referrals";
+import { addReferralMessage, getDemoReferrals, getReferralById, saveReferral, type Referral } from "../../../../lib/referrals";
+import { getCloudReferral } from "../../../../lib/cloud-referrals";
 import { services } from "../../../data";
 import { replyToMessage } from "../../../../lib/assistant";
 import { useProviderServices } from "../../../../lib/provider-services";
@@ -19,16 +20,36 @@ export default function ConnectedServiceChatPage() {
   const [mode, setMode] = useState<Mode>("assistant");
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+  const [cloudBacked, setCloudBacked] = useState(false);
   const feed = useRef<HTMLDivElement>(null);
   const catalogue = useProviderServices(services);
   const service = catalogue.find(item => item.id === referral?.serviceId);
   const organisation = referral?.serviceId.startsWith("iraac-") ? "IRAAC" : referral?.serviceName ?? "Service";
 
   useEffect(() => {
-    const refresh = () => setReferral(getReferralById(id));
+    let cancelled = false;
+    const refresh = () => {
+      const local = getReferralById(id);
+      if (local) {
+        setCloudBacked(/^[0-9a-f]{8}-[0-9a-f-]{27}$/i.test(local.id));
+        setReferral(local);
+        return;
+      }
+      void getCloudReferral(id).then((remote) => {
+        if (!remote || cancelled) return;
+        saveReferral(remote);
+        setCloudBacked(true);
+        setReferral(remote);
+      }).catch(() => {
+        if (!cancelled) setError("The cloud-saved request could not be loaded. Please try again.");
+      });
+    };
     refresh(); setMessage(""); setError("");
     window.addEventListener("storage", refresh);
-    return () => window.removeEventListener("storage", refresh);
+    return () => {
+      cancelled = true;
+      window.removeEventListener("storage", refresh);
+    };
   }, [id]);
   useEffect(() => { if (feed.current) feed.current.scrollTop = feed.current.scrollHeight; }, [referral, mode]);
 
@@ -56,7 +77,7 @@ export default function ConnectedServiceChatPage() {
       <Link className="mobile-chat-back" href="/app/messages">← Chats</Link>
       {!referral ? <div className="compact-empty"><p>This conversation is not available in this browser session.</p><Link href="/app/search">Find a service</Link></div> : (
         <section className="provider-mobile-chat" aria-label={`${organisation} conversation`}>
-          <header className="mobile-conversation-head"><span className="inbox-iraac-avatar" aria-hidden="true">{organisation[0]}</span><div><h1>{organisation}</h1><p>{referral.serviceName} · demo conversation</p></div></header>
+          <header className="mobile-conversation-head"><span className="inbox-iraac-avatar" aria-hidden="true">{organisation[0]}</span><div><h1>{organisation}</h1><p>{referral.serviceName} · {cloudBacked ? "cloud-saved request" : "demo conversation"}</p></div></header>
           <div className="conversation-mode-switch" role="group" aria-label="Choose who to speak with">
             <button type="button" className={mode === "assistant" ? "active" : ""} aria-pressed={mode === "assistant"} onClick={() => setMode("assistant")}>✳ {organisation} assistant</button>
             <button type="button" className={mode === "advisor" ? "active" : ""} aria-pressed={mode === "advisor"} onClick={() => setMode("advisor")}>{organisation} adviser</button>

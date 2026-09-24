@@ -66,41 +66,9 @@ create policy "Authenticated users can read published services"
   to authenticated
   using (status = 'published');
 
--- Staff: can read all services
-create policy "Staff can read all services"
-  on public.services for select
-  to authenticated
-  using (exists (
-    select 1 from public.staff_profiles
-    where user_id = auth.uid() and is_active = true
-  ));
-
--- Staff: can insert services
-create policy "Staff can insert services"
-  on public.services for insert
-  to authenticated
-  with check (exists (
-    select 1 from public.staff_profiles
-    where user_id = auth.uid() and is_active = true
-  ));
-
--- Staff: can update services
-create policy "Staff can update services"
-  on public.services for update
-  to authenticated
-  using (exists (
-    select 1 from public.staff_profiles
-    where user_id = auth.uid() and is_active = true
-  ));
-
--- Staff: can delete services (soft delete via status)
-create policy "Staff can delete services"
-  on public.services for delete
-  to authenticated
-  using (exists (
-    select 1 from public.staff_profiles
-    where user_id = auth.uid() and is_active = true
-  ));
+-- Staff policies are installed by the later cloud-access hardening migration,
+-- after public.staff_profiles exists. Keeping that dependency out of this
+-- migration allows a clean database to rebuild in timestamp order.
 
 -- Auto-update updated_at
 create or replace function public.update_updated_at()
