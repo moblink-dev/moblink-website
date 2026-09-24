@@ -51,6 +51,20 @@ export async function proxy(request: NextRequest) {
     publicUrl.searchParams.set("supplierAccess", "required");
     return NextResponse.redirect(publicUrl);
   }
+  if (isAdminRoute && user) {
+    const membership = await supabase
+      .from("staff_profiles")
+      .select("user_id")
+      .eq("user_id", user.id)
+      .eq("is_active", true)
+      .maybeSingle();
+    if (membership.error || !membership.data) {
+      const publicUrl = request.nextUrl.clone();
+      publicUrl.pathname = "/";
+      publicUrl.searchParams.set("supplierAccess", "unauthorised");
+      return NextResponse.redirect(publicUrl);
+    }
+  }
 
   return supabaseResponse;
 }

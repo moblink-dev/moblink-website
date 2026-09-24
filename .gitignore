@@ -5,6 +5,9 @@ node_modules/
 dist/
 .astro/
 .next/
+*.tsbuildinfo
+supabase/.branches/
+supabase/.temp/
 server.log
 .vercel
 .env*

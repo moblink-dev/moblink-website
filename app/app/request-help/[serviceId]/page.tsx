@@ -4,6 +4,8 @@ import { useState, useEffect, type FormEvent } from "react";
 import { useRouter, useParams } from "next/navigation";
 import { services } from "../../../data";
 import { createReferral, saveReferral, needCategories, type PreferredContact } from "../../../../lib/referrals";
+import { saveCloudReferral } from "../../../../lib/cloud-referrals";
+import { cloudConfigured } from "../../../../lib/cloud-session";
 import BottomNav from "../../../../components/app/BottomNav";
 import { useProviderServices } from "../../../../lib/provider-services";
 
@@ -13,6 +15,8 @@ export default function RequestHelpPage() {
   const serviceId = params?.serviceId as string;
   const [submitted, setSubmitted] = useState(false);
   const [createdReferralId, setCreatedReferralId] = useState("");
+  const [cloudSaved, setCloudSaved] = useState(false);
+  const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const catalogue = useProviderServices(services);
   const [form, setForm] = useState({
@@ -45,9 +49,11 @@ export default function RequestHelpPage() {
     }
   }, [serviceId, catalogue]);
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    if (!form.consentToFollowUp || !service) return;
+    if (!form.consentToFollowUp || !service || busy) return;
+    setBusy(true);
+    setError("");
     const referral = createReferral({
       serviceId: form.serviceId,
       serviceName: form.serviceName,
@@ -63,11 +69,15 @@ export default function RequestHelpPage() {
       preferredContact: form.preferredContact,
     });
     try {
-      saveReferral(referral);
-      setCreatedReferralId(referral.id);
+      const saved = cloudConfigured() ? await saveCloudReferral(referral) : referral;
+      saveReferral(saved);
+      setCloudSaved(cloudConfigured());
+      setCreatedReferralId(saved.id);
       setSubmitted(true);
     } catch {
-      setError("Your browser couldn’t save this request. Please try again; nothing has been sent to the provider.");
+      setError("Your request was not confirmed as saved. Please try again; nothing has been sent to the provider.");
+    } finally {
+      setBusy(false);
     }
   };
 
@@ -77,8 +87,8 @@ export default function RequestHelpPage() {
         <div className="phone-shell">
           <div className="request-confirmed">
             <div className="request-confirmed-icon">✓</div>
-            <h1>Demo request saved</h1>
-            <p>Your request for {service?.name || "the selected service"} is saved in this browser. Open the conversation to review your next step. The provider has not been contacted.</p>
+            <h1>{cloudSaved ? "Request saved securely" : "Demo request saved"}</h1>
+            <p>Your request for {service?.name || "the selected service"} is {cloudSaved ? "saved to your private MobLink cloud session" : "saved in this browser"}. Open the conversation to review your next step. The provider has not been contacted.</p>
             <p className="request-confirmed-detail">
               Reference: <strong>{createdReferralId.slice(0, 12)}</strong>
             </p>
@@ -130,7 +140,7 @@ export default function RequestHelpPage() {
           <div className="admin-banner admin-banner-soft">
             <div>
               <strong>Prototype: use fictional details only.</strong>
-              <p>This screen saves requests in this browser. It does not contact a real service yet.</p>
+              <p>{cloudConfigured() ? "This staged screen saves to your private cloud session." : "This screen saves requests in this browser."} It does not contact a real service yet.</p>
             </div>
           </div>
           <div className="request-form-group">
@@ -233,8 +243,8 @@ export default function RequestHelpPage() {
             </label>
           </div>
 
-          <button type="submit" className="service-card-button request-form-submit" disabled={!form.consentToFollowUp}>
-            Submit request
+          <button type="submit" className="service-card-button request-form-submit" disabled={!form.consentToFollowUp || busy}>
+            {busy ? "Saving…" : "Submit request"}
           </button>
         </form>}
 

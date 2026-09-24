@@ -49,28 +49,13 @@ create policy "Users can read own referrals"
   to authenticated
   using (requester_phone = auth.jwt()->>'phone');
 
--- Staff: can read all referrals
-create policy "Staff can read all referrals"
-  on public.referrals for select
-  to authenticated
-  using (exists (
-    select 1 from public.staff_profiles
-    where user_id = auth.uid() and is_active = true
-  ));
-
 -- Anyone can insert a referral (public form)
 create policy "Anyone can request help"
   on public.referrals for insert
   with check (true);
 
--- Staff: can update referrals
-create policy "Staff can update referrals"
-  on public.referrals for update
-  to authenticated
-  using (exists (
-    select 1 from public.staff_profiles
-    where user_id = auth.uid() and is_active = true
-  ));
+-- Staff policies are installed by the later cloud-access hardening migration,
+-- after public.staff_profiles exists.
 
 -- Auto-update updated_at
 create trigger trg_referrals_updated_at
